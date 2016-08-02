@@ -32,10 +32,14 @@ const LoginForm = React.createClass({
   },
 
   // login with provided credentials
-  login() {
+  handleSubmit() {
     const email = this.state.email;
     const password = this.state.password;
-    SessionActions.login(email, password);
+    if (this.props.location.pathname === "/signup") {
+      SessionActions.signup(email, password);
+    } else {
+      SessionActions.login(email, password);
+    }
   },
 
   // go to home page if logged in
@@ -46,10 +50,16 @@ const LoginForm = React.createClass({
   },
 
   render() {
+
+    let buttonText = "Login";
+    if (this.props.location.pathname === "/signup") {
+      buttonText = "Sign Up";
+    }
+
     return (
       <div>
         <h2>LoginForm</h2>
-        <form onSubmit={ this.login } >
+        <form onSubmit={ this.handleSubmit } >
 
           <label>Email
             <input id="login-email"
@@ -65,12 +75,12 @@ const LoginForm = React.createClass({
               onChange={ this.changePassword } />
           </label>
 
-          <button type="submit" >Log In</button>
+          <button type="submit" >{ buttonText }</button>
 
         </form>
       </div>
     );
-  }
+  },
 
 });
 
