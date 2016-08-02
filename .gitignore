@@ -16,3 +16,9 @@
 
 # Ignore Byebug command history file.
 .byebug_history
+
+# zsh
+@
+
+# npm packages
+/node_modules
