@@ -11,15 +11,16 @@ const SessionActions = {
   login(email, password) {
     SessionApiUtil.login(
       email, password,
-      this.receiveCurrentUser,
-      this.error
+      SessionActions.receiveCurrentUser,
+      SessionActions.error
     );
   },
 
   logout() {
+    debugger
     SessionApiUtil.logout(
-      this.removeCurrentUser,
-      this.error
+      SessionActions.removeCurrentUser,
+      SessionActions.error
     );
   },
 
@@ -31,6 +32,9 @@ const SessionActions = {
   },
 
   removeCurrentUser(user) {
+
+    debugger
+
     AppDispatcher.dispatch({
       actionType: SessionConstants.LOGOUT,
     });
@@ -39,8 +43,8 @@ const SessionActions = {
   signup(email, password) {
     SessionApiUtil.signup(
       {email: email, password: password},
-      this.receiveCurrentUser,
-      this.error
+      SessionActions.receiveCurrentUser,
+      SessionActions.error
     );
   }
 

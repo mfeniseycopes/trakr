@@ -1,3 +1,10 @@
+<script id="bootstrap-current-user" type="text/javascript">
+  <% if logged_in? %>
+  	window.currentUser = <%= render("api/users/user.json.jbuilder",
+  		user: current_user).html_safe %>
+  <% end %>
+</script>
+
 <div id="react-root">
   No react here
 </div>

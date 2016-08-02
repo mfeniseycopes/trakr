@@ -14,17 +14,17 @@ SessionStore.currentUser = () => {
 };
 
 SessionStore.isLoggedIn = () => {
-  return _currentUser.id !== undefined;
+  return _currentUser.email !== undefined;
 };
 
 SessionStore.__onDispatch = (payload) => {
   switch(payload.actionType) {
     case SessionConstants.LOGIN:
-      _login(payload.currentUser);
-      break;
+    _login(payload.currentUser);
+    break;
     case SessionConstants.LOGOUT:
-      _logout();
-      break;
+    _logout();
+    break;
   }
 };
 
