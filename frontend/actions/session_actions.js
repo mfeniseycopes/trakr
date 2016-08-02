@@ -5,6 +5,7 @@ const SessionConstants = require('../constants/session_constants');
 const SessionActions = {
 
   error(res) {
+    debugger
     console.log(`An error occurred: ${res}`);
   },
 

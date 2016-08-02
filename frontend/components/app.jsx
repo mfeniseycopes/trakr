@@ -3,6 +3,7 @@ const React = require('react');
 
 // project requires
 const LogoutButton    = require('./sessions/logout_button');
+const NavBar = require('./navbar');
 const SessionStore    = require('../stores/session_store');
 
 const App = React.createClass({
@@ -16,18 +17,8 @@ const App = React.createClass({
     return (
       <div>
         <h1>App</h1>
-        { SessionStore.isLoggedIn() ? this.userNav() : "" }
+        <NavBar location={ this.props.location.pathname } />
         { this.props.children }
-      </div>
-    );
-  },
-
-  userNav() {
-    return (
-      <div>
-        <h2>user_nav</h2>
-        <h3>{ SessionStore.currentUser().email }</h3>
-        <LogoutButton />
       </div>
     );
   }

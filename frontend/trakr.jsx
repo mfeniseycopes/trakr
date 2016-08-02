@@ -11,11 +11,14 @@ const hashHistory = ReactRouter.hashHistory;
 const App         = require('./components/app');
 const LoginForm   = require('./components/sessions/login_form');
 const SessionActions  = require('./actions/session_actions');
+const SessionStore    = require('./stores/session_store');
+const IndexRouteStub    = require('./components/index_route_stub');
 
 // routes
 const router = (
   <Router history={ hashHistory } >
     <Route path="/" component={ App } >
+      <IndexRoute component={ IndexRouteStub } onEnter={ _ensureLoggedIn } />
       <Route path="/signup" component={ LoginForm } />
       <Route path="/login" component={ LoginForm } />
     </Route>
