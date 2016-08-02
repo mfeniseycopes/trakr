@@ -48,7 +48,7 @@ class User < ActiveRecord::Base
   attr_reader :password # can be validated
 
   def is_password?(password)
-    BCrytp::Password.new(password_digest).is_password?(password)
+    BCrypt::Password.new(password_digest).is_password?(password)
   end
 
   def password=(password)

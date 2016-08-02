@@ -19,7 +19,7 @@ class Api::SessionsController < ApplicationController
       logout
       render "api/users/show"
     else
-      json: ["Cannot logout the void"], status: 401
+      render json: ["Cannot logout the void"], status: 401
     end
 
   end
