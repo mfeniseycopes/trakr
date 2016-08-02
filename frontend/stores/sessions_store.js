@@ -22,9 +22,7 @@ SessionStore.__onDispatch = (payload) => {
       _logout();
       break;
   }
-}
-
-
+};
 
 // private methods
 function _login(user) {
