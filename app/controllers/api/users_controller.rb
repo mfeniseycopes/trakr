@@ -7,7 +7,7 @@ class Api::UsersController < ApplicationController
       login(@user)
       render :show
     else
-      render @user.errors
+      render json: @user.errors
     end
   end
 
