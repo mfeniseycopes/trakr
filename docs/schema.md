@@ -7,7 +7,7 @@ id              | integer   | not null, primary key
 email           | string    | not null, indexed, unique
 first_name      | string    | not null
 last_name       | string    | not null
-image           | binary    | 
+image_link      | string    | 
 password_digest | string    | not null
 session_token   | string    | not null, indexed, unique
 location        | string    |
