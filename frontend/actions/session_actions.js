@@ -9,7 +9,6 @@ const SessionActions = {
   },
 
   login(email, password) {
-    debugger
     SessionApiUtil.login(
       email, password,
       this.receiveCurrentUser,
@@ -32,7 +31,6 @@ const SessionActions = {
   },
 
   removeCurrentUser(user) {
-    debugger
     AppDispatcher.dispatch({
       actionType: SessionConstants.LOGOUT,
     });

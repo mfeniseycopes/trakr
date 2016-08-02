@@ -9,12 +9,15 @@ const SessionStore = new Store(AppDispatcher);
 let _currentUser = {};
 
 // public methods
-SessionStore.currentUser = () => { return Object.assign({}, _currentUser); };
+SessionStore.currentUser = () => {
+  return Object.assign({}, _currentUser);
+};
 
-SessionStore.isLoggedIn = () => { return _currentUser.id !== undefined; };
+SessionStore.isLoggedIn = () => {
+  return _currentUser.id !== undefined;
+};
 
 SessionStore.__onDispatch = (payload) => {
-  debugger
   switch(payload.actionType) {
     case SessionConstants.LOGIN:
       _login(payload.currentUser);
