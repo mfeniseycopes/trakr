@@ -17,7 +17,7 @@ const SessionApiUtil = {
     });
   },
 
-  login(username, password, successCallback, errorCallback) {
+  login(email, password, successCallback, errorCallback) {
 
     $.ajax({
       method: "POST",

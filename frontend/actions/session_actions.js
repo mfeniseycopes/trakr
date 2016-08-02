@@ -1,5 +1,5 @@
 const AppDispatcher = require('../dispatchers/dispatcher');
-const SessionApiUtil = require('../util/session_api_util');
+const SessionApiUtil = require('../utils/session_api_util');
 const SessionConstants = require('../constants/session_constants');
 
 const SessionActions = {
@@ -9,6 +9,7 @@ const SessionActions = {
   },
 
   login(email, password) {
+    debugger
     SessionApiUtil.login(
       email, password,
       this.receiveCurrentUser,
@@ -31,6 +32,7 @@ const SessionActions = {
   },
 
   removeCurrentUser(user) {
+    debugger
     AppDispatcher.dispatch({
       actionType: SessionConstants.LOGOUT,
     });
