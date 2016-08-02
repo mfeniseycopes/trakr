@@ -18,7 +18,6 @@
     "react-router": "^2.6.1",
     "webpack": "^1.13.1"
   },
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "webpack": "webpack --watch"
