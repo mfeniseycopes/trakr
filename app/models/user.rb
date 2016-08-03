@@ -22,6 +22,10 @@ class User < ActiveRecord::Base
   # user must always have a session_token
   after_initialize :ensure_session_token
 
+  # avatar setup
+  has_attached_file :avatar, default_url: "default_avatar.jpg"
+  validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
+
   # class vars & methods
   def self.find_by_credentials(email, password)
     user = User.find_by(email: email)

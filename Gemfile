@@ -30,6 +30,8 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'paperclip'
 # hide api keys
 gem 'figaro'
+# amazon web services
+gem 'aws-sdk'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
