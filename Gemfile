@@ -28,6 +28,8 @@ gem 'bcrypt', '~> 3.1.7'
 
 # allow user profile pictures
 gem 'paperclip'
+# hide api keys
+gem 'figaro'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
