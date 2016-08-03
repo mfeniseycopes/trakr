@@ -16,6 +16,15 @@ ErrorStore.clearErrors = () => {
   ErrorStore.__emitChange();
 };
 
+// return errors to matching form
+ErrorStore.errors = (form) => {
+  if (form === _form) {
+    return errors.slice();
+  } else {
+    return [];
+  }
+};
+
 ErrorStore.__onDispatch = (payload) => {
   switch(payload.actionType) {
     case ErrorConstants.SET_ERRORS:
