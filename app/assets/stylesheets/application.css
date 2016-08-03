@@ -99,6 +99,22 @@ body {
   color: #666;
 }
 
+.user-avatar {
+  height: 40px;
+  width: 40px;
+  padding-top: 7.5px;
+  border-radius: 20px;
+  overflow: hidden;
+  overflow-x: hidden;
+}
+
+.user-avatar > img {
+  display: inline;
+  margin: 0 auto;
+  height: 100%;
+  width: auto;
+}
+
 .header a:hover {
   border-left: 1px #e5e5e5 solid;
   border-right: 1px #e5e5e5 solid;

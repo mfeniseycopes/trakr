@@ -70,7 +70,12 @@ const NavBar = React.createClass({
     return (
       <ul className="right-nav-list">
         <li>
-          <a>{ SessionStore.currentUser().email }</a>
+          <a href="#">
+            <div className="user-avatar small">
+              <img
+                src={ SessionStore.currentUser().avatar_url } />
+            </div>
+          </a>
         </li>
         <li>
           <LogoutButton />
