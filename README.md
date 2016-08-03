@@ -8,15 +8,14 @@
 
 trakr is a web application inspired by strava.com built using Ruby on Rails and React.js. It is used to track activities via gps data and view and follow other users activities.
 
-- [ ] Hosting on Heroku
-- [ ] A production README, replacing this README
-- [ ] Users
-  - [ ] Creation (Sign Up)
-  - [ ] Login
-  - [ ] Guest login
-  - [ ] Accurate navigation
-  - [ ] Lots of seed data
-  - [ ] CSS Styling that matches strava.com
+- [X] Hosting on Heroku
+- [X] A production README, replacing this README
+- [X] Users
+  - [X] Creation (Sign Up)
+  - [X] Login
+  - [X] Guest login
+  - [X] Accurate navigation
+  - [X] CSS Styling that matches strava.com
 - [ ] Profiles
   - [ ] Users can view theirs and others profiles
   - [ ] Users can edit their profile
