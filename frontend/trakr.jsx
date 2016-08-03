@@ -10,8 +10,10 @@ const hashHistory = ReactRouter.hashHistory;
 // project requires
 const App         = require('./components/app');
 const LoginForm   = require('./components/sessions/login_form');
+const Profile     = require('./components/users/profile');
 const SessionActions  = require('./actions/session_actions');
 const SessionStore    = require('./stores/session_store');
+
 const IndexRouteStub    = require('./components/index_route_stub');
 
 // routes
@@ -21,6 +23,8 @@ const router = (
       <IndexRoute component={ IndexRouteStub } onEnter={ _ensureLoggedIn } />
       <Route path="/signup" component={ LoginForm } />
       <Route path="/login" component={ LoginForm } />
+      <Route path="/profile" component={ Profile } />
+      <Route path="/users/:id" component={ Profile } />
     </Route>
   </Router>
 );
