@@ -57,26 +57,28 @@ const LoginForm = React.createClass({
     }
 
     return (
-      <div>
-        <h2>LoginForm</h2>
+      <div className="session-form">
         <form onSubmit={ this.handleSubmit } >
 
-          <label>Email
-            <input id="login-email"
-              type="email"
-              value={ this.state.email }
-              onChange={ this.changeEmail } />
-          </label>
+          <div className="form-row">
+          <input id="login-email"
+            type="email"
+            value={ this.state.email }
+            onChange={ this.changeEmail }
+            placeholder="Email"/>
+        </div>
+          <div className="form-row">
 
-          <label>Password
-            <input id="login-password"
-              type="password"
-              value={ this.state.password }
-              onChange={ this.changePassword } />
-          </label>
+          <input id="login-password"
+            type="password"
+            value={ this.state.password }
+            onChange={ this.changePassword }
+            placeholder="Password" />
+        </div>
 
+        <div className="form-row">
           <button type="submit" >{ buttonText }</button>
-
+          </div>
         </form>
       </div>
     );

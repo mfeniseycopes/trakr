@@ -13,3 +13,154 @@
  *= require_tree .
  *= require_self
  */
+
+@import url(https://fonts.googleapis.com/css?family=Gloria+Hallelujah);
+@import url(https://fonts.googleapis.com/css?family=Rancho);
+
+/* reset */
+ html, body, header, nav, h1, a,
+ul, li, strong, main, button, i,
+section, img, div, h2, p, form,
+fieldset, label, input, textarea,
+span, article, footer, time, small {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font: inherit;
+  color: inherit;
+  text-align: inherit;
+  text-decoration: inherit;
+  vertical-align: inherit;
+  box-sizing: inherit;
+  background: transparent;
+}
+
+ul {
+  list-style: none;
+}
+
+img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+input[type="password"],
+input[type="email"],
+input[type="text"],
+input[type="submit"],
+textarea,
+button {
+  /*
+  Get rid of native styling. Read more here:
+  http://css-tricks.com/almanac/properties/a/appearance/
+  */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+button,
+input[type="submit"] {
+  cursor: pointer;
+}
+
+/* Clearfix */
+
+.group:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+/* all */
+
+body {
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+/* header */
+.header {
+  background-color: white;
+  border-top: 1px #e5e5e5 solid;
+  border-bottom: 1px #e5e5e5 solid;
+}
+.header a {
+  display: block;
+  height: 53px;
+  padding: 0 10px;
+  line-height: 53px;
+  font-size: 14px;
+  border-left: 1px white solid;
+  border-right: 1px white solid;
+  border-bottom: 2px white solid;
+  color: #666;
+}
+
+.header a:hover {
+  border-left: 1px #e5e5e5 solid;
+  border-right: 1px #e5e5e5 solid;
+  color: #277455;
+}
+
+.header a.active {
+  border-bottom: 2px #277455 solid;
+}
+
+.header-nav {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.header-logo {
+  width: 200px;
+  display: block;
+  float: left;
+}
+
+.header-logo > a {
+  font-family: 'Rancho', cursive;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.right-nav-list {
+  display: block;
+  float: right;
+}
+
+.right-nav-list > li {
+  display: block;
+  float: left;
+}
+
+/* main */
+.content {
+  width: 90%;
+  margin: 0 auto;
+}
+
+/* session forms */
+.session-form {
+  width: 300px;
+  margin: 0 auto;
+  padding: 25px;
+}
+
+.session-form .form-row * {
+  width: 270px;
+  padding: 10px;
+  border: 1px #e5e5e5 solid;
+  border-radius: 3px;
+  margin: 5px;
+}
+
+.session-form > h2 {
+  text-align: center;
+}
+
+.session-form button {
+  background-color: #277455;
+  color: white;
+  text-align: center;
+}

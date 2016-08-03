@@ -23,20 +23,22 @@ const NavBar = React.createClass({
 
   loginNav() {
     return (
-      <div>
-        <button onClick={ this.goToSignup } >Sign Up</button>
-      </div>
+      <ul className="right-nav-list">
+        <li>
+          <a onClick={ this.goToSignup } >Sign Up</a>
+        </li>
+      </ul>
     );
   },
 
   render() {
 
-    let nav = this.selectNav();
+    let rightNav = this.selectNav();
 
     return (
       <div>
-        <h2>NavBar</h2>
-        { nav }
+        <h1 className="header-logo"><a href="#">trakr</a></h1>
+        { rightNav }
       </div>
     );
   },
@@ -56,18 +58,24 @@ const NavBar = React.createClass({
 
   signupNav() {
     return (
-      <div>
-        <button onClick={ this.goToLogin } >Log In</button>
-      </div>
+      <ul className="right-nav-list">
+        <li>
+          <a onClick={ this.goToLogin } >Log In</a>
+        </li>
+      </ul>
     );
   },
 
   userNav() {
     return (
-      <div>
-        <h3>{ SessionStore.currentUser().email }</h3>
-        <LogoutButton />
-      </div>
+      <ul className="right-nav-list">
+        <li>
+          <a>{ SessionStore.currentUser().email }</a>
+        </li>
+        <li>
+          <LogoutButton />
+        </li>
+      </ul>
     );
   }
 

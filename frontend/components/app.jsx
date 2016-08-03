@@ -16,9 +16,14 @@ const App = React.createClass({
   render() {
     return (
       <div>
-        <h1>App</h1>
-        <NavBar location={ this.props.location.pathname } />
-        { this.props.children }
+        <header className="header">
+          <nav className="header-nav group">
+            <NavBar location={ this.props.location.pathname } />
+          </nav>
+        </header>
+        <main className="content">
+          { this.props.children }
+        </main>
       </div>
     );
   }

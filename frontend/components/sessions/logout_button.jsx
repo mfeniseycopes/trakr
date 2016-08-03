@@ -15,9 +15,7 @@ const LogoutButton = React.createClass({
 
   render() {
     return (
-      <div>
-        <button onClick={this.logout}>Log Out</button>
-      </div>
+      <a onClick={this.logout}>Log Out</a>
     );
   }
 
