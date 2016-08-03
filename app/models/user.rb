@@ -2,12 +2,20 @@
 #
 # Table name: users
 #
-#  id              :integer          not null, primary key
-#  email           :string           not null
-#  password_digest :string           not null
-#  session_token   :string           not null
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
+#  id                  :integer          not null, primary key
+#  email               :string           not null
+#  password_digest     :string           not null
+#  session_token       :string           not null
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
+#  avatar_file_name    :string
+#  avatar_content_type :string
+#  avatar_file_size    :integer
+#  avatar_updated_at   :datetime
+#  first_name          :string           not null
+#  last_name           :string           not null
+#  location            :string
+#  bio                 :text
 #
 
 class User < ActiveRecord::Base
@@ -50,6 +58,10 @@ class User < ActiveRecord::Base
 
   # instance vars & methods
   attr_reader :password # can be validated
+
+  def avatar_url
+    self.avatar.url
+  end
 
   def is_password?(password)
     BCrypt::Password.new(password_digest).is_password?(password)
