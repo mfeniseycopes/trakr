@@ -5,7 +5,6 @@ const SessionConstants = require('../constants/session_constants');
 const SessionActions = {
 
   error(res) {
-    debugger
     console.log(`An error occurred: ${res}`);
   },
 
@@ -18,7 +17,6 @@ const SessionActions = {
   },
 
   logout() {
-    debugger
     SessionApiUtil.logout(
       SessionActions.removeCurrentUser,
       SessionActions.error
@@ -33,9 +31,6 @@ const SessionActions = {
   },
 
   removeCurrentUser(user) {
-
-    debugger
-
     AppDispatcher.dispatch({
       actionType: SessionConstants.LOGOUT,
     });

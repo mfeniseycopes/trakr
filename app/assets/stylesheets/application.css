@@ -77,11 +77,12 @@ input[type="submit"] {
 
 body {
   font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  background-image: url("rocky_iii.jpg");
 }
 
 /* header */
 .header {
-  background-color: white;
+  background-color: #FFF;
   border-top: 1px #e5e5e5 solid;
   border-bottom: 1px #e5e5e5 solid;
 }
@@ -143,24 +144,38 @@ body {
 /* session forms */
 .session-form {
   width: 300px;
-  margin: 0 auto;
+  margin: 200px auto;
   padding: 25px;
+  background-color: rgba(0, 0, 0, 0.75);
+  border-radius: 3px;
+}
+
+.session-form > * {
+  margin: auto;
 }
 
 .session-form .form-row * {
-  width: 270px;
+  width: 260px;
   padding: 10px;
-  border: 1px #e5e5e5 solid;
-  border-radius: 3px;
-  margin: 5px;
+  border: 1px solid #a5a5a5;
+  margin: 8px;
+  background-color: #000;
+  color: #FFF;
 }
 
 .session-form > h2 {
   text-align: center;
 }
 
-.session-form button {
+.session-form .form-row button {
   background-color: #277455;
+  border-radius: 3px;
+  border: none;
   color: white;
   text-align: center;
+  margin-top: 40px;
+}
+
+.session-form .form-row button:hover {
+  background-color: #0F573A;
 }

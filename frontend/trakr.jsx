@@ -45,6 +45,8 @@ document.addEventListener(
       SessionActions.receiveCurrentUser(window.currentUser);
     }
 
+    console.log("working");
+
     ReactDOM.render(
       router,
       document.getElementById('react-root')
