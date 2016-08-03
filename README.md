@@ -1,8 +1,8 @@
 # trakr
 
-[Heroku link][heroku] **Note:** this will be a link to production
+[Heroku link][heroku] 
 
-[heroku]: http://www.herokuapp.com
+[heroku]: http://trakr.herokuapp.com
 
 ## Minimum Viable Product
 
