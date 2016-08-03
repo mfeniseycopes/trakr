@@ -19,28 +19,29 @@ ErrorStore.clearErrors = () => {
 // return errors to matching form
 ErrorStore.errors = (form) => {
   if (form === _form) {
-    return errors.slice();
+    return _errors.slice();
   } else {
     return [];
   }
 };
 
 ErrorStore.__onDispatch = (payload) => {
+
   switch(payload.actionType) {
     case ErrorConstants.SET_ERRORS:
-    clearErrors();
+    ErrorStore.setErrors(payload);
     break;
 
     case ErrorConstants.CLEAR_ERRORS:
-    setErrors(payload);
+    ErrorStore.clearErrors();
     break;
   }
 };
 
 ErrorStore.setErrors = (payload) => {
-    _errors = payload.errors;
-    _form = payload.form;
-    ErrorStore.__emitChange();
+  _errors = payload.errors;
+  _form = payload.form;
+  ErrorStore.__emitChange();
 };
 
 

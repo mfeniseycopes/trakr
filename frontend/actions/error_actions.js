@@ -20,4 +20,4 @@ const ErrorActions = {
 
 };
 
-module.exports =
+module.exports = ErrorActions;

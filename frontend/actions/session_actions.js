@@ -1,4 +1,5 @@
 const AppDispatcher = require('../dispatchers/dispatcher');
+const ErrorActions = require('../actions/error_actions');
 const SessionApiUtil = require('../utils/session_api_util');
 const SessionConstants = require('../constants/session_constants');
 
@@ -12,14 +13,14 @@ const SessionActions = {
     SessionApiUtil.login(
       email, password,
       SessionActions.receiveCurrentUser,
-      SessionActions.error
+      ErrorActions.setErrors
     );
   },
 
   logout() {
     SessionApiUtil.logout(
       SessionActions.removeCurrentUser,
-      SessionActions.error
+      ErrorActions.setErrors
     );
   },
 
@@ -40,7 +41,7 @@ const SessionActions = {
     SessionApiUtil.signup(
       {email: email, password: password},
       SessionActions.receiveCurrentUser,
-      SessionActions.error
+      ErrorActions.setErrors
     );
   }
 

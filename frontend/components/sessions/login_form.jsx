@@ -3,10 +3,19 @@ const hashHistory     = require('react-router').hashHistory;
 const React           = require('react');
 
 // project requires
+const ErrorStore      = require('../../stores/error_store');
+const FormErrors      = require('../errors/form_errors');
 const SessionActions  = require('../../actions/session_actions');
 const SessionStore    = require('../../stores/session_store');
 
 const LoginForm = React.createClass({
+
+  // adds errors to form
+  addErrors() {
+    let form =
+      (this.props.location.pathname === "/signup" ? "signup" : "login");
+    this.setState({ errors: ErrorStore.errors(form) });
+  },
 
   // input change methods
   changeEmail(e) {
@@ -20,6 +29,7 @@ const LoginForm = React.createClass({
   // add listeners
   componentDidMount() {
     this.sessionListener = SessionStore.addListener(this.redirectIfLoggedIn);
+    this.errorListener = ErrorStore.addListener(this.addErrors);
   },
 
   // remove listeners
@@ -28,7 +38,7 @@ const LoginForm = React.createClass({
   },
 
   getInitialState() {
-    return { email: "", password: "" };
+    return { email: "", password: "", errors: [] };
   },
 
   // login with provided credentials
@@ -56,29 +66,38 @@ const LoginForm = React.createClass({
       buttonText = "Sign Up";
     }
 
+    let errors = "";
+    if (this.state.errors.length > 0) {
+      errors =
+          <FormErrors errors={ this.state.errors } />;
+    }
+
     return (
       <div className="session-form">
         <form onSubmit={ this.handleSubmit } >
 
-          <div className="form-row">
-          <input id="login-email"
-            type="email"
-            value={ this.state.email }
-            onChange={ this.changeEmail }
-            placeholder="Email"/>
-        </div>
-          <div className="form-row">
+          { errors }
 
-          <input id="login-password"
-            type="password"
-            value={ this.state.password }
-            onChange={ this.changePassword }
-            placeholder="Password" />
-        </div>
-
-        <div className="form-row">
-          <button type="submit" >{ buttonText }</button>
+          <div className="form-row">
+            <input id="login-email"
+              type="email"
+              value={ this.state.email }
+              onChange={ this.changeEmail }
+              placeholder="Email"/>
           </div>
+
+          <div className="form-row">
+            <input id="login-password"
+              type="password"
+              value={ this.state.password }
+              onChange={ this.changePassword }
+              placeholder="Password" />
+          </div>
+
+          <div className="form-row">
+            <button type="submit" >{ buttonText }</button>
+          </div>
+
         </form>
       </div>
     );

@@ -75,6 +75,7 @@ input[type="submit"] {
 
 /* all */
 
+/*TODO: move to scss to include background image */
 body {
   font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
   background-image: url("rocky_iii.jpg");
@@ -154,7 +155,7 @@ body {
   margin: auto;
 }
 
-.session-form .form-row * {
+.session-form .form-row > * {
   width: 260px;
   padding: 10px;
   border: 1px solid #a5a5a5;
@@ -178,4 +179,14 @@ body {
 
 .session-form .form-row button:hover {
   background-color: #0F573A;
+}
+
+.form-error-list {
+  width: 260px;
+  padding: 10px;
+  font-size: 10px;
+}
+
+.form-error-list > li {
+  color: red;
 }
