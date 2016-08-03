@@ -9,7 +9,7 @@ const SessionApiUtil = {
       dataType: "json",
       data: { "user": user },
       error(res) {
-        errorCallback(res);
+        errorCallback("signup", res);
       },
       success(res) {
         successCallback(res);
@@ -29,7 +29,7 @@ const SessionApiUtil = {
         "password": password
       },
       error(res) {
-        errorCallback(res);
+        errorCallback("login", res);
       },
       success(res) {
         successCallback(res);
@@ -44,7 +44,7 @@ const SessionApiUtil = {
       url: "/api/session",
       dataType: "json",
       error(res) {
-        errorCallback(res);
+        errorCallback("logout", res);
       },
       success(res) {
         successCallback(res);
