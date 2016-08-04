@@ -1,6 +1,6 @@
 # trakr
 
-[Heroku link][heroku] 
+[Heroku link][heroku]
 
 [heroku]: http://trakr.herokuapp.com
 
@@ -8,20 +8,20 @@
 
 trakr is a web application inspired by strava.com built using Ruby on Rails and React.js. It is used to track activities via gps data and view and follow other users activities.
 
-- [X] Hosting on Heroku
-- [X] A production README, replacing this README
-- [X] Users
-  - [X] Creation (Sign Up)
-  - [X] Login
-  - [X] Guest login
-  - [X] Accurate navigation
-  - [X] CSS Styling that matches strava.com
-- [ ] Profiles
-  - [ ] Users can view theirs and others profiles
-  - [ ] Users can edit their profile
-  - [ ] Accurate navigation
-  - [ ] Lots of seed data
-  - [ ] CSS Styling that matches strava.com
+- [x] Hosting on Heroku
+- [x] A production README, replacing this README
+- [x] Users
+  - [x] Creation (Sign Up)
+  - [x] Login
+  - [x] Guest login
+  - [x] Accurate navigation
+  - [x] CSS Styling that matches strava.com
+- [x] Profiles
+  - [x] Users can view theirs and others profiles
+  - [x] Users can edit their profile
+  - [x] Accurate navigation
+  - [x] Lots of seed data
+  - [x] CSS Styling that matches strava.com
 - [ ] Activities
   - [ ] Upload activity
   - [ ] Manually create activity
@@ -73,39 +73,46 @@ trakr is a web application inspired by strava.com built using Ruby on Rails and 
 
 **Objective:** Functioning rails project with front-end Authentication and navigation skeleton
 
-* [ ] create new project
-* [ ] create `User` model
-* [ ] authentication backend setup
-* [ ] create `StaticPages` controller and root view
-* [ ] set up webpack & flux scaffold with skeleton files
-* [ ] setup `APIUtil` to interact with the API
-* [ ] set up flux cycle for frontend auth
-* [ ] components:
-  * [ ] `App`
-  * [ ] `Navbar`
-    * [ ] `MainNav` w/ empty links
-    * [ ] `UserNav` w/ empty links
-      * [ ] `LoggedInNav`
-      * [ ] `SignupForm`
-      * [ ] `LoginForm`
-* [ ] directs to `/` and empty `App` component
-* [ ] style components
-* [ ] seed users
+* [x] create new project
+* [x] create `User` model
+* [x] authentication backend setup
+* [x] create `StaticPages` controller and root view
+* [x] set up webpack & flux scaffold with skeleton files
+* [x] setup `APIUtil` to interact with the API
+* [x] set up flux cycle for frontend auth
+* [x] components:
+  * [x] `App`
+  * [x] `Navbar`
+    * [x] `UserNav` w/ empty links
+      * [x] `LoginForm`
+* [x] directs to `/` and empty `App` component
+* [x] style components
+* [x] seed users
+
+#### * Not implemented *
+
+* `SignupForm`: merged with LoginForm
+* `LoggedInNav`: trivially implemented within NavBar (will break out after activities)
+* `MainNav`: trivially implemented within NavBar (will break out after activities)
 
 ### Phase 2: User Profiles and UI framework (1 day, W1 Th 6pm)
 
 **Objective:** User profiles can be viewed and edited
 
-* [ ] `UsersController#update`
-* [ ] components:
-  * [ ] `Profile`
-  * [ ] `ProfileEdit`
-  * [ ] `EditProfileButton`
+* [x] `UsersController#update`
+* [x] components:
+  * [x] `Profile`
+    * [x] `ProfileDetail`
+    * [x] `ProfileForm`
   * [ ] stub components for:
     * [ ] `FollowButton`
     * [ ] `ProgressPane`
     * [ ] `ActivityTable`
-* [ ] get reasonable css sizing for components
+* [x] get reasonable css sizing for components
+
+#### * Not implemented *
+
+* `EditProfileButton`: not needed (same page editing instead of routed)
 
 ### Phase 3: Activity Creation and Details (2 days, W2 M 6pm)
 

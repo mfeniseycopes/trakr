@@ -6,15 +6,19 @@
 
 ### Controllers
 
+* UsersController (U) *++*
+
 ### Views
+
+* users/show.json.jbuilder
 
 ## Flux
 
 ### Views
 
+* Profile
 * ProfileDetail
-* ProfileEdit
-* EditProfileButton
+* ProfileForm
 
 ### Stores
 

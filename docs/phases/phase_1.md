@@ -9,13 +9,13 @@
 
 ### Controllers
 
-* UsersController (CRU)
+* UsersController (CR)
 * SessionsController (CD)
 * ApplicationController
 
 ### Views
 
-* users/show.json.jbuilder
+* users/current_user.json.jbuilder
 
 ## Flux
 
@@ -23,12 +23,11 @@
 
 * App
 * Navbar
-* SignupForm
 * LoginForm
 
 ### Stores
 
-* CurrentUser
+* Session
 * Error
 
 ### Actions
@@ -43,6 +42,7 @@
 * ErrorActions.removeErrors
 
 ### ApiUtil
+
 * logIn
 * logOut
 * signUp
@@ -60,3 +60,4 @@
 * "react": "^0.14.2",
 * "react-dom": "^0.14.2",
 * "react-router": "2.0.1"
+* "annotate"
