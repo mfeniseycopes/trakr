@@ -78,6 +78,10 @@ class User < ActiveRecord::Base
     self.session_token
   end
 
+  def user_since
+    self.created_at.year
+  end
+
   # private methods
   private
 
