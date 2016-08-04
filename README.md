@@ -104,10 +104,10 @@ trakr is a web application inspired by strava.com built using Ruby on Rails and 
   * [x] `Profile`
     * [x] `ProfileDetail`
     * [x] `ProfileForm`
-  * [ ] stub components for:
-    * [ ] `FollowButton`
-    * [ ] `ProgressPane`
-    * [ ] `ActivityTable`
+  * [x] stub components for:
+    * [x] `FollowButton`
+    * [x] `ProgressPane`
+    * [x] `ActivityTable`
 * [x] get reasonable css sizing for components
 
 #### * Not implemented *

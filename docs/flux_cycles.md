@@ -35,7 +35,7 @@
   * `GET /api/users/:id` is called.
   * `receiveUser` is set as the success callback.
 * `updateUser`
-  * invoked from `ProfileEdit` `onSubmit`
+  * invoked from `ProfileForm` `onSubmit`
   * `PATCH /api/users/:id` is called.
   * `receiveUser` is set as the success callback.
 
