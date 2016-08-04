@@ -216,15 +216,6 @@ body {
   }
 }
 
-.form-error-list {
-  width: 260px;
-  padding: 10px;
-  font-size: 10px;
-
-  li {
-    color: red;
-  }
-}
 
 .user {
   display: block;
@@ -235,6 +226,10 @@ body {
     margin-right: 20px;
     display: block;
     float: left;
+  }
+
+  > :last-child {
+    margin-right: 0;
   }
 }
 
@@ -290,12 +285,17 @@ body {
   float: left;
   font-size: 12px;
 
-  > * {
-    padding: 3px;
-    margin: 4px;
+  input, a, textarea {
+    padding: 4px;
+    margin: 10px;
     display: block;
     background-color: white;
     border: 1px solid #a5a5a5;
+  }
+
+  .user-form-names > input {
+    float: left;
+    width: 170px;
   }
 
   > textarea {
@@ -303,9 +303,8 @@ body {
     height: 100px;
   }
 
-  :first-child {
-    display:inline;
-    margin-bottom: 20px;
+  > :first-child {
+    margin-bottom: 10px;
     font-size: 20px;
   }
 }
@@ -314,9 +313,26 @@ body {
   border: 1px #e5e5e5 solid;
   padding: 10px;
   transition:.5s;
+
 }
 
 .button:hover {
   background-color: #277455;
   color: white;
+}
+
+.form-button {
+  float: right;
+}
+
+.form-error-list {
+  width: 260px;
+  padding: 10px;
+  font-size: 10px;
+  margin: 0px;
+  border: 0;
+
+  li {
+    color: red;
+  }
 }

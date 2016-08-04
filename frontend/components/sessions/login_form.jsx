@@ -66,17 +66,11 @@ const LoginForm = React.createClass({
       buttonText = "Sign Up";
     }
 
-    let errors = "";
-    if (this.state.errors.length > 0) {
-      errors =
-          <FormErrors errors={ this.state.errors } />;
-    }
-
     return (
       <div className="session-form">
         <form onSubmit={ this.handleSubmit } >
 
-          { errors }
+          <FormErrors errors={ this.state.errors } />
 
           <div className="form-row">
             <input id="login-email"

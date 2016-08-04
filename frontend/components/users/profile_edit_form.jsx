@@ -6,10 +6,13 @@ const React           = require('react');
 const ErrorStore      = require('../../stores/error_store');
 const FormErrors      = require('../errors/form_errors');
 const UserActions  = require('../../actions/user_actions');
-const SessionStore = require('../../stores/session_store');
 const UserStore    = require('../../stores/user_store');
 
 const ProfileEditForm = React.createClass({
+
+  addErrors() {
+    this.setState({ errors: ErrorStore.errors("userForm") });
+  },
 
   changeFirstName(e) {
     this.setState({ first_name: e.target.value });
@@ -27,12 +30,18 @@ const ProfileEditForm = React.createClass({
     this.setState({ bio: e.target.value });
   },
 
+  componentDidMount() {
+    ErrorStore.addListener(this.addErrors);
+  },
+
   getInitialState() {
     return {
       first_name: this.props.user.first_name,
       last_name: this.props.user.last_name,
       location : this.props.user.location,
-      bio: this.props.user.bio
+      bio: this.props.user.bio,
+
+      errors: []
      };
   },
 
@@ -44,19 +53,20 @@ const ProfileEditForm = React.createClass({
             <img src={ this.props.user.avatar_url } />
           </div>
           <div className="user-form">
-            <input type="text"
+            <div className="group user-form-names"><input type="text"
               value={this.state.first_name}
               onChange={ this.changeFirstName }/>
             <input type="text"
               value={this.state.last_name}
-              onChange={ this.changeLastName }/>
+              onChange={ this.changeLastName }/></div>
             <input type="text"
               value={this.state.location}
               onChange={ this.changeLocation }/>
             <textarea
               value={this.state.bio}
               onChange={ this.changeBio }/>
-            <input className="button" type="submit" value="Update" />
+            <FormErrors errors={ this.state.errors } />
+            <button className="button form-button" type="submit" value="Update" >Update</button>
           </div>
         </div>
       </form>

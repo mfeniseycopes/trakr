@@ -25,7 +25,7 @@ const UserApiUtil = {
       data: { user: user },
       error(res) {
         debugger
-        errorCallback("userEdit", res.responseJSON);
+        errorCallback("userForm", res.responseJSON);
       },
       success(res) {
         successCallback(res);
