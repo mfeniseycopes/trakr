@@ -74,7 +74,7 @@ const NavBar = React.createClass({
     return (
       <ul className="right-nav-list">
         <li>
-          <a onClick={ this.goToProfile }>
+          <a className="user-avatar-outside-padding" onClick={ this.goToProfile }>
             <div className="user-avatar small">
               <img
                 src={ SessionStore.currentUser().avatar_url } />

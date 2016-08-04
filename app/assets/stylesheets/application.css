@@ -34,6 +34,7 @@ span, article, footer, time, small {
   vertical-align: inherit;
   box-sizing: inherit;
   background: transparent;
+  position: relative;
 }
 
 ul {
@@ -103,9 +104,13 @@ body {
   color: #666;
   transition: 0.5s;
 }
+.user-avatar-outside-padding {
+  height: 40px !important;
+  padding-top: 6.5px !important;
+  padding-bottom: 6.5px !important;
+}
 
 .user-avatar {
-  padding-top: 7.5px;
   height: 40px;
   width: 40px;
   border-radius: 100%;
@@ -134,7 +139,6 @@ body {
 }
 
 .header-logo {
-  width: 200px;
   display: block;
   float: left;
 }
