@@ -37,9 +37,9 @@ const SessionActions = {
     });
   },
 
-  signup(email, password) {
+  signup(user) {
     SessionApiUtil.signup(
-      {email: email, password: password},
+      user,
       SessionActions.receiveCurrentUser,
       ErrorActions.setErrors
     );

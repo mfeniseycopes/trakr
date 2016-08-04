@@ -31,7 +31,7 @@ class User < ActiveRecord::Base
   after_initialize :ensure_session_token
 
   # avatar setup
-  has_attached_file :avatar, default_url: "default_avatar.jpg"
+  has_attached_file :avatar, default_url: "images/cat_avatar.jpg"
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
 
   # class vars & methods
