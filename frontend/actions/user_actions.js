@@ -18,7 +18,7 @@ const UserActions = {
   },
 
   updateUser(user) {
-    UserApiUtil.updateUser(id, this.receiveUser, ErrorActions.setErrors);
+    UserApiUtil.updateUser(user, this.receiveUser, ErrorActions.setErrors);
   }
 };
 

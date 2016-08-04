@@ -7,7 +7,7 @@ const UserApiUtil = {
       method: "GET",
       url: `/api/users/${id}`,
       dataType: "json",
-      error(form, res) {
+      error(res) {
         errorCallback("user", res.responseJSON);
       },
       success(res) {
@@ -16,13 +16,15 @@ const UserApiUtil = {
     });
   },
 
-  updateUser() {
+  updateUser(user, successCallback, errorCallback) {
+
     $.ajax({
       method: "PATCH",
-      url: `/api/users/${id}`,
+      url: `/api/users/${user.id}`,
       dataType: "json",
-      data: user,
-      error(form, res) {
+      data: { user: user },
+      error(res) {
+        debugger
         errorCallback("userEdit", res.responseJSON);
       },
       success(res) {
