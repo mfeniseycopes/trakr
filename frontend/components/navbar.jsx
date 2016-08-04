@@ -17,6 +17,10 @@ const NavBar = React.createClass({
     hashHistory.push("/login");
   },
 
+  goToProfile() {
+    hashHistory.push("/profile");
+  },
+
   goToSignup() {
     hashHistory.push("/signup");
   },
@@ -70,7 +74,7 @@ const NavBar = React.createClass({
     return (
       <ul className="right-nav-list">
         <li>
-          <a href="#">
+          <a onClick={ this.goToProfile }>
             <div className="user-avatar small">
               <img
                 src={ SessionStore.currentUser().avatar_url } />

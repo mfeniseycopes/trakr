@@ -8,7 +8,6 @@ const SessionStore    = require('../../stores/session_store');
 const LogoutButton = React.createClass({
 
   logout() {
-    debugger
     SessionActions.logout();
     hashHistory.push("/signup");
   },
