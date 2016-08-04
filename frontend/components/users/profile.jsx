@@ -24,14 +24,6 @@ const Profile = React.createClass({
     }
   },
 
-  editButton() {
-    if (this.props.location.pathname === "/profile" && !this.state.edit) {
-      return <a onClick={ this.switchToEdit } className="button" >Edit</a>;
-    }
-    else {
-      return "";
-    }
-  },
 
   getInitialState() {
     if ((this.props.location.pathname === "/profile"
@@ -61,10 +53,17 @@ const Profile = React.createClass({
     }
 
     return (
-      <div>
-        <h2 className="page-header">Profile</h2>
-        { this.editButton() }
-        { inner }
+      <div class="user">
+        <section className="user-pane">
+          <div className="page-top">
+            <h2 className="page-header">Profile</h2>
+            { this.toggleButton() }
+          </div>
+          { inner }
+        </section>
+        <section className="user-detail-pane">
+
+        </section>
       </div>
     );
   },
@@ -85,26 +84,23 @@ const Profile = React.createClass({
     UserActions.updateUser(this.state.user);
   },
 
-  switchToEdit() {
-    this.setState({ edit: true });
+  toggleButton() {
+    if (this.props.location.pathname === "/profile") {
+      if (!this.state.edit) {
+        return <a onClick={ this.toggleModes } className="button form-button bottom" >Edit</a>;
+      }
+      else {
+        return <a onClick={ this.toggleModes } className="button form-button bottom" >Cancel</a>;
+      }
+    }
+    else {
+      return "";
+    }
   },
 
-  viewRender() {
-    return (
-
-      <div className="user form group">
-        <div className="user-avatar-large">
-          <img src={this.state.user.avatar_url} />
-        </div>
-        <div className="user-detail">
-          <h3>{this.state.user.first_name} {this.state.user.last_name}</h3>
-          <p>Member since {this.state.user.user_since}</p>
-          <p>{this.state.user.location}</p>
-          <p>{this.state.user.bio}</p>
-        </div>
-      </div>
-    );
-  },
+  toggleModes() {
+    this.setState({ edit: !this.state.edit });
+  }
 
 });
 
