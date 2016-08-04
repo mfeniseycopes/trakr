@@ -14,6 +14,21 @@ const UserApiUtil = {
         successCallback(res);
       }
     });
+  },
+
+  updateUser() {
+    $.ajax({
+      method: "PATCH",
+      url: `/api/users/${id}`,
+      dataType: "json",
+      data: user,
+      error(form, res) {
+        errorCallback("userEdit", res.responseJSON);
+      },
+      success(res) {
+        successCallback(res);
+      }
+    });
   }
 
 };
