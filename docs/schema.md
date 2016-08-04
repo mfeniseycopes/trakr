@@ -7,7 +7,7 @@ id              | integer   | not null, primary key
 email           | string    | not null, indexed, unique
 first_name      | string    | not null
 last_name       | string    | not null
-avatar          | attachment| 
+avatar          | attachment|
 password_digest | string    | not null
 session_token   | string    | not null, indexed, unique
 location        | string    |
@@ -20,11 +20,11 @@ id              | integer   | not null, primary key
 user_id         | integer   | not null, foreign key (users), indexed
 type_id         | integer   | not null, foreign key (activity_types), indexed
 title           | string    | not null
-description     | text      | not null
-date            | date      | not null, indexed
+description     | text      |
+date            | date      | not null
 gpx             | binary    | not null
 distance        | float     |
-time            | integer   |
+duration        | integer   |
 
 ## activitiy_types
 column name     | data type | details
