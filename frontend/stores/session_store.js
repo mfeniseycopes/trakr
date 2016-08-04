@@ -31,11 +31,13 @@ SessionStore.__onDispatch = (payload) => {
 // private methods
 function _login(user) {
   _currentUser = user;
+  document.body.className = "";
   SessionStore.__emitChange();
 }
 
 function _logout() {
   _currentUser = {};
+  document.body.className = "logged-out";
   SessionStore.__emitChange();
 }
 

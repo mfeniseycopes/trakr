@@ -21,7 +21,6 @@ UserStore.resetUser = (user) => {
 };
 
 UserStore.user = () => {
-  debugger
   return Object.assign({}, _user);
 };
 
