@@ -20,11 +20,25 @@ const IndexRouteStub    = require('./components/index_route_stub');
 const router = (
   <Router history={ hashHistory } >
     <Route path="/" component={ App } >
-      <IndexRoute component={ IndexRouteStub } onEnter={ _ensureLoggedIn } />
-      <Route path="/signup" component={ LoginForm } />
-      <Route path="/login" component={ LoginForm } />
-      <Route path="/profile" component={ Profile } />
-      <Route path="/users/:id" component={ Profile } />
+
+      <IndexRoute
+        component={ IndexRouteStub }
+        onEnter={ _ensureLoggedIn } />
+
+      <Route path="/signup"
+        component={ LoginForm } />
+
+      <Route path="/login"
+        component={ LoginForm } />
+
+      <Route path="/profile"
+        component={ Profile }
+        onEnter={ _ensureLoggedIn } />
+
+      <Route path="/users/:id"
+        component={ Profile }
+        onEnter={ _ensureLoggedIn } />
+      
     </Route>
   </Router>
 );
