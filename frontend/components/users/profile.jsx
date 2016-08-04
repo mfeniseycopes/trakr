@@ -3,13 +3,19 @@ const hashHistory     = require('react-router').hashHistory;
 const React           = require('react');
 
 // project requires
-const ErrorStore      = require('../../stores/error_store');
+// actions
+const UserActions     = require('../../actions/user_actions');
+// components
+const ActivitiesTable = require('../activities/activities_table');
+const FollowButton = require('../follows/follow_button');
 const FormErrors      = require('../errors/form_errors');
-const ProfileDetail = require('./profile_detail');
+const ProfileDetail   = require('./profile_detail');
 const ProfileEditForm = require('./profile_edit_form');
-const UserActions  = require('../../actions/user_actions');
-const SessionStore = require('../../stores/session_store');
-const UserStore    = require('../../stores/user_store');
+const Progress        = require('./progress.jsx');
+// stores
+const ErrorStore      = require('../../stores/error_store');
+const SessionStore    = require('../../stores/session_store');
+const UserStore       = require('../../stores/user_store');
 
 const Profile = React.createClass({
 
@@ -53,17 +59,18 @@ const Profile = React.createClass({
     }
 
     return (
-      <div class="user">
-        <section className="user-pane">
-          <div className="page-top">
-            <h2 className="page-header">Profile</h2>
-            { this.toggleButton() }
-          </div>
-          { inner }
-        </section>
-        <section className="user-detail-pane">
-
-        </section>
+      <div className="user group">
+        <div>
+          <section className="user-pane group">
+            <div className="page-top">
+              <h2 className="page-header">Profile</h2>
+              { this.toggleButton() }
+            </div>
+            { inner }
+          </section>
+          <Progress />
+        </div>
+        <ActivitiesTable />
       </div>
     );
   },
@@ -94,7 +101,7 @@ const Profile = React.createClass({
       }
     }
     else {
-      return "";
+      return <FollowButton />
     }
   },
 

@@ -229,17 +229,17 @@ a, button:hover {
 
 .user-pane {
   width: 660px;
+  display: block;
+    float: left;
 }
-
-
 
 .user {
   display: block;
   float: left;
-  padding: 20px;
 
   > *{
-    margin-right: 20px;
+    margin-top: 20px;
+    width: 100%;
     display: block;
     float: left;
   }
@@ -325,14 +325,32 @@ a, button:hover {
   }
 }
 
+
+
+.progress-pane {
+  border: 1px black solid;
+  height: 400px;
+  width: 400px;
+  padding: 20px;
+  float: right;
+}
+
+.activities-table {
+  border: 1px black solid;
+  height: 500px;
+  width: 1160px;
+  padding: 20px;
+  display: block;
+}
+
+
+
 .button {
   border: 1px solid #a5a5a5;
   padding: 10px;
   transition:.5s;
   display: block;
-  width: 50px;
   text-align: center;
-  // margin: 10px 0;
 }
 
 .button:hover {
