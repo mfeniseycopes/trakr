@@ -83,7 +83,7 @@ body {
 
 /* login specific */
 .logged-out {
-  background-image: url("rocky_iii.jpg");
+  background-image: image-url("rocky_iii.jpg");
 }
 
 /* header */
@@ -91,18 +91,30 @@ body {
   background-color: #FFF;
   border-top: 1px #e5e5e5 solid;
   border-bottom: 1px #e5e5e5 solid;
-}
-.header a {
-  display: block;
-  height: 53px;
-  padding: 0 10px;
-  line-height: 53px;
-  font-size: 14px;
-  border-left: 1px white solid;
-  border-right: 1px white solid;
-  border-bottom: 2px white solid;
-  color: #666;
-  transition: 0.5s;
+  a {
+    display: block;
+    height: 53px;
+    padding: 0 10px;
+    line-height: 53px;
+    font-size: 14px;
+    border-left: 1px white solid;
+    border-right: 1px white solid;
+    border-bottom: 2px white solid;
+    color: #666;
+    transition: 0.5s;
+
+
+    .active {
+      border-bottom: 2px #277455 solid;
+    }
+  }
+
+  a:hover {
+    border-left: 1px #e5e5e5 solid;
+    border-right: 1px #e5e5e5 solid;
+    color: #277455;
+    border-bottom: 2px #277455 solid;
+  }
 }
 .user-avatar-outside-padding {
   height: 40px !important;
@@ -115,22 +127,12 @@ body {
   width: 40px;
   border-radius: 100%;
   overflow: hidden;
-}
 
-.user-avatar > img {
-  height: 40px;
-  width: 40px;
-  object-fit: cover;
-}
-
-.header a:hover {
-  border-left: 1px #e5e5e5 solid;
-  border-right: 1px #e5e5e5 solid;
-  color: #277455;
-}
-
-.header a.active {
-  border-bottom: 2px #277455 solid;
+  img {
+    height: 40px;
+    width: 40px;
+    object-fit: cover;
+  }
 }
 
 .header-nav {
@@ -141,22 +143,22 @@ body {
 .header-logo {
   display: block;
   float: left;
-}
 
-.header-logo > a {
-  font-family: 'Rancho', cursive;
-  font-size: 28px;
-  font-weight: bold;
+  a {
+    font-family: 'Rancho', cursive;
+    font-size: 28px;
+    font-weight: bold;
+  }
 }
 
 .right-nav-list {
   display: block;
   float: right;
-}
 
-.right-nav-list > li {
-  display: block;
-  float: left;
+  li {
+    display: block;
+    float: left;
+  }
 }
 
 /* main */
@@ -179,57 +181,60 @@ body {
   padding: 25px;
   background-color: rgba(0, 0, 0, 0.75);
   border-radius: 3px;
-}
 
-.session-form > * {
-  margin: auto;
-}
+  h2 {
+    text-align: center;
+  }
 
-.session-form .form-row > * {
-  width: 260px;
-  padding: 10px;
-  border: 1px solid #a5a5a5;
-  margin: 8px;
-  background-color: #000;
-  color: #FFF;
-}
+  > * {
+    margin: auto;
+  }
 
-.session-form > h2 {
-  text-align: center;
-}
+  .form-row {
+    > * {
+      width: 260px;
+      padding: 10px;
+      border: 1px solid #a5a5a5;
+      margin: 8px;
+      background-color: #000;
+      color: #FFF;
+    }
 
-.session-form .form-row button {
-  background-color: #277455;
-  border-radius: 3px;
-  border: none;
-  color: white;
-  text-align: center;
-  margin-top: 40px;
-}
+    button {
+      background-color: #277455;
+      border-radius: 3px;
+      border: none;
+      color: white;
+      text-align: center;
+      margin-top: 40px;
 
-.session-form .form-row button:hover {
-  background-color: #0F573A;
+    }
+
+    button:hover {
+      background-color: #0F573A;
+    }
+  }
 }
 
 .form-error-list {
   width: 260px;
   padding: 10px;
   font-size: 10px;
-}
 
-.form-error-list > li {
-  color: red;
+  li {
+    color: red;
+  }
 }
 
 .user {
   display: block;
   float: left;
-}
 
-.user > *{
-  margin-right: 20px;
-  display: block;
-  float: left;
+  > *{
+    margin-right: 20px;
+    display: block;
+    float: left;
+  }
 }
 
 .user-avatar-large {
@@ -237,27 +242,28 @@ body {
   height: 200px;
   overflow: hidden;
   border-radius: 100%;
-}
 
-.user-avatar-large img {
-  height: 200px;
-  width: 200px;
-  object-fit: cover;
+  img {
+    height: 200px;
+    width: 200px;
+    object-fit: cover;
+  }
 }
 
 .user-detail {
   width: 400px;
   display: block;
   float: left;
-}
 
-.user-detail > * {
-  margin: 10px;
-}
+  > * {
+    margin: 10px;
+  }
 
-.user-detail h3 {
-  margin-bottom: 20px;
-  font-size: 25px;
+  h3 {
+    display:inline;
+    margin-bottom: 20px;
+    font-size: 25px;
+  }
 }
 
 .button {
