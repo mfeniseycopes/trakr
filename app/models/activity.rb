@@ -19,6 +19,11 @@ class Activity < ActiveRecord::Base
 
   validates :user_id, :activity_type_id, :title, :date, presence: true
 
+  # gpx setup
+  has_attached_file :gpx
+  # validate filename
+  validates_attachment_file_name :gpx, matches: [/gpx\Z/]
+
   def type_name
     self.type.name
   end
