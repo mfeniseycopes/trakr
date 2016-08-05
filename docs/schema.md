@@ -22,7 +22,7 @@ type_id         | integer   | not null, foreign key (activity_types), indexed
 title           | string    | not null
 description     | text      |
 date            | date      | not null
-gpx             | binary    | not null
+gpx             | attachment| not null
 distance        | float     |
 duration        | integer   |
 

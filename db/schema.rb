@@ -10,19 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160804220059) do
+ActiveRecord::Schema.define(version: 20160805013207) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "activities", force: :cascade do |t|
-    t.integer "user_id",          null: false
-    t.integer "activity_type_id", null: false
-    t.string  "title",            null: false
-    t.text    "description"
-    t.date    "date",             null: false
-    t.float   "distance"
-    t.integer "duration"
+    t.integer  "user_id",          null: false
+    t.integer  "activity_type_id", null: false
+    t.string   "title",            null: false
+    t.text     "description"
+    t.date     "date",             null: false
+    t.float    "distance"
+    t.integer  "duration"
+    t.string   "gpx_file_name"
+    t.string   "gpx_content_type"
+    t.integer  "gpx_file_size"
+    t.datetime "gpx_updated_at"
     t.index ["activity_type_id"], name: "index_activities_on_activity_type_id", using: :btree
     t.index ["user_id"], name: "index_activities_on_user_id", using: :btree
   end
