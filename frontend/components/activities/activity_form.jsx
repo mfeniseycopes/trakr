@@ -13,8 +13,12 @@ const ActivityForm = React.createClass({
     this.setState({ errors: ErrorStore.errors("activityForm") });
   },
 
-  changeFile(e) {
+  changeActivityType(e) {
     debugger
+    this.setState({ activityType: e.target.value });
+  },
+
+  changeFile(e) {
     var file = e.currentTarget.files[0];
     var fileReader = new FileReader();
     fileReader.onloadend = function () {
@@ -39,12 +43,13 @@ const ActivityForm = React.createClass({
   },
 
   getRes() {
-    
+
   },
 
   handleSubmit() {
     var formData = new FormData();
     formData.append("activity[gpx]", this.state.gpxFile);
+    formData.append("activity[activity_type]", this.state.activityType);
     ActivityApiUtil.createActivity(formData, this.getRes);
   },
 
@@ -52,7 +57,11 @@ const ActivityForm = React.createClass({
 
     return(
       <div>
-        GPX Form!
+        <h2>GPX Form!</h2>
+        <select name="Type">
+          <option value="1">Run</option>
+          <option value="2">Ride</option>
+        </select>
         <input type="file" onChange={this.changeFile}/>
         <button onClick={this.handleSubmit}>Add Activity</button>
       </div>);
