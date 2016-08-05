@@ -24,7 +24,6 @@ const UserApiUtil = {
       dataType: "json",
       data: { user: user },
       error(res) {
-        debugger
         errorCallback("userForm", res.responseJSON);
       },
       success(res) {
