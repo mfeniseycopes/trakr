@@ -80,7 +80,8 @@ const ProfileEditForm = React.createClass({
       last_name: this.state.last_name,
       location : this.state.location,
       bio: this.state.bio
-    }
+    };
+    
     UserActions.updateUser(user);
   }
 

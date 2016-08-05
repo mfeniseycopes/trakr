@@ -8,13 +8,14 @@ const IndexRoute  = ReactRouter.IndexRoute;
 const hashHistory = ReactRouter.hashHistory;
 
 // project requires
-const App         = require('./components/app');
-const LoginForm   = require('./components/sessions/login_form');
-const Profile     = require('./components/users/profile');
+const ActivityForm    = require('./components/activities/activity_form');
+const App             = require('./components/app');
+const LoginForm       = require('./components/sessions/login_form');
+const Profile         = require('./components/users/profile');
 const SessionActions  = require('./actions/session_actions');
 const SessionStore    = require('./stores/session_store');
 
-const IndexRouteStub    = require('./components/index_route_stub');
+const IndexRouteStub  = require('./components/index_route_stub');
 
 // routes
 const router = (
@@ -22,7 +23,7 @@ const router = (
     <Route path="/" component={ App } >
 
       <IndexRoute
-        component={ IndexRouteStub }
+        component={ LoginForm }
         onEnter={ _ensureLoggedIn } />
 
       <Route path="/signup"
@@ -38,7 +39,10 @@ const router = (
       <Route path="/users/:id"
         component={ Profile }
         onEnter={ _ensureLoggedIn } />
-      
+
+      <Route path="/activitytest"
+        component={ ActivityForm } />
+
     </Route>
   </Router>
 );
@@ -70,4 +74,4 @@ document.addEventListener(
       document.getElementById('react-root')
     );
   }
-)
+);
