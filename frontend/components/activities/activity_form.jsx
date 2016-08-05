@@ -13,11 +13,10 @@ const FormErrors          = require('../errors/form_errors');
 const ActivityForm = React.createClass({
 
   activityTypeOptions() {
-    debugger
 
     return this.state.activityTypes.map((activityType) => {
       return (
-        <option value={ activityType.id } key={ activityType.id }>
+        <option value={activityType.id} key={activityType.id}>
           {activityType.name}
         </option>
       );
@@ -33,8 +32,11 @@ const ActivityForm = React.createClass({
   },
 
   changeActivityType(e) {
-    debugger
     this.setState({ activityType: e.target.value });
+  },
+
+  changeDescription(e) {
+    this.setState({ description: e.target.value });
   },
 
   changeFile(e) {
@@ -49,6 +51,10 @@ const ActivityForm = React.createClass({
     }
   },
 
+  changeTitle(e) {
+    this.setState({ title: e.target.value });
+  },
+
   componentDidMount() {
     ErrorStore.addListener(this.addErrors);
     ActivityTypeStore.addListener(this.addActivityTypes);
@@ -59,8 +65,10 @@ const ActivityForm = React.createClass({
   getInitialState() {
     return {
       activity: {
+        activityType: null,
+        description: "",
         gpxFile: null,
-        activityType: null
+        title: ""
       },
 
       activityTypes: [],
@@ -74,9 +82,13 @@ const ActivityForm = React.createClass({
   },
 
   handleSubmit() {
+    debugger
+
     var formData = new FormData();
     formData.append("activity[gpx]", this.state.gpxFile);
-    formData.append("activity[activity_type]", this.state.activityType);
+    formData.append("activity[activity_type_id]", this.state.activityType);
+    formData.append("activity[title]", this.state.title);
+    formData.append("activity[description]", this.state.description);
     ActivityActions.createActivity(formData);
   },
 
@@ -85,21 +97,26 @@ const ActivityForm = React.createClass({
     return(
       <div>
         <h2>GPX Form!</h2>
-        <select name="Type">
+
+        <select name="Type" onChange={this.changeActivityType}>
+          <option value="" >--Type--</option>
           { this.state.activityTypes.length > 0 ? this.activityTypeOptions() : "" }
         </select>
-        <input type="file" onChange={this.changeFile}/>
+
+        <input type="text"
+          onChange={this.changeTitle}
+          value={this.state.title} />
+
+        <textarea
+          onChange={this.changeDescription}
+          value={this.state.description} />
+
+        <input type="file"
+          onChange={this.changeFile} />
+
         <button onClick={this.handleSubmit}>Add Activity</button>
       </div>);
 
-  },
-
-  updateUser() {
-    let activity = {
-      gpx
-    };
-
-    ActivityActions.createActivity(activity);
   }
 
 });

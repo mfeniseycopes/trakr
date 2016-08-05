@@ -4,8 +4,12 @@ class Api::ActivitiesController < ApplicationController
     debugger
     @activity = Activity.new(activity_create_params)
 
+    @activity.user = current_user
+    
     # calculate distance, time if not given
     # TODO: code this
+    @activity.distance = 5.5
+    @activity.date = Time.now
 
     if @activity.save
       render :show
@@ -52,6 +56,10 @@ class Api::ActivitiesController < ApplicationController
     else
       render json: ["The requested activity does not exist."], status: 404
     end
+  end
+
+  def activity_create_params
+    params.require(:activity).permit(:title, :description, :gpx, :activity_type_id)
   end
 
 end
