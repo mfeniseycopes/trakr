@@ -18,6 +18,9 @@ Rails.application.routes.draw do
     # activities can be viewed collectively and destroyed w/o context
     resources :activities, only: [:create, :destroy, :index, :show, :update]
 
+    # activity types needed for activity form
+    resources :activity_types, only: [:index]
+
   end
 
 end
