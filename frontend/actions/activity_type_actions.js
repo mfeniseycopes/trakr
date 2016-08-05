@@ -5,14 +5,14 @@ const ActivityTypeConstants = require('../constants/activity_type_constants');
 
 const ActivityTypeActions = {
 
-  getActivityType(id) {
-    ActivityTypeApiUtil.getActivityType(id, this.receiveActivityType, ErrorActions.setErrors);
+  getActivityTypes() {
+    ActivityTypeApiUtil.getActivityTypes(this.receiveActivityTypes, ErrorActions.setErrors);
   },
 
-  receiveActivityType(activity_type) {
+  receiveActivityTypes(activity_types) {
     AppDispatcher.dispatch({
       actionType: ActivityTypeConstants.RECEIVE_ACTIVITY_TYPES,
-      activity_type: activity_type
+      activityTypes: activity_types
     });
   }
 

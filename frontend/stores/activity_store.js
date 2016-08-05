@@ -2,6 +2,7 @@
 const Store = require('flux/utils').Store;
 
 // project
+const ActivityConstants = require('../constants/activity_constants');
 const AppDispatcher = require('../dispatchers/dispatcher');
 const ErrorConstants = require('../constants/error_constants');
 

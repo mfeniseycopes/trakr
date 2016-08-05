@@ -1,13 +1,32 @@
 // react requires
-const hashHistory     = require('react-router').hashHistory;
-const React           = require('react');
+const hashHistory         = require('react-router').hashHistory;
+const React               = require('react');
 
 // project requires
-const ActivityApiUtil = require('../../utils/activity_api_util');
-const ErrorStore      = require('../../stores/error_store');
-const FormErrors      = require('../errors/form_errors');
+const ActivityActions     = require('../../actions/activity_actions');
+const ActivityStore       = require('../../stores/activity_store');
+const ActivityTypeActions = require('../../actions/activity_type_actions');
+const ActivityTypeStore   = require('../../stores/activity_type_store');
+const ErrorStore          = require('../../stores/error_store');
+const FormErrors          = require('../errors/form_errors');
 
 const ActivityForm = React.createClass({
+
+  activityTypeOptions() {
+    debugger
+
+    return this.state.activityTypes.map((activityType) => {
+      return (
+        <option value={ activityType.id } key={ activityType.id }>
+          {activityType.name}
+        </option>
+      );
+    });
+  },
+
+  addActivityTypes() {
+    this.setState({ activityTypes: ActivityTypeStore.all() });
+  },
 
   addErrors() {
     this.setState({ errors: ErrorStore.errors("activityForm") });
@@ -32,11 +51,19 @@ const ActivityForm = React.createClass({
 
   componentDidMount() {
     ErrorStore.addListener(this.addErrors);
+    ActivityTypeStore.addListener(this.addActivityTypes);
+
+    ActivityTypeActions.getActivityTypes();
   },
 
   getInitialState() {
     return {
-      gpxFile: null,
+      activity: {
+        gpxFile: null,
+        activityType: null
+      },
+
+      activityTypes: [],
 
       errors: []
      };
@@ -50,7 +77,7 @@ const ActivityForm = React.createClass({
     var formData = new FormData();
     formData.append("activity[gpx]", this.state.gpxFile);
     formData.append("activity[activity_type]", this.state.activityType);
-    ActivityApiUtil.createActivity(formData, this.getRes);
+    ActivityActions.createActivity(formData);
   },
 
   render() {
@@ -59,8 +86,7 @@ const ActivityForm = React.createClass({
       <div>
         <h2>GPX Form!</h2>
         <select name="Type">
-          <option value="1">Run</option>
-          <option value="2">Ride</option>
+          { this.state.activityTypes.length > 0 ? this.activityTypeOptions() : "" }
         </select>
         <input type="file" onChange={this.changeFile}/>
         <button onClick={this.handleSubmit}>Add Activity</button>

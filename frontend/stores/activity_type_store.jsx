@@ -26,7 +26,8 @@ ActivityTypeStore.__onDispatch = (payload) => {
   }
 };
 
-ActivityStore.resetActivityTypes = (activityTypes) => {
+ActivityTypeStore.resetActivityTypes = (activityTypes) => {
+  _activityTypes = {};
 
   activityTypes.forEach((activityType) => {
     _activityTypes[activityType.id] = activityType;

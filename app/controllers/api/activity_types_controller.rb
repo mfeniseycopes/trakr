@@ -4,7 +4,7 @@ class Api::ActivityTypesController < ApplicationController
     @activity_types = ActivityType.all
 
     if @activity_types
-      render json: @activity_types # no need for view (only 2 columns)
+      render :index
     else
       render json: ["ActivityTypes resource unavailable"], status: 404
     end
