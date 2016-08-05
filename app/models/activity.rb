@@ -19,4 +19,12 @@ class Activity < ActiveRecord::Base
 
   validates :user_id, :activity_type_id, :title, :date, presence: true
 
+  def type_name
+    self.type.name
+  end
+
+  def user_name
+    self.user.name
+  end
+
 end
