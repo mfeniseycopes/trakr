@@ -3,19 +3,27 @@ const hashHistory     = require('react-router').hashHistory;
 const React           = require('react');
 
 // project requires
+const ActivityApiUtil = require('../../utils/activity_api_util');
 const ErrorStore      = require('../../stores/error_store');
 const FormErrors      = require('../errors/form_errors');
-const UserActions  = require('../../actions/user_actions');
-const UserStore    = require('../../stores/user_store');
 
-const ProfileEditForm = React.createClass({
+const ActivityForm = React.createClass({
 
   addErrors() {
     this.setState({ errors: ErrorStore.errors("activityForm") });
   },
 
   changeFile(e) {
-    this.setState({ first_name: e.target.value });
+    debugger
+    var file = e.currentTarget.files[0];
+    var fileReader = new FileReader();
+    fileReader.onloadend = function () {
+      this.setState({ gpxFile: file });
+    }.bind(this);
+
+    if (file) {
+      fileReader.readAsDataURL(file);
+    }
   },
 
   componentDidMount() {
@@ -24,19 +32,31 @@ const ProfileEditForm = React.createClass({
 
   getInitialState() {
     return {
-      gpxFile: "",
+      gpxFile: null,
 
       errors: []
      };
   },
 
+  getRes() {
+    
+  },
+
+  handleSubmit() {
+    var formData = new FormData();
+    formData.append("activity[gpx]", this.state.gpxFile);
+    ActivityApiUtil.createActivity(formData, this.getRes);
+  },
+
   render() {
-    return (
-      <form onSubmit={ this.updateUser }>
-        <input type="file" />
-        <button className="button form-button" type="submit" value="Update">Update</button>
-      </form>
-    );
+
+    return(
+      <div>
+        GPX Form!
+        <input type="file" onChange={this.changeFile}/>
+        <button onClick={this.handleSubmit}>Add Activity</button>
+      </div>);
+
   },
 
   updateUser() {
@@ -50,4 +70,4 @@ const ProfileEditForm = React.createClass({
 });
 
 
-module.exports = ProfileEditForm;
+module.exports = ActivityForm;

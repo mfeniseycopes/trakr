@@ -1,6 +1,7 @@
 class Api::ActivitiesController < ApplicationController
 
   def create
+    debugger
     @activity = Activity.new(activity_create_params)
 
     # calculate distance, time if not given

@@ -12,11 +12,11 @@ Rails.application.routes.draw do
     # users cannot be deleted
     resources :users, only: [:create, :update, :show] do
       # activities created and viewed in context of user
-      resources :activities, only: [:create, :index]
+      resources :activities, only: [:index]
     end
 
     # activities can be viewed collectively and destroyed w/o context
-    resources :activities, only: [:destroy, :index, :show, :update]
+    resources :activities, only: [:create, :destroy, :index, :show, :update]
 
   end
 
