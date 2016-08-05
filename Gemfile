@@ -33,6 +33,9 @@ gem 'figaro'
 # amazon web services
 gem 'aws-sdk'
 
+# read, creation and manipulation of gpx files
+gem 'gpx'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
