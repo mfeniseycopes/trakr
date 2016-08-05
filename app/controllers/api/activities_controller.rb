@@ -1,15 +1,17 @@
 class Api::ActivitiesController < ApplicationController
 
   def create
+
     debugger
     @activity = Activity.new(activity_create_params)
 
     @activity.user = current_user
-    
+
     # calculate distance, time if not given
     # TODO: code this
     @activity.distance = 5.5
-    @activity.date = Time.now
+    # @activity.calculate_distance
+    @activity.date = DateTime.now
 
     if @activity.save
       render :show
@@ -59,7 +61,7 @@ class Api::ActivitiesController < ApplicationController
   end
 
   def activity_create_params
-    params.require(:activity).permit(:title, :description, :gpx, :activity_type_id)
+    params.require(:activity).permit(:title, :description, :activity_type_id, :gpx)
   end
 
 end

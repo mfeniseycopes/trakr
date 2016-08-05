@@ -24,8 +24,17 @@ class Activity < ActiveRecord::Base
   # validate filename
   validates_attachment_file_name :gpx, matches: [/gpx\Z/]
 
-  def type_name
-    self.type.name
+  before_post_process :determine_properties
+
+  def activity_type_name
+    self.activity_type.name
+  end
+
+  def determine_properties
+    gpx = GPX::GPXFile.new(gpx_file: self.gpx.instance_variable_get(:@file).path)
+    self.distance = gpx.distance
+    self.date = gpx.time
+    self.duration = gpx.duration
   end
 
   def user_name

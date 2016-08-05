@@ -82,7 +82,7 @@ const ActivityForm = React.createClass({
   },
 
   handleSubmit() {
-    debugger
+    
 
     var formData = new FormData();
     formData.append("activity[gpx]", this.state.gpxFile);
