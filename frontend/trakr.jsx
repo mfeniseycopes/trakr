@@ -22,7 +22,7 @@ const router = (
     <Route path="/" component={ App } >
 
       <IndexRoute
-        component={ IndexRouteStub }
+        component={ LoginForm }
         onEnter={ _ensureLoggedIn } />
 
       <Route path="/signup"
@@ -38,7 +38,7 @@ const router = (
       <Route path="/users/:id"
         component={ Profile }
         onEnter={ _ensureLoggedIn } />
-      
+
     </Route>
   </Router>
 );
@@ -70,4 +70,4 @@ document.addEventListener(
       document.getElementById('react-root')
     );
   }
-)
+);
