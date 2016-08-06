@@ -1,3 +1,6 @@
+// react
+const hashHistory     = require('react-router').hashHistory;
+
 // project
 const Store = require('flux/utils').Store;
 const AppDispatcher = require('../dispatchers/dispatcher');
@@ -32,7 +35,9 @@ SessionStore.__onDispatch = (payload) => {
 function _login(user) {
   _currentUser = user;
   document.body.className = "";
+  hashHistory.push('/profile');
   SessionStore.__emitChange();
+
 }
 
 function _logout() {
