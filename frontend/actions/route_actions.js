@@ -1,6 +1,7 @@
 // project requires
 const AppDispatcher = require('../dispatchers/dispatcher');
 const ErrorConstants = require('../constants/error_constants');
+const RouteConstants = require('../constants/route_constants');
 
 const RouteActions = {
 
@@ -13,7 +14,7 @@ const RouteActions = {
 
   clearRoute(routePoint) {
     AppDispatcher.dispatch({
-      actionType: RouteConstants.CLEAR_ROUTE
+      actionType: RouteConstants.RESET_ROUTE
     });
   },
 

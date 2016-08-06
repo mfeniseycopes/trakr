@@ -1,7 +1,7 @@
 
 const RouteConstants = {
 
-  CLEAR_ROUTE: "CLEAR_ROUTE",
+  RESET_ROUTE: "RESET_ROUTE",
   RECEIVE_ROUTE_POINT: "RECEIVE_ROUTE_POINT"
 
 };
