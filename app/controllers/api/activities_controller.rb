@@ -1,8 +1,6 @@
 class Api::ActivitiesController < ApplicationController
 
   def create
-
-    debugger
     @activity = Activity.new(activity_create_params)
 
     @activity.user = current_user

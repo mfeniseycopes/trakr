@@ -7,7 +7,6 @@ const ActivityActions = {
 
 
   createActivity(activity) {
-    debugger
     ActivityApiUtil.createActivity(activity, this.receiveActivity, ErrorActions.setErrors);
   },
 
