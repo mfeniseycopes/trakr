@@ -40,12 +40,20 @@ const router = (
         component={ Profile }
         onEnter={ _ensureLoggedIn } />
 
-      <Route path="/activitytest"
-        component={ ActivityForm } />
+      <Route path="/upload"
+        component={ ActivityForm }
+        onEnter={ _ensureLoggedIn } />
 
     </Route>
   </Router>
 );
+
+function _goHomeIfLoggedIn(nextState, replace) {
+
+    if (SessionStore.isLoggedIn()) {
+      replace('/profile');
+    }
+}
 
 function _ensureLoggedIn(nextState, replace) {
   // We don't want users to be able to visit our 'new' or 'review' routes
