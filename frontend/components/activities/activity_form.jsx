@@ -4,6 +4,7 @@ const React               = require('react');
 
 // project requires
 const ActivityActions     = require('../../actions/activity_actions');
+const ActivityCreationMap = require('./activity_creation_map');
 const ActivityStore       = require('../../stores/activity_store');
 const ActivityTypeActions = require('../../actions/activity_type_actions');
 const ActivityTypeStore   = require('../../stores/activity_type_store');
@@ -77,12 +78,7 @@ const ActivityForm = React.createClass({
      };
   },
 
-  getRes() {
-
-  },
-
   handleSubmit() {
-    
 
     var formData = new FormData();
     formData.append("activity[gpx]", this.state.gpxFile);
@@ -97,6 +93,8 @@ const ActivityForm = React.createClass({
     return(
       <div>
         <h2>GPX Form!</h2>
+
+        <ActivityCreationMap />
 
         <select name="Type" onChange={this.changeActivityType}>
           <option value="" >--Type--</option>

@@ -8,12 +8,12 @@ const IndexRoute  = ReactRouter.IndexRoute;
 const hashHistory = ReactRouter.hashHistory;
 
 // project requires
-const ActivityForm    = require('./components/activities/activity_form');
-const App             = require('./components/app');
-const LoginForm       = require('./components/sessions/login_form');
-const Profile         = require('./components/users/profile');
-const SessionActions  = require('./actions/session_actions');
-const SessionStore    = require('./stores/session_store');
+const ActivityForm        = require('./components/activities/activity_form');
+const App                 = require('./components/app');
+const LoginForm           = require('./components/sessions/login_form');
+const Profile             = require('./components/users/profile');
+const SessionActions      = require('./actions/session_actions');
+const SessionStore        = require('./stores/session_store');
 
 const IndexRouteStub  = require('./components/index_route_stub');
 
