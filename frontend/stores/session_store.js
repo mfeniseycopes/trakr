@@ -22,9 +22,14 @@ SessionStore.isLoggedIn = () => {
 
 SessionStore.__onDispatch = (payload) => {
   switch(payload.actionType) {
+    case SessionConstants.RECEIVE_BOOTSTRAPPED_USER:
+    _setCurrentUser(payload.currentUser);
+    break;
+
     case SessionConstants.LOGIN:
     _login(payload.currentUser);
     break;
+
     case SessionConstants.LOGOUT:
     _logout();
     break;
@@ -33,16 +38,17 @@ SessionStore.__onDispatch = (payload) => {
 
 // private methods
 function _login(user) {
-  _currentUser = user;
-  document.body.className = "";
   hashHistory.push('/profile');
-  SessionStore.__emitChange();
-
+  _setCurrentUser(user);
 }
 
 function _logout() {
-  _currentUser = {};
-  document.body.className = "logged-out";
+  _setCurrentUser({});
+}
+
+function _setCurrentUser(user) {
+  document.body.className = (user === {} ? "logged-out" : "");
+  _currentUser = user;
   SessionStore.__emitChange();
 }
 

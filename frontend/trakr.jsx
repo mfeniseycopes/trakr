@@ -41,8 +41,7 @@ const router = (
         onEnter={ _ensureLoggedIn } />
 
       <Route path="/upload"
-        component={ ActivityForm }
-        onEnter={ _ensureLoggedIn } />
+        component={ ActivityForm } />
 
     </Route>
   </Router>
@@ -56,12 +55,6 @@ function _goHomeIfLoggedIn(nextState, replace) {
 }
 
 function _ensureLoggedIn(nextState, replace) {
-  // We don't want users to be able to visit our 'new' or 'review' routes
-  // if they haven't already signed in/up. Let's redirect them!
-  // `replace` is like a redirect. It replaces the current entry
-  // into the history (and the hashFragment), so the Router is forced
-  // to re-route.
-
     if (!SessionStore.isLoggedIn()) {
       replace('/signup');
     }
@@ -72,7 +65,7 @@ document.addEventListener(
   () => {
 
     if (window.currentUser) {
-      SessionActions.receiveCurrentUser(window.currentUser);
+      SessionActions.receiveBootstrappedUser(window.currentUser);
     }
 
     console.log("working");

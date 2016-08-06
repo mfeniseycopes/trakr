@@ -24,6 +24,13 @@ const SessionActions = {
     );
   },
 
+  receiveBootstrappedUser(user) {
+    AppDispatcher.dispatch({
+      actionType: SessionConstants.RECEIVE_BOOTSTRAPPED_USER,
+      currentUser: user
+    });
+  },
+
   receiveCurrentUser(user) {
     AppDispatcher.dispatch({
       actionType: SessionConstants.LOGIN,

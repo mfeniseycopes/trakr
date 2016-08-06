@@ -1,7 +1,8 @@
 const SessionConstants = {
 
   LOGIN: "LOGIN",
-  LOGOUT: "LOGOUT"
+  LOGOUT: "LOGOUT",
+  RECEIVE_BOOTSTRAPPED_USER: "RECEIVE_BOOTSTRAPPED_USER"
 
 };
 
