@@ -7,8 +7,24 @@ const RouteActions  = require('../../actions/route_actions');
 const RouteStore    = require('../../stores/route_store');
 
 let _numRoutPoints = 0;
+// used to determine when to update route points on waypoint drag
+let _draggedNotClicked = true;
 
 const ActivityCreationMap = React.createClass({
+
+  updateRoute() {
+    let legs = this.legs();
+
+    if (_draggedNotClicked) {
+      this.origin = legs.start_location;
+      this.destination = legs.end_location;
+      this.waypoints = legs.via_waypoints || [];
+    }
+
+    this.setState({ distance: legs.distance });
+
+    _draggedNotClicked = true;
+  },
 
   componentDidMount() {
 
@@ -28,106 +44,110 @@ const ActivityCreationMap = React.createClass({
 
     this.map = new google.maps.Map(mapDOMNode, mapOptions);
     this.routeDisplay.setMap(this.map);
+    // keeps track of route info
+    this.origin = null;
+    this.destination = null;
+    this.waypoints = [];
 
     this.registerListeners();
   },
 
   getInitialState() {
-    return null;
+    return {
+      distance: 0
+    };
   },
 
   _handleClick(e) {
-    console.log('handleClick');
-    let lat = e.latLng.lat();
-    let lng = e.latLng.lng();
-    RouteActions.addRoutePoint({ lat: lat, lng: lng, name: ++_numRoutPoints });
-  },
+    // add to routePoints
 
-  registerListeners() {
-    this.routeListener = RouteStore.addListener(this.resetRoute);
+    // only one point, no route yet
+    if (!this.origin) {
 
-    this.map.addListener('click', this._handleClick);
-  },
+      this.origin = e.latLng;
 
-  render() {
-    return (
-      <div className="map clear" ref="map">
-
-      </div>
-    );
-  },
-
-  resetRoute() {
-
-    console.log('resetRoute');
-
-    // get all user inputted points
-    this.routePoints = RouteStore.all();
-
-    // no route or start pt
-    if (this.routePoints.length === 0) {
-      // remove old marker from map
-      if (this.marker) {
-        this.marker.setMap(null);
-      }
-    }
-
-    // don't have a route yet, so just place a marker
-    if (this.routePoints.length < 2) {
-
-      // remove old marker from map
-      if (this.marker) {
-        this.marker.setMap(null);
-      }
-
-      // set new marker
       this.marker = new google.maps.Marker({
         position: {
-          lat: this.routePoints[0].lat,
-          lng: this.routePoints[0].lng
+          lat: e.latLng.lat(),
+          lng: e.latLng.lng()
         },
         map: this.map,
         title: "Start"
       });
     }
-    // we do have a route, so remove the marker & get directions
+    // yay, lets start a route
     else {
-      // remove old marker from map
-      if (this.marker) {
-        this.marker.setMap(null);
-      }
+      // set as click event (prevent full resync of route points)
+      _draggedNotClicked = false;
 
+      // clear the marker
+      this.marker.setMap(null);
+
+      // get directions
       // generate route request
-      let origin = _googleLatLngFromRoutePoint(this.routePoints[0]);
-      let destination = _googleLatLngFromRoutePoint(this.routePoints[this.routePoints.length-1]);
-      let waypoints = _googleWaypointsFromRoutePoints(this.routePoints.slice(1, this.routePoints.length-1));
+      if (this.destination) {
+        this.waypoints.push(this.destination);
+      }
+      this.destination = e.latLng;
 
+      // create request
       var request = {
-        origin: origin,
-        destination: destination,
-        waypoints: waypoints,
+        origin: this.origin,
+        destination: this.destination,
+        waypoints: this.waypoints.map((waypoint) => {
+          return {
+            location: waypoint,
+            stopover: false
+          };
+        }),
         travelMode: google.maps.TravelMode.WALKING
       };
+
       this.routeService.route(request, (response, status) => {
-        if (status == 'OK') {
+        if (status === 'OK') {
           this.routeDisplay.setDirections(response);
         }
       });
     }
+  },
+
+  legs() {
+    return this.routeDisplay.getDirections().routes[0].legs[0];
+  },
+
+  routeDistance() {
+    return this.routeDisplay.getDirections().routes[0].legs[0].distance;
+  },
+
+  registerListeners() {
+
+    this.routeListener = RouteStore.addListener(this.resetRoute);
+
+    this.map.addListener('click', this._handleClick);
+    this.routeDisplay.addListener('directions_changed', this.updateRoute);
+  },
+
+  render() {
+    return (
+      <div>
+        <div className="map" ref="map">
+
+        </div>
+        <div className="route-details">
+          <p>{this.state.distance.text}</p>
+          <p>Maybe a button goes here</p>
+          <button onClick={this.submitRoute} />
+        </div>
+      </div>
+    );
+  },
+
+  submitRoute() {
+    
   }
 
 });
 
-let _googleLatLngFromRoutePoint = (routePoint) => {
-  return new google.maps.LatLng(routePoint.lat, routePoint.lng);
-};
 
-let _googleWaypointsFromRoutePoints = (routePoints) => {
-  return routePoints.map((routePoint) => {
-    return {
-      location: _googleLatLngFromRoutePoint(routePoint)
-    };
-  });
-};
 
 module.exports = ActivityCreationMap;
