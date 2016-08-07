@@ -5,6 +5,7 @@ const ReactDOM      = require('react-dom');
 // project requires
 const RouteActions  = require('../../actions/route_actions');
 const RouteStore    = require('../../stores/route_store');
+const SessionStore = require('../../stores/session_store');
 
 let _numRoutPoints = 0;
 // used to determine when to update route points on waypoint drag
@@ -28,28 +29,23 @@ const ActivityCreationMap = React.createClass({
 
   componentDidMount() {
 
-    let styles = [{"stylers":[{"visibility":"on"},{"saturation":-100},{"gamma":0.54}]},{"featureType":"road","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"water","stylers":[{"color":"#4d4946"}]},{"featureType":"poi","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"poi","elementType":"labels.text","stylers":[{"visibility":"simplified"}]},{"featureType":"road","elementType":"geometry.fill","stylers":[{"color":"#ffffff"}]},{"featureType":"road.local","elementType":"labels.text","stylers":[{"visibility":"simplified"}]},{"featureType":"water","elementType":"labels.text.fill","stylers":[{"color":"#ffffff"}]},{"featureType":"transit.line","elementType":"geometry","stylers":[{"gamma":0.48}]},{"featureType":"transit.station","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"geometry.stroke","stylers":[{"gamma":7.18}]}];
-
-    const mapDOMNode = ReactDOM.findDOMNode(this.refs.map);
-    const mapOptions = {
-      center: { lat: 40.728558, lng: -73.982990}, // this is not SF
-      zoom: 11,
-      styles: styles
-    };
-
-    this.routeService = new google.maps.DirectionsService();
-    this.routeDisplay = new google.maps.DirectionsRenderer({
-      draggable: true
-    });
-
-    this.map = new google.maps.Map(mapDOMNode, mapOptions);
-    this.routeDisplay.setMap(this.map);
-    // keeps track of route info
-    this.origin = null;
-    this.destination = null;
-    this.waypoints = [];
-
-    this.registerListeners();
+    if (SessionStore.currentUser().location) {
+      let geocoder = new google.maps.Geocoder();
+      geocoder.geocode({
+        address: SessionStore.currentUser().location },
+        (results, status) => {
+          if (status === "OK") {
+            this.setupMap(results[0].geometry.location);
+          }
+          else {
+            this.setupMap(new google.maps.LatLng({ lat: 40.6781784, lng: -73.9441579 }));
+          }
+        }
+      );
+    }
+    else {
+      this.setupMap(new google.maps.LatLng({ lat: 40.6781784, lng: -73.9441579 }));
+    }
   },
 
   getInitialState() {
@@ -142,8 +138,34 @@ const ActivityCreationMap = React.createClass({
     );
   },
 
+  setupMap(center) {
+
+    let styles = [{"stylers":[{"visibility":"on"},{"saturation":-100},{"gamma":0.54}]},{"featureType":"road","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"water","stylers":[{"color":"#4d4946"}]},{"featureType":"poi","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"poi","elementType":"labels.text","stylers":[{"visibility":"simplified"}]},{"featureType":"road","elementType":"geometry.fill","stylers":[{"color":"#ffffff"}]},{"featureType":"road.local","elementType":"labels.text","stylers":[{"visibility":"simplified"}]},{"featureType":"water","elementType":"labels.text.fill","stylers":[{"color":"#ffffff"}]},{"featureType":"transit.line","elementType":"geometry","stylers":[{"gamma":0.48}]},{"featureType":"transit.station","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"geometry.stroke","stylers":[{"gamma":7.18}]}];
+
+    const mapDOMNode = ReactDOM.findDOMNode(this.refs.map);
+    const mapOptions = {
+      center: center,
+      zoom: 13,
+      styles: styles
+    };
+
+    this.routeService = new google.maps.DirectionsService();
+    this.routeDisplay = new google.maps.DirectionsRenderer({
+      draggable: true
+    });
+
+    this.map = new google.maps.Map(mapDOMNode, mapOptions);
+    this.routeDisplay.setMap(this.map);
+    // keeps track of route info
+    this.origin = null;
+    this.destination = null;
+    this.waypoints = [];
+
+    this.registerListeners();
+  },
+
   submitRoute() {
-    
+
   }
 
 });

@@ -8,6 +8,7 @@ const IndexRoute  = ReactRouter.IndexRoute;
 const hashHistory = ReactRouter.hashHistory;
 
 // project requires
+const ActivityCreationMap = require('./components/activities/activity_creation_map');
 const ActivityForm        = require('./components/activities/activity_form');
 const App                 = require('./components/app');
 const LoginForm           = require('./components/sessions/login_form');
@@ -42,6 +43,9 @@ const router = (
 
       <Route path="/upload"
         component={ ActivityForm } />
+
+      <Route path="/create-activity"
+        component={ ActivityCreationMap } />
 
     </Route>
   </Router>
