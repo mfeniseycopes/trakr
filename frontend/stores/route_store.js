@@ -9,14 +9,15 @@ const RouteConstants = require('../constants/route_constants');
 // instance var
 // this will store the routePoints
 // key: order in which they are added ('name' from waypoint obj)
-// value: waypoint (name, lat, lon, ele)
+// value: waypoint (name, lat, lng, ele)
 let _route = {};
 
 const RouteStore = new Store(AppDispatcher);
 
-RouteStore.resetRoute = () => {
-  _route = {};
-  RouteStore.__emitChange();
+RouteStore.all = () => {
+  return Object.keys(_route).map((name) => {
+    return _route[name];
+  });
 };
 
 RouteStore.findRoutePoint = (routePoint_name) => {
@@ -24,13 +25,14 @@ RouteStore.findRoutePoint = (routePoint_name) => {
 };
 
 RouteStore.__onDispatch = (payload) => {
+
   switch(payload.actionType) {
     case RouteConstants.RESET_ROUTE:
     RouteStore.resetRoute();
     break;
 
-    case RouteConstants.RECEIVE_WAYPOINT:
-
+    case RouteConstants.RECEIVE_ROUTE_POINT:
+    RouteStore.resetRoutePoint(payload.routePoint);
     break;
   }
 };
