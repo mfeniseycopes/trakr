@@ -192,7 +192,7 @@ const ActivityForm = React.createClass({
 
   redirectToActivityDetail() {
     if(ActivityStore.newActivity().id) {
-      hashHistory.push(`/activities/${ActivityStore.newActivity.id}`);
+      hashHistory.push(`/activities/${ActivityStore.newActivity().id}`);
     }
   },
 
