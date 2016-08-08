@@ -58,24 +58,38 @@ const ActivityForm = React.createClass({
 
   componentDidMount() {
     ErrorStore.addListener(this.addErrors);
-    ActivityTypeStore.addListener(this.addActivityTypes);
 
+    // populate activityType dropdown
+    ActivityTypeStore.addListener(this.addActivityTypes);
     ActivityTypeActions.getActivityTypes();
+
+    // get route info from prepopulated activity
   },
 
   getInitialState() {
-    return {
-      activity: {
+    let activity;
+    if (this.props.location.query.from === "creator" ||
+        this.props.location.query.from === "upload") {
+
+      activity = ActivityStore.newActivity();
+
+    }
+    else {
+
+      activity = {
         activityType: null,
         description: "",
         gpxFile: null,
         title: ""
-      },
+      };
 
+    }
+
+    return {
+      activity: activity,
       activityTypes: [],
-
       errors: []
-     };
+    };
   },
 
   handleSubmit() {
@@ -92,9 +106,6 @@ const ActivityForm = React.createClass({
 
     return(
       <div>
-        <h2>GPX Form!</h2>
-
-        <ActivityCreationMap />
 
         <select name="Type" onChange={this.changeActivityType}>
           <option value="" >--Type--</option>
@@ -113,8 +124,8 @@ const ActivityForm = React.createClass({
           onChange={this.changeFile} />
 
         <button onClick={this.handleSubmit}>Add Activity</button>
-      </div>);
-
+      </div>
+    );
   }
 
 });

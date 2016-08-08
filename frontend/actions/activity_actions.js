@@ -10,6 +10,14 @@ const ActivityActions = {
     ActivityApiUtil.createActivity(activity, this.receiveActivity, ErrorActions.setErrors);
   },
 
+  // used to send new (non-persisted) activity to activity form
+  createNewActivity(activity) {
+    AppDispatcher.dispatch({
+      actionType: ActivityConstants.RECEIVE_NEW_ACTIVITY,
+      activity: activity
+    });
+  },
+
   destroyActivity(id) {
     ActivityApiUtil.destroyActivity(id, this.receiveActivity, ErrorActions.setErrors);
   },

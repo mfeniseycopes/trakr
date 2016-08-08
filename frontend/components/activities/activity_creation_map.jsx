@@ -1,8 +1,10 @@
 // react requires
+const hashHistory   = require('react-router').hashHistory;
 const React         = require('react');
 const ReactDOM      = require('react-dom');
 
 // project requires
+const ActivityActions = require('../../actions/activity_actions');
 const RouteActions  = require('../../actions/route_actions');
 const RouteStore    = require('../../stores/route_store');
 const SessionStore = require('../../stores/session_store');
@@ -132,7 +134,7 @@ const ActivityCreationMap = React.createClass({
         <div className="route-details">
           <p>{this.state.distance.text}</p>
           <p>Maybe a button goes here</p>
-          <button onClick={this.submitRoute} />
+          <button onClick={this.submitRoute} >Create!</button>
         </div>
       </div>
     );
@@ -164,11 +166,52 @@ const ActivityCreationMap = React.createClass({
     this.registerListeners();
   },
 
+  steps() {
+    return this.routeDisplay.getDirections().routes[0].legs[0].steps;
+  },
+
   submitRoute() {
+    // translate to route
+    if (this.origin && this.destination) {
+
+      let steps = this.steps();
+      let legs = this.legs();
+      let d = this.routeDisplay.getDirections();
+
+      let route = [_googleLatLngToSimpleObject(steps[0].start_location)];
+
+      steps.forEach((step) => {
+        route.push(step.end_location);
+      });
+
+
+      let activity = {
+        route: route,
+        distance: this.state.distance
+      };
+
+      // add route to RouteStore to be received by ActivityForm component onmount
+      ActivityActions.createNewActivity(activity);
+
+      hashHistory.push({
+        pathname: "/new-activity",
+        query: { from: "creator" }
+      });
+    }
+    else {
+      // display error
+    }
 
   }
 
 });
+
+let _googleLatLngToSimpleObject = (latLng) => {
+  return {
+    lat: latLng.lat(),
+    lng: latLng.lng()
+  };
+};
 
 
 

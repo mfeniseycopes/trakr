@@ -10,6 +10,7 @@ const ActivityStore = new Store(AppDispatcher);
 
 // instance vars
 let _activities = {};
+let _newActivity = {};
 
 ActivityStore.all = () => {
   let keys = Object.keys(_activities);
@@ -25,18 +26,26 @@ ActivityStore.find = (id) => {
 
 ActivityStore.__onDispatch = (payload) => {
   switch(payload.actionType) {
-    case ActivityConstants.RECEIVED_ACTIVITIES:
+    case ActivityConstants.RECEIVE_ACTIVITIES:
     ActivityStore.resetActivities(payload.activities);
     break;
 
-    case ActivityConstants.RECEIVED_ACTIVITY:
+    case ActivityConstants.RECEIVE_ACTIVITY:
     ActivityStore.resetActivity(payload.activity);
     break;
 
-    case ActivityConstants.REMOVED_ACTIVITY:
+    case ActivityConstants.RECEIVE_NEW_ACTIVITY:
+    ActivityStore.resetNewActivity(payload.activity);
+    break;
+
+    case ActivityConstants.REMOVE_ACTIVITY:
     ActivityStore.removeActivity(payload.activity);
     break;
   }
+};
+
+ActivityStore.newActivity = () => {
+  return Object.assign({}, _newActivity);
 };
 
 ActivityStore.removeActivity = (activity) => {
@@ -57,6 +66,12 @@ ActivityStore.resetActivities = (activities) => {
 
 ActivityStore.resetActivity = (activity) => {
   _activities[activity.id] = activity;
+
+  ActivityStore.__emitChange();
+};
+
+ActivityStore.resetNewActivity = (activity) => {
+  _newActivity = activity;
 
   ActivityStore.__emitChange();
 };

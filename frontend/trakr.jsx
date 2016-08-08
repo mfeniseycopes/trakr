@@ -41,7 +41,7 @@ const router = (
         component={ Profile }
         onEnter={ _ensureLoggedIn } />
 
-      <Route path="/upload"
+      <Route path="/new-activity"
         component={ ActivityForm } />
 
       <Route path="/create-activity"
