@@ -2,7 +2,6 @@
 const ActivityApiUtil = {
 
   createActivity(activity, successCallback, errorCallback) {
-
     $.ajax({
       method: "POST",
       url: `/api/activities`,

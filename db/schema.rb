@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160808213653) do
+ActiveRecord::Schema.define(version: 20160808231701) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 20160808213653) do
     t.integer  "activity_type_id", null: false
     t.string   "title",            null: false
     t.text     "description"
-    t.date     "date",             null: false
+    t.datetime "date",             null: false
     t.float    "distance"
     t.integer  "duration"
     t.string   "gpx_file_name"
@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 20160808213653) do
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
     t.string   "encoded_polyline"
+    t.float    "speed"
     t.index ["activity_type_id"], name: "index_activities_on_activity_type_id", using: :btree
     t.index ["user_id"], name: "index_activities_on_user_id", using: :btree
   end

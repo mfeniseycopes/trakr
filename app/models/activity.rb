@@ -46,15 +46,22 @@ class Activity < ActiveRecord::Base
       self.date = gpx.time
       self.duration = gpx.duration
     else
-      gpx = GPX::GPXFile.new(name: self.title, distance: self.distance)
+       # convert distance to km for gpx compatibility
+      gpx = GPX::GPXFile.new(
+        name: self.title,
+        distance: self.distance * 1.60934,
+        moving_duration: self.duration
+      )
       gpx.tracks << GPX::Track.new
 
       @route.each do |point|
         gpx.tracks[0].points << GPX::TrackPoint.new(lat: point["lat"].to_f, lon: point["lng"].to_f)
       end
-
+      
+      self.speed = gpx.average_speed(units: "miles")
       self.gpx = StringIO.new(gpx.to_s)
     end
+
   end
 
   def route=(route)

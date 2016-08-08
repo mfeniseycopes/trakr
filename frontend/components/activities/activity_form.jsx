@@ -173,7 +173,7 @@ const ActivityForm = React.createClass({
     } else if (this.state.route) {
       activity = {
         activity_type_id: this.state.activityType,
-        date: date,
+        date: date.toJSON(),
         description: this.state.description,
         distance: this.state.distance,
         duration: this.duration(),

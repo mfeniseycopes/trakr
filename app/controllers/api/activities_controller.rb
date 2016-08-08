@@ -1,14 +1,12 @@
 class Api::ActivitiesController < ApplicationController
 
   def create
-    @activity = current_user.activities.new(activity_create_params)
 
-    @activity.date = DateTime.now
+    @activity = current_user.activities.new(activity_create_params)
 
     if @activity.save
       render :show
     else
-      debugger
       render json: @activity.errors.full_messages, status: 422
     end
   end
@@ -55,9 +53,15 @@ class Api::ActivitiesController < ApplicationController
 
   def activity_create_params
     params.require(:activity).permit(
-      :title, :description, :distance,
-      :activity_type_id, :gpx, :encoded_polyline,
-      {route: [:lat, :lng]}
+      :activity_type_id,
+      :date,
+      :description,
+      :distance,
+      :duration,
+      :gpx,
+      :encoded_polyline,
+      {route: [:lat, :lng]},
+      :title
     )
   end
 
