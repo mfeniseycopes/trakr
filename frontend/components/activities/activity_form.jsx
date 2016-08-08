@@ -70,19 +70,15 @@ const ActivityForm = React.createClass({
     let activity;
     if (this.props.location.query.from === "creator" ||
         this.props.location.query.from === "upload") {
-
       activity = ActivityStore.newActivity();
-
     }
     else {
-
       activity = {
         activityType: null,
         description: "",
         gpxFile: null,
         title: ""
       };
-
     }
 
     return {
@@ -102,28 +98,39 @@ const ActivityForm = React.createClass({
     ActivityActions.createActivity(formData);
   },
 
+  miniMapUrl() {
+    return `https://maps.googleapis.com/maps/api/staticmap?size=300x200&path=color:0x003A23%7Cenc:${this.state.activity.encPolyline}`;
+  },
+
   render() {
 
     return(
       <div>
+        <p>{ this.state.activity.distance.text }</p>
 
-        <select name="Type" onChange={this.changeActivityType}>
-          <option value="" >--Type--</option>
-          { this.state.activityTypes.length > 0 ? this.activityTypeOptions() : "" }
-        </select>
+        <img className="mini-map" src={ this.miniMapUrl() } />
 
-        <input type="text"
-          onChange={this.changeTitle}
-          value={this.state.title} />
+        <form onSubmit={this.handleSubmit}>
 
-        <textarea
-          onChange={this.changeDescription}
-          value={this.state.description} />
+          <select name="Type" onChange={this.changeActivityType}>
+            <option value="" >--Type--</option>
+            { this.state.activityTypes.length > 0 ? this.activityTypeOptions() : "" }
+          </select>
 
-        <input type="file"
-          onChange={this.changeFile} />
+          <input type="text"
+            onChange={this.changeTitle}
+            value={this.state.title} />
 
-        <button onClick={this.handleSubmit}>Add Activity</button>
+          <textarea
+            onChange={this.changeDescription}
+            value={this.state.description} />
+
+          <input type="file"
+            onChange={this.changeFile} />
+
+          <button type="submit">Add Activity</button>
+
+        </form>
       </div>
     );
   }

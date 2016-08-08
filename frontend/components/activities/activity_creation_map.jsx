@@ -113,6 +113,10 @@ const ActivityCreationMap = React.createClass({
     return this.routeDisplay.getDirections().routes[0].legs[0];
   },
 
+  encPolyline() {
+    return this.routeDisplay.getDirections().routes[0].overview_polyline;
+  },
+
   routeDistance() {
     return this.routeDisplay.getDirections().routes[0].legs[0].distance;
   },
@@ -142,13 +146,10 @@ const ActivityCreationMap = React.createClass({
 
   setupMap(center) {
 
-    let styles = [{"stylers":[{"visibility":"on"},{"saturation":-100},{"gamma":0.54}]},{"featureType":"road","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"water","stylers":[{"color":"#4d4946"}]},{"featureType":"poi","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"poi","elementType":"labels.text","stylers":[{"visibility":"simplified"}]},{"featureType":"road","elementType":"geometry.fill","stylers":[{"color":"#ffffff"}]},{"featureType":"road.local","elementType":"labels.text","stylers":[{"visibility":"simplified"}]},{"featureType":"water","elementType":"labels.text.fill","stylers":[{"color":"#ffffff"}]},{"featureType":"transit.line","elementType":"geometry","stylers":[{"gamma":0.48}]},{"featureType":"transit.station","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"geometry.stroke","stylers":[{"gamma":7.18}]}];
-
     const mapDOMNode = ReactDOM.findDOMNode(this.refs.map);
     const mapOptions = {
       center: center,
-      zoom: 13,
-      styles: styles
+      zoom: 13
     };
 
     this.routeService = new google.maps.DirectionsService();
@@ -175,8 +176,6 @@ const ActivityCreationMap = React.createClass({
     if (this.origin && this.destination) {
 
       let steps = this.steps();
-      let legs = this.legs();
-      let d = this.routeDisplay.getDirections();
 
       let route = [_googleLatLngToSimpleObject(steps[0].start_location)];
 
@@ -187,7 +186,8 @@ const ActivityCreationMap = React.createClass({
 
       let activity = {
         route: route,
-        distance: this.state.distance
+        distance: this.state.distance,
+        encPolyline: this.encPolyline()
       };
 
       // add route to RouteStore to be received by ActivityForm component onmount
