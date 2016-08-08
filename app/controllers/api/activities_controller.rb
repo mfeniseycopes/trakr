@@ -5,13 +5,10 @@ class Api::ActivitiesController < ApplicationController
 
     @activity.date = DateTime.now
 
-    # convert route to gpx
-    if route = params[:activity][:route]
-    end
-
     if @activity.save
       render :show
     else
+      debugger
       render json: @activity.errors.full_messages, status: 422
     end
   end

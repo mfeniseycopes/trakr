@@ -9,6 +9,7 @@ const hashHistory = ReactRouter.hashHistory;
 
 // project requires
 const ActivityCreationMap = require('./components/activities/activity_creation_map');
+const Activity            = require('./components/activities/activity');
 const ActivityForm        = require('./components/activities/activity_form');
 const App                 = require('./components/app');
 const LoginForm           = require('./components/sessions/login_form');
@@ -34,6 +35,7 @@ const router = (
         component={ LoginForm }
         onEnter={ _ensureLoggedOut }/>
 
+
       <Route path="/profile"
         component={ Profile }
         onEnter={ _ensureLoggedIn } />
@@ -42,13 +44,19 @@ const router = (
         component={ Profile }
         onEnter={ _ensureLoggedIn } />
 
-      <Route path="/new-activity"
-        component={ ActivityForm }
-        onEnter={ _ensureLoggedIn } />
 
       <Route path="/create-activity"
         component={ ActivityCreationMap }
         onEnter={ _ensureLoggedIn } />
+
+      <Route path="/new-activity"
+        component={ ActivityForm }
+        onEnter={ _ensureLoggedIn } />
+
+      <Route path="/activities/:id"
+        component={ Activity }
+        onEnter={ _ensureLoggedIn } />
+
 
     </Route>
   </Router>

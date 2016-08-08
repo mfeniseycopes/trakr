@@ -39,7 +39,7 @@ ErrorStore.__onDispatch = (payload) => {
 };
 
 ErrorStore.setErrors = (payload) => {
-  _errors = payload.errors;
+  _errors = payload.errors || [];
   _form = payload.form;
   ErrorStore.__emitChange();
 };

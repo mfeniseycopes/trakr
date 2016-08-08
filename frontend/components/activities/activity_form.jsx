@@ -152,7 +152,9 @@ const ActivityForm = React.createClass({
     return state;
   },
 
-  handleSubmit() {
+  handleSubmit(e) {
+
+    e.preventDefault();
 
     // format date
     let date = new Date(this.state.date + " " + this.state.start);
@@ -189,7 +191,7 @@ const ActivityForm = React.createClass({
   },
 
   redirectToActivityDetail() {
-    if(ActivityStore.newActivity.id) {
+    if(ActivityStore.newActivity().id) {
       hashHistory.push(`/activities/${ActivityStore.newActivity.id}`);
     }
   },
@@ -242,6 +244,8 @@ const ActivityForm = React.createClass({
 
           <input type="file"
             onChange={this.changeFile} />
+
+          <FormErrors errors={ this.state.errors } />
 
           <button type="submit">Add Activity</button>
 

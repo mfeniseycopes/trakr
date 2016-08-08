@@ -2,7 +2,6 @@
 const ActivityApiUtil = {
 
   createActivity(activity, successCallback, errorCallback) {
-    debugger
 
     $.ajax({
       method: "POST",
