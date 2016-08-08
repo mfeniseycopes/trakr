@@ -81,7 +81,10 @@ const ProfileEditForm = React.createClass({
     );
   },
 
-  updateUser() {
+  updateUser(e) {
+
+    e.preventDefault();
+
     let user = {
       id: this.props.user.id,
       first_name: this.state.first_name,

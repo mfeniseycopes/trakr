@@ -95,7 +95,10 @@ const LoginForm = React.createClass({
   },
 
   // login with provided credentials
-  handleSubmit() {
+  handleSubmit(e) {
+
+    e.preventDefault();
+
     const email = this.state.email;
     const password = this.state.password;
     if (this.props.location.pathname === "/signup") {
