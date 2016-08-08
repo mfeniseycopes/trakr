@@ -54,7 +54,11 @@ class Api::ActivitiesController < ApplicationController
   end
 
   def activity_create_params
-    params.require(:activity).permit(:title, :description, :distance, :activity_type_id, :gpx, {route: [:lat, :lng]})
+    params.require(:activity).permit(
+      :title, :description, :distance,
+      :activity_type_id, :gpx, :encoded_polyline,
+      {route: [:lat, :lng]}
+    )
   end
 
 end

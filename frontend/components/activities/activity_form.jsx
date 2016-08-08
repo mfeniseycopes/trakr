@@ -129,7 +129,7 @@ const ActivityForm = React.createClass({
       durationHH: "",
       durationMM: "",
       durationSS: "",
-      encPolyline: "",
+      encodedPolyline: "",
       gpxFile: null,
       start: `${hh}:${mm}`,
       title: "My Acivity",
@@ -143,7 +143,7 @@ const ActivityForm = React.createClass({
       let activity = ActivityStore.newActivity();
       state.distance = activity.distance;
       state.route = activity.route;
-      state.encPolyline = activity.encPolyline;
+      state.encodedPolyline = activity.encodedPolyline;
     }
     else if (this.props.location.query.from === "upload") {
       // TODO: get info from gpx file
@@ -168,7 +168,7 @@ const ActivityForm = React.createClass({
       formData.append("activity[description]", this.state.description);
       formData.append("activity[duration]", this.duration());
       formData.append("activity[distance]", this.state.distance);
-      formData.append("activity[enc_polyline]", this.state.encPolyline);
+      formData.append("activity[encoded_polyline]", this.state.encodedPolyline);
       formData.append("activity[title]", this.state.title);
     } else if (this.state.route) {
       activity = {
@@ -177,7 +177,7 @@ const ActivityForm = React.createClass({
         description: this.state.description,
         distance: this.state.distance,
         duration: this.duration(),
-        enc_polyline: this.state.encPolyline,
+        encoded_polyline: this.state.encodedPolyline,
         route: this.state.route,
         title: this.state.title
       };
@@ -187,7 +187,7 @@ const ActivityForm = React.createClass({
   },
 
   miniMapUrl() {
-    return `https://maps.googleapis.com/maps/api/staticmap?size=300x200&path=color:0x003A23%7Cenc:${this.state.encPolyline}`;
+    return `https://maps.googleapis.com/maps/api/staticmap?size=300x200&path=color:0x003A23%7Cenc:${this.state.encodedPolyline}`;
   },
 
   redirectToActivityDetail() {

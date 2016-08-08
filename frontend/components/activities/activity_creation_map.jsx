@@ -115,7 +115,7 @@ const ActivityCreationMap = React.createClass({
     return this.routeDisplay.getDirections().routes[0].legs[0];
   },
 
-  encPolyline() {
+  encodedPolyline() {
     return this.routeDisplay.getDirections().routes[0].overview_polyline;
   },
 
@@ -198,7 +198,7 @@ const ActivityCreationMap = React.createClass({
       let activity = {
         route: this.route(),
         distance: this.distance(),
-        encPolyline: this.encPolyline()
+        encodedPolyline: this.encodedPolyline()
       };
 
       // add route to RouteStore to be received by ActivityForm component onmount
