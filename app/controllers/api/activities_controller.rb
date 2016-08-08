@@ -1,15 +1,13 @@
 class Api::ActivitiesController < ApplicationController
 
   def create
-    @activity = Activity.new(activity_create_params)
+    @activity = current_user.activities.new(activity_create_params)
 
-    @activity.user = current_user
-
-    # calculate distance, time if not given
-    # TODO: code this
-    @activity.distance = 5.5
-    # @activity.calculate_distance
     @activity.date = DateTime.now
+
+    # convert route to gpx
+    if route = params[:activity][:route]
+    end
 
     if @activity.save
       render :show
@@ -59,7 +57,7 @@ class Api::ActivitiesController < ApplicationController
   end
 
   def activity_create_params
-    params.require(:activity).permit(:title, :description, :activity_type_id, :gpx)
+    params.require(:activity).permit(:title, :description, :distance, :activity_type_id, :gpx, {route: [:lat, :lng]})
   end
 
 end

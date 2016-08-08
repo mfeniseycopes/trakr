@@ -15,19 +15,6 @@ let _draggedNotClicked = true;
 
 const ActivityCreationMap = React.createClass({
 
-  updateRoute() {
-    let legs = this.legs();
-
-    if (_draggedNotClicked) {
-      this.origin = legs.start_location;
-      this.destination = legs.end_location;
-      this.waypoints = legs.via_waypoints || [];
-    }
-
-    this.setState({ distance: legs.distance });
-
-    _draggedNotClicked = true;
-  },
 
   componentDidMount() {
 
@@ -48,6 +35,12 @@ const ActivityCreationMap = React.createClass({
     else {
       this.setupMap(new google.maps.LatLng({ lat: 40.6781784, lng: -73.9441579 }));
     }
+  },
+
+  distance() {
+    let distance = this.state.distance.text;
+    distance = distance.slice(0, distance.length - 3);
+    return parseFloat(distance);
   },
 
   getInitialState() {
@@ -144,6 +137,17 @@ const ActivityCreationMap = React.createClass({
     );
   },
 
+  route() {
+    let steps = this.steps();
+    let route = steps.map((step) => {
+      return _googleLatLngToSimpleObject(step.start_location);
+    });
+
+    route.push(_googleLatLngToSimpleObject(steps[steps.length - 1].end_location));
+
+    return route;
+  },
+
   setupMap(center) {
 
     const mapDOMNode = ReactDOM.findDOMNode(this.refs.map);
@@ -175,18 +179,9 @@ const ActivityCreationMap = React.createClass({
     // translate to route
     if (this.origin && this.destination) {
 
-      let steps = this.steps();
-
-      let route = [_googleLatLngToSimpleObject(steps[0].start_location)];
-
-      steps.forEach((step) => {
-        route.push(step.end_location);
-      });
-
-
       let activity = {
-        route: route,
-        distance: this.state.distance,
+        route: this.route(),
+        distance: this.distance(),
         encPolyline: this.encPolyline()
       };
 
@@ -202,8 +197,21 @@ const ActivityCreationMap = React.createClass({
       // display error
     }
 
-  }
+  },
 
+  updateRoute() {
+    let legs = this.legs();
+
+    if (_draggedNotClicked) {
+      this.origin = legs.start_location;
+      this.destination = legs.end_location;
+      this.waypoints = legs.via_waypoints || [];
+    }
+
+    this.setState({ distance: legs.distance });
+
+    _draggedNotClicked = true;
+  }
 });
 
 let _googleLatLngToSimpleObject = (latLng) => {

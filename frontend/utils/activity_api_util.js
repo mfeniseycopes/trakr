@@ -2,15 +2,12 @@
 const ActivityApiUtil = {
 
   createActivity(activity) {
-    
 
     $.ajax({
       method: "POST",
       url: `/api/activities`,
       dataType: "json",
-      contentType: false,
-      processData: false,
-      data: activity,
+      data: { activity: activity },
       error(res) {
         errorCallback("activityForm", res.responseJSON);
       },

@@ -67,46 +67,74 @@ const ActivityForm = React.createClass({
   },
 
   getInitialState() {
-    let activity;
-    if (this.props.location.query.from === "creator" ||
-        this.props.location.query.from === "upload") {
-      activity = ActivityStore.newActivity();
+    let state = {
+      activityType: null,
+      description: "",
+      distance: 0,
+      encPolyline: "",
+      gpxFile: null,
+      title: "",
+      route: null,
+      activityTypes: [],
+      errors: []
+    };
+
+    if (this.props.location.query.from === "creator") {
+      let activity = ActivityStore.newActivity();
+      state.distance = activity.distance;
+      state.route = activity.route;
+      state.encPolyline = activity.encPolyline;
+    }
+    else if (this.props.location.query.from === "upload") {
+      // state.gpxFile = ??
     }
     else {
       activity = {
         activityType: null,
         description: "",
+        distance: 0,
         gpxFile: null,
         title: ""
       };
     }
 
-    return {
-      activity: activity,
-      activityTypes: [],
-      errors: []
-    };
+    return state;
   },
 
   handleSubmit() {
 
-    var formData = new FormData();
-    formData.append("activity[gpx]", this.state.gpxFile);
-    formData.append("activity[activity_type_id]", this.state.activityType);
-    formData.append("activity[title]", this.state.title);
-    formData.append("activity[description]", this.state.description);
-    ActivityActions.createActivity(formData);
+    let activity;
+    if (this.state.gpxFile) {
+      activity = new FormData();
+      formData.append("activity[gpx]", this.state.gpxFile);
+      formData.append("activity[activity_type_id]", this.state.activityType);
+      formData.append("activity[description]", this.state.description);
+      formData.append("activity[distance]", this.state.distance);
+      formData.append("activity[enc_polyline]", this.state.encPolyline);
+      formData.append("activity[title]", this.state.title);
+    } else if (this.state.route) {
+      activity = {
+        activity_type_id: this.state.activityType,
+        description: this.state.description,
+        distance: this.state.distance,
+        enc_polyline: this.state.encPolyline,
+        route: this.state.route,
+        title: this.state.title
+      };
+    }
+
+    ActivityActions.createActivity(activity);
   },
 
   miniMapUrl() {
-    return `https://maps.googleapis.com/maps/api/staticmap?size=300x200&path=color:0x003A23%7Cenc:${this.state.activity.encPolyline}`;
+    return `https://maps.googleapis.com/maps/api/staticmap?size=300x200&path=color:0x003A23%7Cenc:${this.state.encPolyline}`;
   },
 
   render() {
 
     return(
       <div>
-        <p>{ this.state.activity.distance.text }</p>
+        <p>{ this.state.distance }</p>
 
         <img className="mini-map" src={ this.miniMapUrl() } />
 
