@@ -389,3 +389,32 @@ a, button:hover {
   height: 200px;
   width: 300px;
 }
+
+.activity-form {
+  width: 400px;
+  display: block;
+  float: left;
+  font-size: 12px;
+
+  input, a, textarea, select {
+    padding: 4px;
+    margin: 10px;
+    display: block;
+    background-color: white;
+    border: 1px solid #a5a5a5;
+  }
+
+  .user-form-names > input {
+    float: left;
+    width: 170px;
+  }
+
+  > textarea {
+    width: 380px;
+    height: 100px;
+  }
+
+  .time-input {
+
+  }
+}
