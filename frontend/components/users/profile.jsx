@@ -39,7 +39,7 @@ const Profile = React.createClass({
   },
 
   getInitialState() {
-    if ((this.props.location.pathname === "/profile" &&
+    if ((this.onProfile() &&
             SessionStore.currentUser().id === UserStore.user().id) ||
          this.props.params === UserStore.user().id) {
 
@@ -59,10 +59,14 @@ const Profile = React.createClass({
     }
   },
 
+  onProfile() {
+    return this.props.location.pathname === "/profile" || this.props.location.pathname === "/";
+  },
+
   render() {
     let inner = <ProfileDetail user={ this.state.user } />;
     if (this.state.edit) {
-      inner = <ProfileEditForm user={ this.state.user } />
+      inner = <ProfileEditForm user={ this.state.user } />;
     }
 
     return (
@@ -83,7 +87,7 @@ const Profile = React.createClass({
   },
 
   requestUser(props) {
-    if (props.location.pathname === "/profile") {
+    if (this.onProfile()) {
       UserActions.getUser(SessionStore.currentUser().id);
     } else {
       UserActions.getUser(props.params.id);
@@ -99,7 +103,7 @@ const Profile = React.createClass({
   },
 
   toggleButton() {
-    if (this.props.location.pathname === "/profile") {
+    if (this.onProfile()) {
       if (!this.state.edit) {
         return <a onClick={ this.toggleModes } className="button form-button bottom" >Edit</a>;
       }
