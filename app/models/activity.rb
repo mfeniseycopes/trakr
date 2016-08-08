@@ -10,6 +10,13 @@
 #  date             :date             not null
 #  distance         :float
 #  duration         :integer
+#  gpx_file_name    :string
+#  gpx_content_type :string
+#  gpx_file_size    :integer
+#  gpx_updated_at   :datetime
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  encoded_polyline :string
 #
 
 class Activity < ActiveRecord::Base
