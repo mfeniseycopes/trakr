@@ -37,7 +37,6 @@ const ActivityForm = React.createClass({
   },
 
   changeDate(e) {
-    debugger
     this.setState({ date: e.target.value });
   },
 
@@ -79,7 +78,6 @@ const ActivityForm = React.createClass({
   },
 
   changeStart(e) {
-    debugger
     this.setState({ start: e.target.value });
   },
 
@@ -90,12 +88,13 @@ const ActivityForm = React.createClass({
   componentDidMount() {
     this.errorListener = ErrorStore.addListener(this.addErrors);
 
+    // goto detail page when activity is persisted
+    this.activityListener = ActivityStore.addListener(this.redirectToActivityDetail);
+
     // populate activityType dropdown
     this.activityTypeListener =
       ActivityTypeStore.addListener(this.addActivityTypes);
     ActivityTypeActions.getActivityTypes();
-
-    // get route info from prepopulated activity
   },
 
   componentWillUnmount() {
@@ -147,10 +146,7 @@ const ActivityForm = React.createClass({
       state.encPolyline = activity.encPolyline;
     }
     else if (this.props.location.query.from === "upload") {
-      // state.gpxFile = ??
-    }
-    else {
-
+      // TODO: get info from gpx file
     }
 
     return state;
@@ -185,13 +181,17 @@ const ActivityForm = React.createClass({
       };
     }
 
-    debugger
-
     ActivityActions.createActivity(activity);
   },
 
   miniMapUrl() {
     return `https://maps.googleapis.com/maps/api/staticmap?size=300x200&path=color:0x003A23%7Cenc:${this.state.encPolyline}`;
+  },
+
+  redirectToActivityDetail() {
+    if(ActivityStore.newActivity.id) {
+      hashHistory.push(`/activities/${ActivityStore.newActivity.id}`);
+    }
   },
 
   render() {
@@ -251,40 +251,6 @@ const ActivityForm = React.createClass({
   }
 
 });
-
-let _HH = (duration) => {
-  if (duration) {
-    return ("00" + Math.floor(duration / 360) % 60).slice (-2);
-  } else {
-    return "";
-  }
-};
-let _MM = (duration) => {
-  if (duration) {
-    return ("00" + Math.floor(duration / 60) % 60).slice (-2);
-  } else {
-    return "";
-  }
-};
-let _SS = (duration) => {
-  if (duration) {
-    return ("00" + duration % 60).slice (-2);
-  } else {
-    return "";
-  }
-};
-
-let _formatDuration = (duration) => {
-  let ss = ("00" + (duration % 60)).slice (-2);
-  duration = Math.floor(duration / 60);
-
-  let mm = ("00" + (duration % 60)).slice (-2);
-  duration = Math.floor(duration / 60);
-
-  let hh = ("00" + (duration % 60)).slice (-2);
-
-  return `${hh}:${mm}:${ss}`;
-};
 
 
 module.exports = ActivityForm;

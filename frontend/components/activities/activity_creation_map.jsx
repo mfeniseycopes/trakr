@@ -5,8 +5,8 @@ const ReactDOM      = require('react-dom');
 
 // project requires
 const ActivityActions = require('../../actions/activity_actions');
+const ActivityStore    = require('../../stores/activity_store');
 const RouteActions  = require('../../actions/route_actions');
-const RouteStore    = require('../../stores/route_store');
 const SessionStore = require('../../stores/session_store');
 
 let _numRoutPoints = 0;
@@ -42,7 +42,7 @@ const ActivityCreationMap = React.createClass({
   },
 
   deregisterListeners() {
-    this.routeListener.remove();
+    this.activityListener.remove();
     this.routeDisplayListener.remove();
   },
 
@@ -125,22 +125,29 @@ const ActivityCreationMap = React.createClass({
 
   registerListeners() {
 
-    this.routeListener = RouteStore.addListener(this.resetRoute);
-
     this.map.addListener('click', this._handleClick);
-    this.routeDisplayListener = this.routeDisplay.addListener('directions_changed', this.updateRoute);
+    this.activityListener =
+      ActivityStore.addListener(this.redirectToActivityDetail);
+    this.routeDisplayListener =
+      this.routeDisplay.addListener('directions_changed', this.updateRoute);
+  },
+
+  redirectToActivityDetail() {
+    if (ActivityStore.newActivity() !== {}) {
+      hashHistory.push({
+        pathname: "/new-activity",
+        query: { from: "creator" }
+      });
+    }
   },
 
   render() {
     return (
       <div>
-        <div className="map" ref="map">
-
-        </div>
+        <div className="map" ref="map"></div>
         <div className="route-details">
           <p>{this.state.distance.text}</p>
-          <p>Maybe a button goes here</p>
-          <button onClick={this.submitRoute} >Create!</button>
+          <button className="button" onClick={this.submitRoute} >Create!</button>
         </div>
       </div>
     );
@@ -196,11 +203,6 @@ const ActivityCreationMap = React.createClass({
 
       // add route to RouteStore to be received by ActivityForm component onmount
       ActivityActions.createNewActivity(activity);
-
-      hashHistory.push({
-        pathname: "/new-activity",
-        query: { from: "creator" }
-      });
     }
     else {
       // display error

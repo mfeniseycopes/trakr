@@ -71,7 +71,13 @@ ActivityStore.resetActivity = (activity) => {
 };
 
 ActivityStore.resetNewActivity = (activity) => {
+  debugger
   _newActivity = activity;
+
+  // add to store if persisted
+  if (activity.id) {
+    _activities[activity.id] = activity;
+  }
 
   ActivityStore.__emitChange();
 };

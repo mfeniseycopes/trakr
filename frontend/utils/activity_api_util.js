@@ -1,7 +1,8 @@
 // provides api calls for activity actions
 const ActivityApiUtil = {
 
-  createActivity(activity) {
+  createActivity(activity, successCallback, errorCallback) {
+    debugger
 
     $.ajax({
       method: "POST",

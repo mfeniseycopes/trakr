@@ -7,7 +7,8 @@ const ActivityActions = {
 
 
   createActivity(activity) {
-    ActivityApiUtil.createActivity(activity, this.receiveActivity, ErrorActions.setErrors);
+    debugger
+    ActivityApiUtil.createActivity(activity, this.receiveNewActivity, ErrorActions.setErrors);
   },
 
   // used to send new (non-persisted) activity to activity form
@@ -34,6 +35,13 @@ const ActivityActions = {
     AppDispatcher.dispatch({
       actionType: ActivityConstants.RECEIVE_ACTIVITIES,
       activities: activities
+    });
+  },
+
+  receiveNewActivity(activity) {
+    AppDispatcher.dispatch({
+      actionType: ActivityConstants.RECEIVE_NEW_ACTIVITY,
+      activity: activity
     });
   },
 
