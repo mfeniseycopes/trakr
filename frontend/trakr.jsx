@@ -28,10 +28,12 @@ const router = (
         onEnter={ _ensureLoggedIn } />
 
       <Route path="/signup"
-        component={ LoginForm } />
+        component={ LoginForm }
+        onEnter={ _ensureLoggedOut }/>
 
       <Route path="/login"
-        component={ LoginForm } />
+        component={ LoginForm }
+        onEnter={ _ensureLoggedOut }/>
 
       <Route path="/profile"
         component={ Profile }
@@ -42,26 +44,27 @@ const router = (
         onEnter={ _ensureLoggedIn } />
 
       <Route path="/new-activity"
-        component={ ActivityForm } />
+        component={ ActivityForm }
+        onEnter={ _ensureLoggedIn } />
 
       <Route path="/create-activity"
-        component={ ActivityCreationMap } />
+        component={ ActivityCreationMap }
+        onEnter={ _ensureLoggedIn } />
 
     </Route>
   </Router>
 );
 
-function _goHomeIfLoggedIn(nextState, replace) {
-
-    if (SessionStore.isLoggedIn()) {
-      replace('/profile');
-    }
+function _ensureLoggedIn(nextState, replace) {
+  if (!SessionStore.isLoggedIn()) {
+    replace('/signup');
+  }
 }
 
-function _ensureLoggedIn(nextState, replace) {
-    if (!SessionStore.isLoggedIn()) {
-      replace('/signup');
-    }
+function _ensureLoggedOut(nextState, replace) {
+  if (SessionStore.isLoggedIn()) {
+    replace('/profile');
+  }
 }
 
 document.addEventListener(

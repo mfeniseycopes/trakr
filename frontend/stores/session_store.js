@@ -23,7 +23,7 @@ SessionStore.isLoggedIn = () => {
 SessionStore.__onDispatch = (payload) => {
   switch(payload.actionType) {
     case SessionConstants.RECEIVE_BOOTSTRAPPED_USER:
-    _setCurrentUser(payload.currentUser);
+    _bootstrapUser(payload.currentUser);
     break;
 
     case SessionConstants.LOGIN:
@@ -38,12 +38,20 @@ SessionStore.__onDispatch = (payload) => {
 
 // private methods
 function _login(user) {
-  hashHistory.push('/profile');
+  console.log("ActivityForm#_login");
   _setCurrentUser(user);
+  hashHistory.push('/profile');
 }
 
 function _logout() {
+  console.log("ActivityForm#_logout");
   _setCurrentUser({});
+  hashHistory.push('/signup');
+}
+
+function _bootstrapUser(user) {
+  console.log("ActivityForm#_bootstrapUser");
+  _setCurrentUser(user);
 }
 
 function _setCurrentUser(user) {
