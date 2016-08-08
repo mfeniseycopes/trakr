@@ -37,6 +37,15 @@ const ActivityCreationMap = React.createClass({
     }
   },
 
+  componentWillUnmount() {
+    this.deregisterListeners();
+  },
+
+  deregisterListeners() {
+    this.routeListener.remove();
+    this.routeDisplayListener.remove();
+  },
+
   distance() {
     let distance = this.state.distance.text;
     distance = distance.slice(0, distance.length - 3);
@@ -119,7 +128,7 @@ const ActivityCreationMap = React.createClass({
     this.routeListener = RouteStore.addListener(this.resetRoute);
 
     this.map.addListener('click', this._handleClick);
-    this.routeDisplay.addListener('directions_changed', this.updateRoute);
+    this.routeDisplayListener = this.routeDisplay.addListener('directions_changed', this.updateRoute);
   },
 
   render() {

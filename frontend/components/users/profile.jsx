@@ -30,11 +30,18 @@ const Profile = React.createClass({
     }
   },
 
+  componentWillUnmount() {
+    this.deregisterListeners();
+  },
+
+  deregisterListeners() {
+    this.userListener.remove();
+  },
 
   getInitialState() {
-    if ((this.props.location.pathname === "/profile"
-           && SessionStore.currentUser().id === UserStore.user().id)
-         || this.props.params === UserStore.user().id) {
+    if ((this.props.location.pathname === "/profile" &&
+            SessionStore.currentUser().id === UserStore.user().id) ||
+         this.props.params === UserStore.user().id) {
 
       return { user: UserStore.user() };
     }

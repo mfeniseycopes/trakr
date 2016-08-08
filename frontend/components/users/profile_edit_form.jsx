@@ -31,7 +31,15 @@ const ProfileEditForm = React.createClass({
   },
 
   componentDidMount() {
-    ErrorStore.addListener(this.addErrors);
+    this.errorListener = ErrorStore.addListener(this.addErrors);
+  },
+
+  componentWillUnmount() {
+    this.deregisterListeners();
+  },
+
+  deregisterListeners() {
+    this.errorListener.remove();
   },
 
   getInitialState() {
@@ -81,7 +89,7 @@ const ProfileEditForm = React.createClass({
       location : this.state.location,
       bio: this.state.bio
     };
-    
+
     UserActions.updateUser(user);
   }
 

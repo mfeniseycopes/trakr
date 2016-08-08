@@ -57,13 +57,22 @@ const ActivityForm = React.createClass({
   },
 
   componentDidMount() {
-    ErrorStore.addListener(this.addErrors);
+    this.errorListener = ErrorStore.addListener(this.addErrors);
 
     // populate activityType dropdown
-    ActivityTypeStore.addListener(this.addActivityTypes);
+    this.activityTypeListener = ActivityTypeStore.addListener(this.addActivityTypes);
     ActivityTypeActions.getActivityTypes();
 
     // get route info from prepopulated activity
+  },
+
+  componentWillUnmount() {
+    this.deregisterListeners();
+  },
+
+  deregisterListeners() {
+    this.errorListener.remove();
+    this.activityTypeListener.remove();
   },
 
   getInitialState() {
@@ -71,6 +80,7 @@ const ActivityForm = React.createClass({
       activityType: null,
       description: "",
       distance: 0,
+      duration: 0,
       encPolyline: "",
       gpxFile: null,
       title: "",
@@ -148,6 +158,10 @@ const ActivityForm = React.createClass({
           <input type="text"
             onChange={this.changeTitle}
             value={this.state.title} />
+
+          <input type="time"
+            onChange={this.changeDuration}
+            value={this.state.duration} />
 
           <textarea
             onChange={this.changeDescription}

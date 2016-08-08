@@ -76,37 +76,22 @@ const LoginForm = React.createClass({
     this.errorListener = ErrorStore.addListener(this.addErrors);
   },
 
-  // remove listeners
   componentWillUnmount() {
-    this.sessionListener.remove();
+    this.deregisterListeners();
   },
 
-  // standardFields() {
-  //
-  //   return (
-  //
-  //     <div className="form-row">
-  //       <input
-  //         type="email"
-  //         value={ this.state.email }
-  //         onChange={ this.changeEmail }
-  //         placeholder="Email"/>
-  //     </div>
-  //
-  //     <div className="form-row">
-  //       <input id="login-password"
-  //         type="password"
-  //         value={ this.state.password }
-  //         onChange={ this.changePassword }
-  //         placeholder="Password" />
-  //     </div>
-  //   );
-  // }
+  deregisterListeners() {
+    this.sessionListener.remove();
+    this.errorListener.remove();
+  },
 
   getInitialState() {
-    return { email: "", password: "",
-             first_name: "", last_name: "",
-             errors: [] };
+    return {
+      email: "",
+      password: "",
+      first_name: "",
+      last_name: "",
+      errors: [] };
   },
 
   // login with provided credentials
@@ -119,7 +104,8 @@ const LoginForm = React.createClass({
         password: this.state.password,
         first_name: this.state.first_name,
         last_name: this.state.last_name
-      }
+      };
+
       SessionActions.signup(user);
     } else {
       SessionActions.login(email, password);
@@ -129,7 +115,7 @@ const LoginForm = React.createClass({
   // go to home page if logged in
   redirectIfLoggedIn() {
     if (SessionStore.isLoggedIn()) {
-      hashHistory.push("/");
+      hashHistory.push("/profile");
     }
   },
 

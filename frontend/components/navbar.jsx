@@ -10,7 +10,15 @@ const NavBar = React.createClass({
 
   componentDidMount() {
     // prevents redundant storing of logged in state in this.state
-    SessionStore.addListener(this.forceUpdate.bind(this));
+    this.sessionListener = SessionStore.addListener(this.forceUpdate.bind(this));
+  },
+
+  componentWillUnmount() {
+    this.deregisterListeners();
+  },
+
+  deregisterListeners() {
+    this.sesssionListener.remove();
   },
 
   goToLogin() {
