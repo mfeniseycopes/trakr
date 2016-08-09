@@ -187,7 +187,7 @@ const ActivityForm = React.createClass({
   },
 
   miniMapUrl() {
-    return `https://maps.googleapis.com/maps/api/staticmap?size=300x200&path=color:0x003A23%7Cenc:${this.state.encodedPolyline}`;
+    return `https://maps.googleapis.com/maps/api/staticmap?size=300x200&path=color:0x003A23%7Cenc:${this.state.encodedPolyline}&key=AIzaSyDL_NuEJQOvYtPxbTALLDl_sku6ZioowKQ`;
   },
 
   redirectToActivityDetail() {

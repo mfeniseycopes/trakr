@@ -8,11 +8,12 @@
     <%= javascript_include_tag 'application' %>
 
     <!-- Google Maps -->
-  <script type="text/javascript"
-  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDL_NuEJQOvYtPxbTALLDl_sku6ZioowKQ&libraries=geometry">
-</script>
-  </head>
+  <script
+    type="text/javascript"
+    src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['google_maps_api_key'] %>&libraries=geometry"
+  </script>
 
+  </head>
   <body class="logged-out">
     <%= yield %>
   </body>
