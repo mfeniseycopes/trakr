@@ -174,7 +174,11 @@ const ActivityCreationMap = React.createClass({
 
     this.routeService = new google.maps.DirectionsService();
     this.routeDisplay = new google.maps.DirectionsRenderer({
-      draggable: true
+      draggable: true,
+      polylineOptions: {
+        strokeWeight: 5,
+        strokeColor: "#277455"
+      }
     });
 
     this.map = new google.maps.Map(mapDOMNode, mapOptions);

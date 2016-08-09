@@ -21,7 +21,7 @@ const ActivityApiUtil = {
 
     $.ajax({
       method: "DELETE",
-      url: `/api/users/${id}`,
+      url: `/api/activities/${id}`,
       dataType: "json",
       error(res) {
         errorCallback("activityDelete", res.responseJSON);
@@ -36,7 +36,7 @@ const ActivityApiUtil = {
 
     $.ajax({
       method: "GET",
-      url: `/api/users/${id}`,
+      url: `/api/activities/${id}`,
       dataType: "json",
       error(res) {
         errorCallback("activity", res.responseJSON);
@@ -51,7 +51,7 @@ const ActivityApiUtil = {
 
     $.ajax({
       method: "GET",
-      url: `/api/users`,
+      url: `/api/activities`,
       dataType: "json",
       error(res) {
         errorCallback("activity", res.responseJSON);

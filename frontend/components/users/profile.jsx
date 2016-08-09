@@ -23,7 +23,7 @@ const Profile = React.createClass({
   componentDidMount() {
     this.errorListener = ErrorStore.addListener(this.handle404);
     this.userListener = UserStore.addListener(this.resetUser);
-    this.requestUser(this.props);
+    this.requestUser(this.props.params.id);
   },
 
   componentWillReceiveProps(newProps) {
@@ -49,16 +49,7 @@ const Profile = React.createClass({
       return { user: UserStore.user() };
     }
     else {
-      return {
-        user: {
-          id: "",
-          first_name: "",
-          last_name: "",
-          location: "",
-          bio: ""
-        },
-        edit: false
-      };
+      return null;
     }
   },
 
