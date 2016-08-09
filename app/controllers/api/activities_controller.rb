@@ -12,7 +12,7 @@ class Api::ActivitiesController < ApplicationController
   end
 
   def destroy
-    @activity = Activity.find(params[:id])
+    @activity = Activity.find_by(id: params[:id])
 
     if @activity.destroy
       render :show
@@ -32,8 +32,8 @@ class Api::ActivitiesController < ApplicationController
   end
 
   def update
-    @activity = Activity.find(params[:id])
-
+    @activity = Activity.find_by(id: params[:id])
+    
     if @activity.update(activity_update_params)
       render :show
     else
@@ -61,6 +61,16 @@ class Api::ActivitiesController < ApplicationController
       :gpx,
       :encoded_polyline,
       {route: [:lat, :lng]},
+      :title
+    )
+  end
+
+  def activity_update_params
+    params.require(:activity).permit(
+      :activity_type_id,
+      :date,
+      :description,
+      :duration,
       :title
     )
   end

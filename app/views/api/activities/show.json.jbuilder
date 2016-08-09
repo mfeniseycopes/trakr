@@ -1,5 +1,4 @@
 json.extract! @activity,
-  :activity_type_name,
   :description,
   :date,
   :distance,
@@ -7,5 +6,14 @@ json.extract! @activity,
   :encoded_polyline,
   :id,
   :speed,
-  :title,
-  :user_name
+  :title
+
+json.activity_type do
+  json.id @activity.activity_type_id
+  json.name @activity.activity_type_name
+end
+
+json.user do
+  json.id @activity.user_id
+  json.name @activity.user_name
+end

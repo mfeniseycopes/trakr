@@ -63,10 +63,11 @@ const ActivityApiUtil = {
   },
 
   updateActivity(activity, successCallback, errorCallback) {
-
+    let id = activity.id;
+    delete activity.id;
     $.ajax({
       method: "PATCH",
-      url: `/api/activities/${activity.id}`,
+      url: `/api/activities/${id}`,
       dataType: "json",
       data: { activity: activity },
       error(res) {

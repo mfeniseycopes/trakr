@@ -28,12 +28,10 @@ class Activity < ActiveRecord::Base
 
   # gpx setup
   has_attached_file :gpx
-  # validate filename
-  validates_attachment_file_name :gpx, matches: [/gpx\Z/]
 
-  # attr_accessor :route
+  before_create :determine_properties
+  before_update :update_properties
 
-  before_save :determine_properties
 
   def activity_type_name
     self.activity_type.name
@@ -57,7 +55,7 @@ class Activity < ActiveRecord::Base
       @route.each do |point|
         gpx.tracks[0].points << GPX::TrackPoint.new(lat: point["lat"].to_f, lon: point["lng"].to_f)
       end
-      
+
       self.speed = gpx.average_speed(units: "miles")
       self.gpx = StringIO.new(gpx.to_s)
     end
@@ -66,6 +64,10 @@ class Activity < ActiveRecord::Base
 
   def route=(route)
     @route = route.values
+  end
+
+  def update_properties
+    self.speed = self.distance / (self.duration / 360)
   end
 
   def user_name

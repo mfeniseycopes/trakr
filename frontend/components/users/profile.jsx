@@ -4,12 +4,12 @@ const React           = require('react');
 
 // project requires
 // actions
-const ErrorActions     = require('../../actions/error_actions');
+const ErrorActions    = require('../../actions/error_actions');
 const UserActions     = require('../../actions/user_actions');
 // components
 const ActivitiesTable = require('../activities/activities_table');
-const Error404 = require('../error_404');
-const FollowButton = require('../follows/follow_button');
+const Error404        = require('../error_404');
+const FollowButton    = require('../follows/follow_button');
 const FormErrors      = require('../errors/form_errors');
 const ProfileDetail   = require('./profile_detail');
 const ProfileEditForm = require('./profile_edit_form');
@@ -25,10 +25,10 @@ const Profile = React.createClass({
   componentDidMount() {
     this.errorListener = ErrorStore.addListener(this.handleErrors);
     this.userListener = UserStore.addListener(this.resetUser);
-    if (this.state.editable) {
-      this.requestUser(SessionStore.currentUser().id);
+    if (this.props.location.pathname === "/profile") {
+      UserActions.getUser(SessionStore.currentUser().id);
     } else {
-      this.requestUser(this.props.params.id);
+      UserActions.getUser(this.props.params.id);
     }
   },
 
@@ -40,7 +40,6 @@ const Profile = React.createClass({
       } else {
         UserActions.getUser(newProps.params.id);
       }
-      this.setState({editable: newProps.location.pathname === "/profile"});
     }
     ErrorActions.clearErrors();
   },
@@ -55,7 +54,15 @@ const Profile = React.createClass({
   },
 
   getInitialState() {
-    return { editable: this.props.location.pathname === "/profile" };
+    return { user: null };
+  },
+
+  handleErrors() {
+    if (ErrorStore.errors("user").length > 0) {
+      this.setState({ error: true });
+    } else {
+      this.setState({ error: false });
+    }
   },
 
   render() {
@@ -63,12 +70,9 @@ const Profile = React.createClass({
     if (this.state.error) {
       return <Error404 />;
     }
-
     else if (!this.state.user) {
       return <div></div>;
     }
-
-
     else {
 
       return (
@@ -93,28 +97,13 @@ const Profile = React.createClass({
     }
   },
 
-  handleErrors() {
-    if (ErrorStore.errors("user").length > 0) {
-      this.setState({ error: true });
-    } else {
-      this.setState({ error: false });
-    }
-  },
-
-  requestUser(id) {
-    if (this.state.editable) {
-      UserActions.getUser(SessionStore.currentUser().id);
-    } else {
-      UserActions.getUser(id);
-    }
-  },
-
   resetUser() {
-    this.setState({ user: UserStore.user(), edit: false });
-  },
-
-  updateUser() {
-    UserActions.updateUser(this.state.user);
+    let user = UserStore.user();
+    this.setState({
+      user: user,
+      edit: false,
+      editable: user.id === SessionStore.currentUser().id
+    });
   },
 
   toggleButton() {

@@ -43,7 +43,7 @@ const ActivityDetail = React.createClass({
   render() {
     return (
       <div>
-        <p>{this.props.activity.user_name} - {this.props.activity.activity_type_name}</p>
+        <p>{this.props.activity.user.name} - {this.props.activity.activity_type.name}</p>
         <p>{this.props.activity.title}</p>
         <p>{this.props.activity.date}</p>
         <p>{this.props.activity.duration}</p>
