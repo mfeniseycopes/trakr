@@ -2,7 +2,6 @@
 const UserApiUtil = {
 
   getUser(id, successCallback, errorCallback) {
-
     $.ajax({
       method: "GET",
       url: `/api/users/${id}`,

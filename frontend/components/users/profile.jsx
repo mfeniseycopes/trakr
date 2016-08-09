@@ -4,6 +4,7 @@ const React           = require('react');
 
 // project requires
 // actions
+const ErrorActions     = require('../../actions/error_actions');
 const UserActions     = require('../../actions/user_actions');
 // components
 const ActivitiesTable = require('../activities/activities_table');
@@ -22,7 +23,7 @@ const Profile = React.createClass({
 
   // when first mounts we need to get user based on current info
   componentDidMount() {
-    this.errorListener = ErrorStore.addListener(this.handle404);
+    this.errorListener = ErrorStore.addListener(this.handleErrors);
     this.userListener = UserStore.addListener(this.resetUser);
     if (this.state.editable) {
       this.requestUser(SessionStore.currentUser().id);
@@ -33,13 +34,15 @@ const Profile = React.createClass({
 
   // when props change we need to get user based on future info
   componentWillReceiveProps(newProps) {
-    if (newProps.params.id !== this.props.params.id) {
+    if (newProps !== this.props) {
       if (newProps.location.pathname === "/profile") {
         UserActions.getUser(SessionStore.currentUser().id);
       } else {
         UserActions.getUser(newProps.params.id);
       }
+      this.setState({editable: newProps.location.pathname === "/profile"});
     }
+    ErrorActions.clearErrors();
   },
 
   componentWillUnmount() {
@@ -57,13 +60,14 @@ const Profile = React.createClass({
 
   render() {
 
-    if (!this.state.user) {
+    if (this.state.error) {
+      return <Error404 />;
+    }
+
+    else if (!this.state.user) {
       return <div></div>;
     }
 
-    else if (this.state.error) {
-      return <Error404 />;
-    }
 
     else {
 
@@ -89,10 +93,11 @@ const Profile = React.createClass({
     }
   },
 
-  handle404() {
-    let error = ErrorStore.errors("user");
-    if (error) {
+  handleErrors() {
+    if (ErrorStore.errors("user").length > 0) {
       this.setState({ error: true });
+    } else {
+      this.setState({ error: false });
     }
   },
 
