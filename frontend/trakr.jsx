@@ -50,7 +50,8 @@ const router = (
 
       <Route path="/new-activity"
         component={ ActivityForm }
-        onEnter={ _ensureLoggedIn } />
+        onEnter={ _ensureLoggedIn }
+        mode="create"/>
 
       <Route path="/activities/:id"
         component={ Activity }

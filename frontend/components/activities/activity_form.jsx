@@ -89,7 +89,7 @@ const ActivityForm = React.createClass({
     this.errorListener = ErrorStore.addListener(this.addErrors);
 
     // goto detail page when activity is persisted
-    this.activityListener = ActivityStore.addListener(this.redirectToActivityDetail);
+    this.activityListener = ActivityStore.addListener(this.gotoActivityDetail);
 
     // populate activityType dropdown
     this.activityTypeListener =
@@ -114,6 +114,8 @@ const ActivityForm = React.createClass({
 
   getInitialState() {
 
+    let mode = (this.props.location.pathname === "/new-activity" ? "create" : "edit");
+
     let date = new Date();
     let year = date.getFullYear();
     let month = ("00" + date.getMonth()).slice(-2);
@@ -136,7 +138,8 @@ const ActivityForm = React.createClass({
       route: null,
       speed: 0,
       activityTypes: [],
-      errors: []
+      errors: [],
+      mode: mode
     };
 
     if (this.props.location.query.from === "creator") {
@@ -190,8 +193,12 @@ const ActivityForm = React.createClass({
     return `https://maps.googleapis.com/maps/api/staticmap?size=300x200&path=color:0x003A23%7Cenc:${this.state.encodedPolyline}&key=AIzaSyDL_NuEJQOvYtPxbTALLDl_sku6ZioowKQ`;
   },
 
-  redirectToActivityDetail() {
-    if(ActivityStore.newActivity().id) {
+  gotoActivityDetail() {
+
+    if (this.state.mode === "edit") {
+
+    }
+    else if (this.state.mode === "create" && ActivityStore.newActivity().id) {
       hashHistory.push(`/activities/${ActivityStore.newActivity().id}`);
     }
   },

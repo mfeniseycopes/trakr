@@ -19,16 +19,35 @@ const Activity = React.createClass({
   },
 
   componentDidMount() {
+    this.errorListener = ErrorStore.addListener(this.handle404);
     this.activityListener = ActivityStore.addListener(this.resetActivity);
     ActivityActions.getActivity(this.props.params.id);
   },
 
+  componentWillReceiveProps(newProps) {
+    if (newProps.params.id !== this.props.params.id) {
+      ActivityActions.getActivity(id);
+    }
+  },
+
   componentWillUnmount() {
+    this.deregisterListeners();
+  },
+
+  deregisterListeners() {
+    this.errorListener.remove();
     this.activityListener.remove();
   },
 
   getInitialState() {
-    return { activity: null };
+    return null;
+  },
+
+  handle404() {
+    let error = ErrorStore.errors("user");
+    if (error) {
+      this.setState({ error: true });
+    }
   },
 
   render() {

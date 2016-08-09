@@ -20,15 +20,25 @@ const UserStore       = require('../../stores/user_store');
 
 const Profile = React.createClass({
 
+  // when first mounts we need to get user based on current info
   componentDidMount() {
     this.errorListener = ErrorStore.addListener(this.handle404);
     this.userListener = UserStore.addListener(this.resetUser);
-    this.requestUser(this.props.params.id);
+    if (this.state.editable) {
+      this.requestUser(SessionStore.currentUser().id);
+    } else {
+      this.requestUser(this.props.params.id);
+    }
   },
 
+  // when props change we need to get user based on future info
   componentWillReceiveProps(newProps) {
     if (newProps.params.id !== this.props.params.id) {
-      this.requestUser(newProps.params.id);
+      if (newProps.location.pathname === "/profile") {
+        UserActions.getUser(SessionStore.currentUser().id);
+      } else {
+        UserActions.getUser(newProps.params.id);
+      }
     }
   },
 
@@ -42,24 +52,12 @@ const Profile = React.createClass({
   },
 
   getInitialState() {
-    if ((this.onProfile() &&
-            SessionStore.currentUser().id === UserStore.user().id) ||
-         this.props.params.id === UserStore.user().id) {
-
-      return { user: UserStore.user() };
-    }
-    else {
-      return null;
-    }
-  },
-
-  onProfile() {
-    return this.props.location.pathname === "/profile" || this.props.location.pathname === "/";
+    return { editable: this.props.location.pathname === "/profile" };
   },
 
   render() {
 
-    if (this.state === null) {
+    if (!this.state.user) {
       return <div></div>;
     }
 
@@ -68,10 +66,6 @@ const Profile = React.createClass({
     }
 
     else {
-      let inner = <ProfileDetail user={ this.state.user } />;
-      if (this.state.edit) {
-        inner = <ProfileEditForm user={ this.state.user } />;
-      }
 
       return (
         <div className="user group">
@@ -81,7 +75,11 @@ const Profile = React.createClass({
                 <h2 className="page-header">Profile</h2>
                 { this.toggleButton() }
               </div>
-              { inner }
+              {
+                this.state.edit ?
+                  <ProfileEditForm user={ this.state.user } /> :
+                  <ProfileDetail user={ this.state.user } />
+              }
             </section>
             <Progress />
           </div>
@@ -99,7 +97,7 @@ const Profile = React.createClass({
   },
 
   requestUser(id) {
-    if (this.onProfile()) {
+    if (this.state.editable) {
       UserActions.getUser(SessionStore.currentUser().id);
     } else {
       UserActions.getUser(id);
@@ -115,13 +113,12 @@ const Profile = React.createClass({
   },
 
   toggleButton() {
-    if (this.onProfile()) {
-      if (!this.state.edit) {
-        return <a onClick={ this.toggleModes } className="button form-button bottom" >Edit</a>;
-      }
-      else {
-        return <a onClick={ this.toggleModes } className="button form-button bottom" >Cancel</a>;
-      }
+    if (this.state.editable) {
+      return (
+        <a onClick={ this.toggleModes } className="button form-button bottom" >
+          { this.state.edit ? "Cancel" : "Edit" }
+        </a>
+      );
     }
     else {
       return <FollowButton />;
