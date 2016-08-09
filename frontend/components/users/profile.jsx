@@ -7,6 +7,7 @@ const React           = require('react');
 const UserActions     = require('../../actions/user_actions');
 // components
 const ActivitiesTable = require('../activities/activities_table');
+const Error404 = require('../error_404');
 const FollowButton = require('../follows/follow_button');
 const FormErrors      = require('../errors/form_errors');
 const ProfileDetail   = require('./profile_detail');
@@ -20,6 +21,7 @@ const UserStore       = require('../../stores/user_store');
 const Profile = React.createClass({
 
   componentDidMount() {
+    this.errorListener = ErrorStore.addListener(this.handle404);
     this.userListener = UserStore.addListener(this.resetUser);
     this.requestUser(this.props);
   },
@@ -35,6 +37,7 @@ const Profile = React.createClass({
   },
 
   deregisterListeners() {
+    this.errorListener.remove();
     this.userListener.remove();
   },
 
@@ -64,26 +67,40 @@ const Profile = React.createClass({
   },
 
   render() {
-    let inner = <ProfileDetail user={ this.state.user } />;
-    if (this.state.edit) {
-      inner = <ProfileEditForm user={ this.state.user } />;
+
+    if (this.state.error) {
+      return <Error404 />;
     }
 
-    return (
-      <div className="user group">
-        <div>
-          <section className="user-pane group">
-            <div className="page-top">
-              <h2 className="page-header">Profile</h2>
-              { this.toggleButton() }
-            </div>
-            { inner }
-          </section>
-          <Progress />
+    else {
+      let inner = <ProfileDetail user={ this.state.user } />;
+      if (this.state.edit) {
+        inner = <ProfileEditForm user={ this.state.user } />;
+      }
+
+      return (
+        <div className="user group">
+          <div>
+            <section className="user-pane group">
+              <div className="page-top">
+                <h2 className="page-header">Profile</h2>
+                { this.toggleButton() }
+              </div>
+              { inner }
+            </section>
+            <Progress />
+          </div>
+          <ActivitiesTable />
         </div>
-        <ActivitiesTable />
-      </div>
-    );
+      );
+    }
+  },
+
+  handle404() {
+    let error = ErrorStore.errors("user");
+    if (error) {
+      this.setState({ error: true });
+    }
   },
 
   requestUser(props) {
