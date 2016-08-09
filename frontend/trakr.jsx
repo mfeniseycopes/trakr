@@ -12,6 +12,7 @@ const ActivityCreationMap = require('./components/activities/activity_creation_m
 const Activity            = require('./components/activities/activity');
 const ActivityForm        = require('./components/activities/activity_form');
 const App                 = require('./components/app');
+const ErrorActions        = require('./actions/error_actions');
 const LoginForm           = require('./components/sessions/login_form');
 const Profile             = require('./components/users/profile');
 const SessionActions      = require('./actions/session_actions');
@@ -65,6 +66,10 @@ function _redirectToLoginOrProfile(nextState, replace) {
   } else {
     replace('/signup');
   }
+}
+
+function _clearErrors() {
+  ErrorActions.clearErrors();
 }
 
 function _ensureLoggedIn(nextState, replace) {

@@ -2,6 +2,7 @@
 const React = require('react');
 
 // project requires
+const ErrorActions    = require('../actions/error_actions');
 const LogoutButton    = require('./sessions/logout_button');
 const NavBar = require('./navbar');
 const SessionStore    = require('../stores/session_store');

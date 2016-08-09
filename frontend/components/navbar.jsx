@@ -22,23 +22,11 @@ const NavBar = React.createClass({
     this.sesssionListener.remove();
   },
 
-  goToLogin() {
-    hashHistory.push("/login");
-  },
-
-  goToProfile() {
-    hashHistory.push("/profile");
-  },
-
-  goToSignup() {
-    hashHistory.push("/signup");
-  },
-
   loginNav() {
     return (
       <ul className="right-nav-list">
         <li>
-          <a onClick={ this.goToSignup } >Sign Up</a>
+          <Link to={"/signup"} >Sign Up</Link>
         </li>
       </ul>
     );
@@ -73,7 +61,7 @@ const NavBar = React.createClass({
     return (
       <ul className="right-nav-list">
         <li>
-          <a onClick={ this.goToLogin } >Log In</a>
+          <Link to={"/login"} >Log In</Link>
         </li>
       </ul>
     );
@@ -83,12 +71,12 @@ const NavBar = React.createClass({
     return (
       <ul className="right-nav-list">
         <li>
-          <a className="user-avatar-outside-padding" onClick={ this.goToProfile }>
+          <Link to={"/profile"} className="user-avatar-outside-padding" >
             <div className="user-avatar small">
               <img
                 src={ SessionStore.currentUser().avatar_url } />
             </div>
-          </a>
+          </Link>
         </li>
         <li>
           <Link to={"/create-activity"} title="New Activity">[+]</Link>

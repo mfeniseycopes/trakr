@@ -3,6 +3,7 @@ const hashHistory     = require('react-router').hashHistory;
 const React           = require('react');
 
 // project requires
+const ErrorActions    = require('../../actions/error_actions');
 const ErrorStore      = require('../../stores/error_store');
 const FormErrors      = require('../errors/form_errors');
 const SessionActions  = require('../../actions/session_actions');
@@ -74,6 +75,12 @@ const LoginForm = React.createClass({
   componentDidMount() {
     this.sessionListener = SessionStore.addListener(this.redirectIfLoggedIn);
     this.errorListener = ErrorStore.addListener(this.addErrors);
+  },
+  
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.location.pathname !== this.props.location.pathname) {
+      ErrorActions.clearErrors();
+    }
   },
 
   componentWillUnmount() {
