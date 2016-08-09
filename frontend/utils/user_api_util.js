@@ -8,7 +8,6 @@ const UserApiUtil = {
       url: `/api/users/${id}`,
       dataType: "json",
       error(res) {
-        debugger
         errorCallback("user", res.responseJSON);
       },
       success(res) {

@@ -73,7 +73,6 @@ function _clearErrors() {
 }
 
 function _ensureLoggedIn(nextState, replace) {
-  debugger
   if (!SessionStore.isLoggedIn()) {
     replace('/signup');
   }
