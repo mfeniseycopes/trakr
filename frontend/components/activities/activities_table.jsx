@@ -8,30 +8,42 @@ const SessionStore    = require('../../stores/session_store');
 
 const ActvitiesTable = React.createClass({
 
-  componentDidMount() {
-    this.activityListener = 1;
-  },
-
-  componentWillUnmount() {
-    this.deregisterListeners();
-  },
-
-  deregisterListeners() {
-    this.activityListener.remove();
-    this.errorListener.remove();
-  },
-
-
-  getInitialState() {
-    return { activities: [] };
-  },
-
   render() {
     return (
       <section className="activities-table">
         Activities Table
+        <table>
+          <tr>
+            <th>Type</th>
+            <th>Date</th>
+            <th>Title</th>
+            <th>Duration</th>
+            <th>Distance</th>
+            <th>Speed</th>
+          </tr>
+          {
+            this.rows()
+          }
+        </table>
       </section>
     );
+  },
+
+  row(activity) {
+    return (
+      <tr>
+        <th>{activity.activity_type.name}</th>
+        <th>{activity.date}</th>
+        <th>{activity.title}</th>
+        <th>{activity.duration}</th>
+        <th>{activity.distance} mi</th>
+        <th>{activity.speed} mph</th>
+      </tr>
+    );
+  },
+
+  rows() {
+    return this.props.activities.map((activity) => { return this.row(activity); });
   }
 
 });

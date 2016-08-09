@@ -4,6 +4,7 @@ const React           = require('react');
 
 // project requires
 // actions
+const ActivityActions = require('../../actions/activity_actions');
 const ErrorActions    = require('../../actions/error_actions');
 const UserActions     = require('../../actions/user_actions');
 // components
@@ -15,6 +16,7 @@ const ProfileDetail   = require('./profile_detail');
 const ProfileEditForm = require('./profile_edit_form');
 const Progress        = require('./progress.jsx');
 // stores
+const ActivityStore   = require('../../stores/activity_store');
 const ErrorStore      = require('../../stores/error_store');
 const SessionStore    = require('../../stores/session_store');
 const UserStore       = require('../../stores/user_store');
@@ -23,13 +25,17 @@ const Profile = React.createClass({
 
   // when first mounts we need to get user based on current info
   componentDidMount() {
+    this.activityListener = ActivityStore.addListener(this.updateActivities);
     this.errorListener = ErrorStore.addListener(this.handleErrors);
     this.userListener = UserStore.addListener(this.resetUser);
+
     if (this.props.location.pathname === "/profile") {
       UserActions.getUser(SessionStore.currentUser().id);
     } else {
       UserActions.getUser(this.props.params.id);
     }
+
+    //ActivityActions.get
   },
 
   // when props change we need to get user based on future info
@@ -49,6 +55,7 @@ const Profile = React.createClass({
   },
 
   deregisterListeners() {
+    this.activityListener.remove();
     this.errorListener.remove();
     this.userListener.remove();
   },
