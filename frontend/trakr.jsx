@@ -57,7 +57,6 @@ const router = (
         component={ Activity }
         onEnter={ _ensureLoggedIn } />
 
-
     </Route>
   </Router>
 );
