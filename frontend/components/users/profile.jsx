@@ -27,8 +27,8 @@ const Profile = React.createClass({
   },
 
   componentWillReceiveProps(newProps) {
-    if (newProps !== this.props) {
-      this.requestUser(newProps);
+    if (newProps.params.id !== this.props.params.id) {
+      this.requestUser(newProps.params.id);
     }
   },
 
@@ -44,7 +44,7 @@ const Profile = React.createClass({
   getInitialState() {
     if ((this.onProfile() &&
             SessionStore.currentUser().id === UserStore.user().id) ||
-         this.props.params === UserStore.user().id) {
+         this.props.params.id === UserStore.user().id) {
 
       return { user: UserStore.user() };
     }
@@ -98,11 +98,11 @@ const Profile = React.createClass({
     }
   },
 
-  requestUser(props) {
+  requestUser(id) {
     if (this.onProfile()) {
       UserActions.getUser(SessionStore.currentUser().id);
     } else {
-      UserActions.getUser(this.props.params.id);
+      UserActions.getUser(id);
     }
   },
 
@@ -124,7 +124,7 @@ const Profile = React.createClass({
       }
     }
     else {
-      return <FollowButton />
+      return <FollowButton />;
     }
   },
 
