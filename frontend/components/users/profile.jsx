@@ -59,7 +59,11 @@ const Profile = React.createClass({
 
   render() {
 
-    if (this.state.error) {
+    if (this.state === null) {
+      return <div></div>;
+    }
+
+    else if (this.state.error) {
       return <Error404 />;
     }
 
@@ -98,7 +102,7 @@ const Profile = React.createClass({
     if (this.onProfile()) {
       UserActions.getUser(SessionStore.currentUser().id);
     } else {
-      UserActions.getUser(props.params.id);
+      UserActions.getUser(this.props.params.id);
     }
   },
 

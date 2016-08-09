@@ -1,6 +1,7 @@
 // react
 const React = require('react');
 const hashHistory = require('react-router').hashHistory;
+const Link = require('react-router').Link;
 
 // project requires
 const LogoutButton    = require('./sessions/logout_button');
@@ -88,6 +89,9 @@ const NavBar = React.createClass({
                 src={ SessionStore.currentUser().avatar_url } />
             </div>
           </a>
+        </li>
+        <li>
+          <Link to={"/create-activity"} title="New Activity">[+]</Link>
         </li>
         <li>
           <LogoutButton />
