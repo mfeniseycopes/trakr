@@ -5,10 +5,6 @@ const SessionConstants = require('../constants/session_constants');
 
 const SessionActions = {
 
-  error(res) {
-    console.log(`An error occurred: ${res}`);
-  },
-
   login(email, password) {
     SessionApiUtil.login(
       email, password,

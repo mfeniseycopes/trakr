@@ -73,6 +73,7 @@ function _clearErrors() {
 }
 
 function _ensureLoggedIn(nextState, replace) {
+  debugger
   if (!SessionStore.isLoggedIn()) {
     replace('/signup');
   }
@@ -91,8 +92,6 @@ document.addEventListener(
     if (window.currentUser) {
       SessionActions.receiveBootstrappedUser(window.currentUser);
     }
-
-    console.log("working");
 
     ReactDOM.render(
       router,

@@ -6,7 +6,6 @@ const RouteConstants = require('../constants/route_constants');
 const RouteActions = {
 
   addRoutePoint(routePoint) {
-    console.log('addRoutePoint');
     AppDispatcher.dispatch({
       actionType: RouteConstants.RECEIVE_ROUTE_POINT,
       routePoint: routePoint

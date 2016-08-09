@@ -1,10 +1,10 @@
 // react
-const hashHistory     = require('react-router').hashHistory;
+const hashHistory       = require('react-router').hashHistory;
 
 // project
-const Store = require('flux/utils').Store;
-const AppDispatcher = require('../dispatchers/dispatcher');
-const SessionConstants = require('../constants/session_constants');
+const Store             = require('flux/utils').Store;
+const AppDispatcher     = require('../dispatchers/dispatcher');
+const SessionConstants  = require('../constants/session_constants');
 
 const SessionStore = new Store(AppDispatcher);
 
@@ -38,19 +38,16 @@ SessionStore.__onDispatch = (payload) => {
 
 // private methods
 function _login(user) {
-  console.log("ActivityForm#_login");
   _setCurrentUser(user);
   hashHistory.push('/profile');
 }
 
 function _logout() {
-  console.log("ActivityForm#_logout");
   _setCurrentUser({});
   hashHistory.push('/signup');
 }
 
 function _bootstrapUser(user) {
-  console.log("ActivityForm#_bootstrapUser");
   _setCurrentUser(user);
 }
 
