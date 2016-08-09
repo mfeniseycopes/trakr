@@ -8,6 +8,7 @@ const ActivityCreationMap = require('./activity_creation_map');
 const ActivityStore       = require('../../stores/activity_store');
 const ActivityTypeActions = require('../../actions/activity_type_actions');
 const ActivityTypeStore   = require('../../stores/activity_type_store');
+const ErrorActions        = require('../../actions/error_actions');
 const ErrorStore          = require('../../stores/error_store');
 const FormErrors          = require('../errors/form_errors');
 

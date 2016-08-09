@@ -24,10 +24,15 @@ class Activity < ActiveRecord::Base
   belongs_to :user
   belongs_to :activity_type
 
-  validates :user_id, :activity_type_id, :title, :date, presence: true
+  validates :user_id, :activity_type_id, :title, :date, :duration, :distance, presence: true
+  validates :duration, numericality: { greater_than: 0 }
 
   # gpx setup
   has_attached_file :gpx
+  # validate filename
+  validates_attachment_content_type :gpx, content_type: ["application/gpx+xml"]
+
+  # attr_accessor :route
 
   before_create :determine_properties
   before_update :update_properties

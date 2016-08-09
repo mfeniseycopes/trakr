@@ -11,6 +11,7 @@ const ActivityStore       = require('../../stores/activity_store');
 const ActivityTypeActions = require('../../actions/activity_type_actions');
 const ActivityTypeStore   = require('../../stores/activity_type_store');
 const Error404            = require('../error_404');
+const ErrorActions     = require('../../actions/error_actions');
 const ErrorStore          = require('../../stores/error_store');
 const FormErrors          = require('../errors/form_errors');
 const SessionStore        = require('../../stores/session_store');
@@ -26,8 +27,8 @@ const Activity = React.createClass({
   componentWillReceiveProps(newProps) {
     if (newProps.params.id !== this.props.params.id) {
       ActivityActions.getActivity(id);
+      ErrorActions.clearErrors();
     }
-    ErrorActions.clearErrors();
   },
 
   componentWillUnmount() {
