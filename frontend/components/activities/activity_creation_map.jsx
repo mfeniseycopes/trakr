@@ -6,7 +6,6 @@ const ReactDOM      = require('react-dom');
 // project requires
 const ActivityActions = require('../../actions/activity_actions');
 const ActivityStore    = require('../../stores/activity_store');
-const RouteActions  = require('../../actions/route_actions');
 const SessionStore = require('../../stores/session_store');
 
 let _numRoutPoints = 0;
@@ -205,7 +204,7 @@ const ActivityCreationMap = React.createClass({
         encodedPolyline: this.encodedPolyline()
       };
 
-      // add route to RouteStore to be received by ActivityForm component onmount
+      // add route to ActivityStore to be received by ActivityForm component onmount
       ActivityActions.createNewActivity(activity);
     }
     else {

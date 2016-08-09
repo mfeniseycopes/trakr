@@ -27,10 +27,15 @@ const ActivityActions = {
   },
 
   getActivities() {
-    ActivityApiUtil.getActivities(this.receiveActivity, ErrorActions.setErrors);
+    ActivityApiUtil.getActivities(this.receiveActivities, ErrorActions.setErrors);
+  },
+
+  getActivitiesByUser(id) {
+    ActivityApiUtil.getActivitiesByUser(id, this.receiveActivities, ErrorActions.setErrors);
   },
 
   receiveActivities(activities) {
+    debugger
     AppDispatcher.dispatch({
       actionType: ActivityConstants.RECEIVE_ACTIVITIES,
       activities: activities

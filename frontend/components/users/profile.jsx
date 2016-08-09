@@ -35,7 +35,7 @@ const Profile = React.createClass({
       UserActions.getUser(this.props.params.id);
     }
 
-    //ActivityActions.get
+    ActivityActions.getActivitiesByUser(SessionStore.currentUser().id);
   },
 
   // when props change we need to get user based on future info
@@ -61,7 +61,7 @@ const Profile = React.createClass({
   },
 
   getInitialState() {
-    return { user: null };
+    return { user: null, activities: [] };
   },
 
   handleErrors() {
@@ -98,7 +98,7 @@ const Profile = React.createClass({
             </section>
             <Progress />
           </div>
-          <ActivitiesTable />
+          <ActivitiesTable activities={this.state.activities} />
         </div>
       );
     }
@@ -128,6 +128,10 @@ const Profile = React.createClass({
 
   toggleModes() {
     this.setState({ edit: !this.state.edit });
+  },
+
+  updateActivities() {
+    this.setState({ activities: ActivityStore.all() });
   }
 
 });

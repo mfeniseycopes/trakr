@@ -62,6 +62,21 @@ const ActivityApiUtil = {
     });
   },
 
+  getActivitiesByUser(id, successCallback, errorCallback) {
+
+    $.ajax({
+      method: "GET",
+      url: `/api/users/${id}/activities`,
+      dataType: "json",
+      error(res) {
+        errorCallback("activities", res.responseJSON);
+      },
+      success(res) {
+        successCallback(res);
+      }
+    });
+  },
+
   updateActivity(activity, successCallback, errorCallback) {
     let id = activity.id;
     delete activity.id;

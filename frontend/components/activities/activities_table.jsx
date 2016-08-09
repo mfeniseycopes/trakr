@@ -13,17 +13,21 @@ const ActvitiesTable = React.createClass({
       <section className="activities-table">
         Activities Table
         <table>
-          <tr>
-            <th>Type</th>
-            <th>Date</th>
-            <th>Title</th>
-            <th>Duration</th>
-            <th>Distance</th>
-            <th>Speed</th>
-          </tr>
-          {
-            this.rows()
-          }
+          <thead>
+            <tr>
+              <th>Type</th>
+              <th>Date</th>
+              <th>Title</th>
+              <th>Duration</th>
+              <th>Distance</th>
+              <th>Speed</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              this.rows()
+            }
+          </tbody>
         </table>
       </section>
     );
@@ -31,13 +35,13 @@ const ActvitiesTable = React.createClass({
 
   row(activity) {
     return (
-      <tr>
-        <th>{activity.activity_type.name}</th>
-        <th>{activity.date}</th>
-        <th>{activity.title}</th>
-        <th>{activity.duration}</th>
-        <th>{activity.distance} mi</th>
-        <th>{activity.speed} mph</th>
+      <tr key={activity.id}>
+        <td>{activity.activity_type_name}</td>
+        <td>{activity.date}</td>
+        <td>{activity.title}</td>
+        <td>{activity.duration}</td>
+        <td>{activity.distance} mi</td>
+        <td>{activity.speed} mph</td>
       </tr>
     );
   },

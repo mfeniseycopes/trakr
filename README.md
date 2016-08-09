@@ -24,12 +24,12 @@ trakr is a web application inspired by strava.com built using Ruby on Rails and 
   - [x] CSS Styling that matches strava.com
 - [ ] Activities
   - [ ] Upload activity
-  - [ ] Manually create activity
-  - [ ] View activity
-  - [ ] Edit activity
-  - [ ] Present data about activity (time, speed, distance)
+  - [x] Manually create activity
+  - [x] View activity
+  - [x] Edit activity
+  - [x] Present data about activity (time, speed, distance)
   - [ ] View list of activities on profiles
-  - [ ] Accurate navigation
+  - [x] Accurate navigation
   - [ ] Lots of seed data
   - [ ] CSS Styling that matches strava.com
 - [ ] Social
@@ -118,21 +118,21 @@ trakr is a web application inspired by strava.com built using Ruby on Rails and 
 
 **Objective:** Activities can be created via file upload or google maps route creation
 
-* [ ] create `Activity` model
+* [x] create `Activity` model
 * [ ] `ActivityUpload` component
   * [ ] `FileUpload` component
   * [ ] `ActivityForm` component
-* [ ] necessary flux loop for activity creation
-* [ ] setup use of Google Maps API
-* [ ] `ManualEntry` component
-  * [ ] `RouteCreatorMap` component
-    * [ ] listens for clicks on google.map
-    * [ ] draws route polylines between them
+* [x] necessary flux loop for activity creation
+* [x] setup use of Google Maps API
+* [x] `ManualEntry` component
+  * [x] `RouteCreatorMap` component
+    * [x] listens for clicks on google.map
+    * [x] draws route polylines between them
     * [ ] user can clear polylines
-    * [ ] marker positions are saved on `ActivityForm` submit
-* [ ] activty data saved as `GPX` instance serialized to db (use `gpx` gem)
-* [ ] `ActivityDetail` component
-* [ ] can edit activity
+    * [x] marker positions are saved on `ActivityForm` submit
+* [x] activty data saved as gpx file (uses gpx gem)
+* [x] `ActivityDetail` component
+* [x] can edit activity
 * [ ] can delete activity
 * [ ] reasonable css styling for activity creation, activity detail
 * [ ] seed activities

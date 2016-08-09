@@ -23,7 +23,7 @@ class Api::ActivitiesController < ApplicationController
 
   def index
     if params[:user_id]
-      @activities = Activitiy.find_by(user_id: params[:user_id])
+      @activities = Activity.where(user_id: params[:user_id]).order(date: :asc)
     else
       @activities = Activity.all
     end
@@ -33,7 +33,7 @@ class Api::ActivitiesController < ApplicationController
 
   def update
     @activity = Activity.find_by(id: params[:id])
-    
+
     if @activity.update(activity_update_params)
       render :show
     else

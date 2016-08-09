@@ -1,6 +1,8 @@
 json.extract! activity,
-  :name,
+  :id,
+  :title,
   :date,
   :distance,
-  :type_name,
+  :duration,
+  :activity_type_name,
   :user_name
