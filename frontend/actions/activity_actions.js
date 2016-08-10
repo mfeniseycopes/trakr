@@ -35,7 +35,6 @@ const ActivityActions = {
   },
 
   receiveActivities(activities) {
-    debugger
     AppDispatcher.dispatch({
       actionType: ActivityConstants.RECEIVE_ACTIVITIES,
       activities: activities

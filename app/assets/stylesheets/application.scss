@@ -139,29 +139,38 @@ a, button:hover {
   }
 }
 
-.header-nav {
-  width: 90%;
-  margin: 0 auto;
-}
-
-.header-logo {
-  display: block;
+.left {
   float: left;
-
-  a {
-    font-family: 'Rancho', cursive;
-    font-size: 28px;
-    font-weight: bold;
-  }
 }
 
-.right-nav-list {
-  display: block;
+.right {
   float: right;
+}
 
-  li {
-    display: block;
-    float: left;
+.header {
+  .header-nav {
+    width: 90%;
+    margin: 0 auto;
+
+    .header-logo {
+      display: block;
+      float: left;
+
+      a {
+        font-family: 'Rancho', cursive;
+        font-size: 28px;
+        font-weight: bold;
+      }
+    }
+
+    .nav-list {
+      display: block;
+
+      li {
+        display: block;
+        float: left;
+      }
+    }
   }
 }
 

@@ -24,27 +24,63 @@ const NavBar = React.createClass({
 
   loginNav() {
     return (
-      <ul className="right-nav-list">
+      <ul className="right nav-list">
         <li>
           <Link to={"/signup"} >Sign Up</Link>
+        </li>
+      </ul>
+
+    );
+  },
+
+  logo() {
+    return (
+      <ul className="left nav-list">
+        <li>
+          <h1 className="header-logo"><a href="#">trakr</a></h1>
         </li>
       </ul>
     );
   },
 
+  mainNav() {
+    if (SessionStore.isLoggedIn()) {
+      return (
+        <ul className="left nav-list">
+          <li>
+            <Link to="#" title="Search">🔍</Link>
+          </li>
+          <li>
+            <Link to="#">Dashboard</Link>
+          </li>
+          <li>
+            <Link to="#">Training</Link>
+          </li>
+          <li>
+            <Link to="#">Explore</Link>
+          </li>
+        </ul>
+      );
+    } else {
+      return "";
+    }
+  },
+
   render() {
-
-    let rightNav = this.selectNav();
-
     return (
-      <div>
-        <h1 className="header-logo"><a href="#">trakr</a></h1>
-        { rightNav }
-      </div>
+      <header className="header">
+        <nav className="header-nav group">
+          <div>
+            { this.logo() }
+            { this.mainNav() }
+            { this.rightNav() }
+          </div>
+        </nav>
+      </header>
     );
   },
 
-  selectNav() {
+  rightNav() {
 
     if (this.props.location === "/login") {
       return this.loginNav();
@@ -59,7 +95,7 @@ const NavBar = React.createClass({
 
   signupNav() {
     return (
-      <ul className="right-nav-list">
+      <ul className="right nav-list">
         <li>
           <Link to={"/login"} >Log In</Link>
         </li>
@@ -69,7 +105,7 @@ const NavBar = React.createClass({
 
   userNav() {
     return (
-      <ul className="right-nav-list">
+      <ul className="right nav-list">
         <li>
           <Link to={"/profile"} className="user-avatar-outside-padding" >
             <div className="user-avatar small">
