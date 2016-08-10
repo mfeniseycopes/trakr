@@ -115,7 +115,7 @@ const NavBar = React.createClass({
           </Link>
         </li>
         <li>
-          <Link to={"/create-activity"} title="New Activity">[+]</Link>
+          <Link to={"/create-activity"} title="New Activity">⎣ ✚ ⎤</Link>
         </li>
         <li>
           <LogoutButton />

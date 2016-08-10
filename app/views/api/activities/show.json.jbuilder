@@ -16,4 +16,5 @@ end
 json.user do
   json.id @activity.user_id
   json.name @activity.user_name
+  json.avatar_url @activity.user.avatar_url
 end

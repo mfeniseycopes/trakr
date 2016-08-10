@@ -16,7 +16,7 @@
     padding: 10px 0;
     height: 200px;
 
-    > * {
+    .activity-left, .activity-right {
       float: left;
     }
 
@@ -86,7 +86,7 @@
         margin-top: 40px;
         width: 192px;
 
-        p {
+        p, input {
           // float: left;
           margin: 10px 20px;
           font-size: 25px;
@@ -98,9 +98,17 @@
       }
     }
   }
+
+  .activity-form {
+    width: 1198px;
+  }
+
+  .button {
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+  }
 }
-
-
 
 .activity-map {
   width: 100%;

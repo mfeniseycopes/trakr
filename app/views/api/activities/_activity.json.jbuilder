@@ -5,4 +5,8 @@ json.extract! activity,
   :distance,
   :duration,
   :activity_type_name,
-  :user_name
+
+json.user do
+  json.name activity.user_name
+  json.avatar_url activity.user.avatar_url
+end

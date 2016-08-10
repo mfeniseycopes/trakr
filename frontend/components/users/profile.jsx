@@ -21,6 +21,8 @@ const ErrorStore      = require('../../stores/error_store');
 const SessionStore    = require('../../stores/session_store');
 const UserStore       = require('../../stores/user_store');
 
+var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
+
 const Profile = React.createClass({
 
   // when first mounts we need to get user based on current info
@@ -83,11 +85,13 @@ const Profile = React.createClass({
     else {
 
       return (
-        <div className="group">
-          <h2 className="page-header">Profile</h2>
+        <div>
+          <div className="page-header group">
+            <h1>Profile</h1>{ this.toggleButton() }
+          </div>
           <div className="group">
-            <div className="two-thirds-left left group">
-              { this.toggleButton() }
+            <div className="two-thirds-left">
+
               {
                 this.state.edit ?
                   <ProfileEditForm user={ this.state.user } /> :
@@ -114,8 +118,8 @@ const Profile = React.createClass({
   toggleButton() {
     if (this.state.editable) {
       return (
-        <a onClick={ this.toggleModes } className="button form-button bottom" >
-          { this.state.edit ? "Cancel" : "Edit" }
+        <a onClick={ this.toggleModes } className="button symbol-button" >
+          { this.state.edit ? "✕" : "🖉" }
         </a>
       );
     }

@@ -66,21 +66,14 @@ const ActivityDetail = React.createClass({
     );
   },
 
-  dateString() {
-    let date = new Date(this.props.activity.date);
-  },
-
   durationString() {
     let duration = this.props.activity.duration;
     let ss = duration % 60;
     let mm = Math.floor(duration /= 60) % 60;
     let hh = Math.floor(duration / 60);
     return `${hh}:${("00" + mm).slice(-2)}:${("00" + ss).slice(-2)}`;
-  },
-
-  timeString() {
-
   }
+
 
 });
 

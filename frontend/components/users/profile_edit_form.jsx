@@ -8,6 +8,8 @@ const FormErrors      = require('../errors/form_errors');
 const UserActions  = require('../../actions/user_actions');
 const UserStore    = require('../../stores/user_store');
 
+var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
+
 const ProfileEditForm = React.createClass({
 
   addErrors() {
@@ -55,29 +57,47 @@ const ProfileEditForm = React.createClass({
 
   render() {
     return (
-      <form onSubmit={ this.updateUser }>
-        <div className="user form group">
-          <div className="user-avatar-large">
-            <img src={ this.props.user.avatar_url } />
+      <ReactCSSTransitionGroup transitionName="example" transitionAppear={true} transitionAppearTimeout={500}>
+        <section className="user group transition">
+          <header>
+            <h1>Edit Profile</h1>
+          </header>
+          <div className="user-main form group">
+            <form className="user-form" onSubmit={ this.updateUser }>
+
+              <div className="form-row group">
+                <label for="first-name">First</label>
+                  <input id="first-name" type="text"
+                    value={this.state.first_name}
+                    onChange={ this.changeFirstName }/>
+
+                <label for="last-name">Last</label>
+                  <input id="last-name" type="text"
+                    value={this.state.last_name}
+                    onChange={ this.changeLastName }/>
+
+                <label for="location">Location</label>
+                  <input id="location" type="text"
+                    value={this.state.location}
+                    onChange={ this.changeLocation }/>
+
+              </div>
+
+              <div className="form-row group">
+                <label for="bio">Bio</label>
+                  <textarea id="bio"
+                    value={this.state.bio}
+                    onChange={ this.changeBio }/>
+              </div>
+
+              <FormErrors errors={ this.state.errors } />
+
+              <button className="button bottom-right-button button-invert-color" type="submit" value="Update" >Save Changes</button>
+
+            </form>
           </div>
-          <div className="user-form">
-            <div className="group user-form-names"><input type="text"
-              value={this.state.first_name}
-              onChange={ this.changeFirstName }/>
-            <input type="text"
-              value={this.state.last_name}
-              onChange={ this.changeLastName }/></div>
-            <input type="text"
-              value={this.state.location}
-              onChange={ this.changeLocation }/>
-            <textarea
-              value={this.state.bio}
-              onChange={ this.changeBio }/>
-            <FormErrors errors={ this.state.errors } />
-            <button className="button form-button" type="submit" value="Update" >Update</button>
-          </div>
-        </div>
-      </form>
+        </section>
+      </ReactCSSTransitionGroup>
     );
   },
 

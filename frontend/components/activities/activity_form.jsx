@@ -35,7 +35,7 @@ const ActivityForm = React.createClass({
   },
 
   changeDurationAndSpeed() {
-    let duration = (this.state.durationHH * 360 + this.state.durationMM * 60 + this.state.durationSS);
+    let duration = (this.state.durationHH * 3600 + this.state.durationMM * 60 + this.state.durationSS);
     this.setState({ duration: duration, speed: duration / this.state.distance });
   },
 
@@ -144,10 +144,10 @@ const ActivityForm = React.createClass({
     }
 
   },
-
-  miniMapUrl() {
-    return `https://maps.googleapis.com/maps/api/staticmap?size=300x200&path=color:0x003A23%7Cenc:${this.state.encodedPolyline}&key=AIzaSyDL_NuEJQOvYtPxbTALLDl_sku6ZioowKQ`;
-  },
+  //
+  // miniMapUrl() {
+  //   return `https://maps.googleapis.com/maps/api/staticmap?size=300x200&path=color:0x003A23%7Cenc:${this.state.encodedPolyline}&key=AIzaSyDL_NuEJQOvYtPxbTALLDl_sku6ZioowKQ`;
+  // },
 
   gotoActivityDetail() {
 
@@ -162,62 +162,76 @@ const ActivityForm = React.createClass({
   render() {
 
     return(
-      <div>
-        <p>{ this.state.distance } mi</p>
+        <section className="activity group">
+          <header>
+            <h1>Edit Activity</h1>
+          </header>
+          <div className="activity-main form group">
+            <form className="activity-form group" onSubmit={this.handleSubmit}>
 
-        <img className="mini-map" src={ this.miniMapUrl() } />
+              <div className="form-row group">
+                <label for="type">Type</label>
+                <select name="Type"
+                  value={this.state.activityType}
+                  onChange={this.change("activityType")}>
+                  {
+                    this.state.activityTypes.length > 0 ?
+                    this.activityTypeOptions() : ""
+                  }
+                </select>
 
-        <form className="activity-form" onSubmit={this.handleSubmit}>
+                <label for="title">Title</label>
+                <input type="text"
+                  onChange={this.change("title")}
+                  value={this.state.title}
+                  placeholder="Title" />
 
-          <select name="Type"
-            value={this.state.activityType}
-            onChange={this.change("activityType")}>
-            {
-              this.state.activityTypes.length > 0 ?
-              this.activityTypeOptions() : ""
-            }
-          </select>
+                <label for="date">Date</label>
+                <input type="date"
+                  onChange={this.change("date")}
+                  value={this.state.date}/>
 
-          <input type="text"
-            onChange={this.change("title")}
-            value={this.state.title}
-            placeholder="Title" />
+                <label for="time">Time</label>
+                <input type="time"
+                  onChange={this.change("start")}
+                  value={this.state.start} />
+              </div>
 
-          <input type="date"
-            onChange={this.change("date")}
-            value={this.state.date}/>
+              <div className="form-row group">
 
-          <input type="time"
-            onChange={this.change("start")}
-            value={this.state.start} />
+                <label for="description">Description</label>
+                <textarea id="description"
+                  onChange={this.change("description")}
+                  value={this.state.description}
+                  placeholder="Description" />
 
-          <input type="number"
-            onChange={this.change("durationHH", this.changeDurationAndSpeed)}
-            value={this.state.durationHH}
-            placeholder="HH" />
-          <input type="number"
-            onChange={this.change("durationMM", this.changeDurationAndSpeed)}
-            value={this.state.durationMM}
-            placeholder="MM" />
-          <input type="number"
-            onChange={this.change("durationSS", this.changeDurationAndSpeed)}
-            value={this.state.durationSS}
-            placeholder="SS" />
+                <label for="durationHH" >hh</label>
+                <input id="durationHH" type="number"
+                  onChange={this.change("durationHH", this.changeDurationAndSpeed)}
+                  value={this.state.durationHH}
+                  placeholder="HH" />
+                  <label for="durationMM" >mm</label>
+                <input id="durationMM" type="number"
+                  onChange={this.change("durationMM", this.changeDurationAndSpeed)}
+                  value={this.state.durationMM}
+                  placeholder="MM" />
+                <label for="durationSS" >ss</label>
+                <input id="durationSS" type="number"
+                  onChange={this.change("durationSS", this.changeDurationAndSpeed)}
+                  value={this.state.durationSS}
+                  placeholder="SS" />
+              </div>
 
-          <textarea
-            onChange={this.change("description")}
-            value={this.state.description}
-            placeholder="Description" />
+              <FormErrors errors={ this.state.errors } />
 
-          <input type="file"
-            onChange={this.changeFile} />
+              <button className="button bottom-right-button button-invert-color" type="submit">Save Changes</button>
 
-          <FormErrors errors={ this.state.errors } />
+            </form>
+          </div>
+        </section>
 
-          <button className="button" type="submit">Save</button>
 
-        </form>
-      </div>
+
     );
   }
 
@@ -254,7 +268,7 @@ let _blankActivity = () => {
 
 let _durations = (duration) => {
   return {
-    hh: Math.floor(duration / 360),
+    hh: Math.floor(duration / 3600),
     mm: Math.floor(duration / 60) % 60,
     ss: duration % 60
   };

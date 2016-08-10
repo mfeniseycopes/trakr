@@ -9,11 +9,14 @@ const UserActions  = require('../../actions/user_actions');
 const SessionStore = require('../../stores/session_store');
 const UserStore    = require('../../stores/user_store');
 
+var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
+
 const ProfileDetail = React.createClass({
 
   render() {
     return (
-      <div className="user group">
+      <ReactCSSTransitionGroup transitionName="example" transitionAppear={true} transitionAppearTimeout={500}>
+      <div className="user group transition">
         <div className="user-avatar-large">
           <img src={this.props.user.avatar_url} />
         </div>
@@ -24,6 +27,7 @@ const ProfileDetail = React.createClass({
           <p>{this.props.user.bio}</p>
         </div>
       </div>
+      </ReactCSSTransitionGroup>
     );
   },
 

@@ -64,17 +64,18 @@ const Activity = React.createClass({
     else {
       return (
         <div className="group">
-          <h2 className="page-header">Activity</h2>
-            <div className="group">
-              <div className="three-thirds-left group">
-                { this.toggleButton() }
-                {
-                  this.state.edit ?
-                    <ActivityForm activity={this.state.activity} /> :
-                    <ActivityDetail activity={this.state.activity} />
-                }
-              </div>
+          <div className="page-header group">
+            <h1>Activity</h1>{ this.toggleButton() }
+          </div>
+          <div>
+            <div className="three-thirds">
+              {
+                this.state.edit ?
+                  <ActivityForm activity={this.state.activity} /> :
+                  <ActivityDetail activity={this.state.activity} />
+              }
             </div>
+          </div>
           <div id="map" className="activity-map" ref="map"></div>
         </div>
 
@@ -119,8 +120,8 @@ const Activity = React.createClass({
   toggleButton() {
     if (this.state.editable) {
       return (
-        <a onClick={ this.toggleModes } className="button" >
-          { this.state.edit ? "Cancel" : "Edit" }
+        <a onClick={ this.toggleModes } className="button symbol-button" >
+          { this.state.edit ? "✕" : "🖉" }
         </a>
       );
     }
