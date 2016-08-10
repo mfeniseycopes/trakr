@@ -37,7 +37,7 @@ const NavBar = React.createClass({
     return (
       <ul className="left nav-list">
         <li>
-          <h1 className="header-logo"><a href="#">trakr</a></h1>
+          <a className="header-logo" href="#">trakr</a>
         </li>
       </ul>
     );

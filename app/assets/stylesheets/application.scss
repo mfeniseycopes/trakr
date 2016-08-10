@@ -90,55 +90,6 @@ a, button:hover {
   background-image: image-url("rocky.jpg");
 }
 
-/* header */
-.header {
-  background-color: #FFF;
-  border-top: 1px #e5e5e5 solid;
-  border-bottom: 1px #e5e5e5 solid;
-  a {
-    display: block;
-    height: 53px;
-    padding: 0 10px;
-    line-height: 53px;
-    font-size: 14px;
-    border-left: 1px white solid;
-    border-right: 1px white solid;
-    border-bottom: 2px white solid;
-    color: #666;
-    transition: 1s;
-
-
-    .active {
-      border-bottom: 2px #277455 solid;
-    }
-  }
-
-  a:hover {
-    border-left: 1px #e5e5e5 solid;
-    border-right: 1px #e5e5e5 solid;
-    color: #277455;
-    border-bottom: 2px #277455 solid;
-  }
-}
-.user-avatar-outside-padding {
-  height: 40px !important;
-  padding-top: 6.5px !important;
-  padding-bottom: 6.5px !important;
-}
-
-.user-avatar {
-  height: 40px;
-  width: 40px;
-  border-radius: 100%;
-  overflow: hidden;
-
-  img {
-    height: 40px;
-    width: 40px;
-    object-fit: cover;
-  }
-}
-
 .left {
   float: left;
 }
@@ -147,36 +98,9 @@ a, button:hover {
   float: right;
 }
 
-.header {
-  .header-nav {
-    width: 90%;
-    margin: 0 auto;
-
-    .header-logo {
-      display: block;
-      float: left;
-
-      a {
-        font-family: 'Rancho', cursive;
-        font-size: 28px;
-        font-weight: bold;
-      }
-    }
-
-    .nav-list {
-      display: block;
-
-      li {
-        display: block;
-        float: left;
-      }
-    }
-  }
-}
-
 /* main */
 .content {
-  width: 90%;
+  width: 1200px;
   margin: 0 auto;
 }
 
@@ -194,47 +118,7 @@ a, button:hover {
   line-height: 50px;
 }
 
-/* session forms */
-.session-form {
-  width: 300px;
-  margin: 200px auto;
-  padding: 25px;
-  background-color: rgba(0, 0, 0, 0.75);
-  border-radius: 3px;
 
-  h2 {
-    text-align: center;
-  }
-
-  > * {
-    margin: auto;
-  }
-
-  .form-row {
-    > * {
-      width: 260px;
-      padding: 10px;
-      border: 1px solid #a5a5a5;
-      margin: 8px;
-      background-color: #000;
-      color: #FFF;
-    }
-
-    button {
-      background-color: #277455;
-      border-radius: 3px;
-      border: none;
-      color: white;
-      text-align: center;
-      margin-top: 40px;
-
-    }
-
-    button:hover {
-      background-color: #0F573A;
-    }
-  }
-}
 
 .user-pane {
   width: 640px;
@@ -422,56 +306,4 @@ a, button:hover {
     width: 380px;
     height: 100px;
   }
-}
-
-
-@-webkit-keyframes pulse {
-  from {
-    -webkit-transform: scale3d(1, 1, 1);
-    transform: scale3d(1, 1, 1);
-  }
-
-  50% {
-    -webkit-transform: scale3d(1.05, 1.05, 1.05);
-    transform: scale3d(1.05, 1.05, 1.05);
-  }
-
-  to {
-    -webkit-transform: scale3d(1, 1, 1);
-    transform: scale3d(1, 1, 1);
-  }
-}
-
-@keyframes pulse {
-  from {
-    -webkit-transform: scale3d(1, 1, 1);
-    transform: scale3d(1, 1, 1);
-  }
-
-  50% {
-    -webkit-transform: scale3d(1.05, 1.05, 1.05);
-    transform: scale3d(1.05, 1.05, 1.05);
-  }
-
-  to {
-    -webkit-transform: scale3d(1, 1, 1);
-    transform: scale3d(1, 1, 1);
-  }
-}
-
-.pulse {
-  -webkit-animation-name: pulse;
-  animation-name: pulse;
-}
-
-.animated {
-  -webkit-animation-duration: 1s;
-  animation-duration: 1s;
-  -webkit-animation-fill-mode: both;
-  animation-fill-mode: both;
-}
-
-.animated.infinite {
-  -webkit-animation-iteration-count: infinite;
-  animation-iteration-count: infinite;
 }

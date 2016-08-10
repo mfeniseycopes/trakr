@@ -1,0 +1,43 @@
+/* session forms */
+.session-form {
+  width: 300px;
+  margin: 200px auto;
+  padding: 25px;
+  background-color: rgba(0, 0, 0, 0.75);
+  border-radius: 3px;
+
+  .session-form-row {
+    width: 300px;
+    margin: auto;
+
+    .session-form-row-full {
+      width: 260px;
+    }
+
+    .session-form-row-half {
+      float: left;
+      width: 111px;
+    }
+
+    > * {
+      padding: 10px;
+      border: 1px solid #a5a5a5;
+      margin: 8px;
+      background-color: #000;
+      color: #FFF;
+    }
+
+    button {
+      background-color: #277455;
+      border-radius: 3px;
+      border: none;
+      color: white;
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    button:hover {
+      background-color: #0F573A;
+    }
+  }
+}
