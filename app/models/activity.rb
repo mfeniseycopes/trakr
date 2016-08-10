@@ -28,9 +28,10 @@ class Activity < ActiveRecord::Base
   validates :duration, numericality: { greater_than: 0 }
 
   # gpx setup
-  has_attached_file :gpx
+  has_attached_file :gpx,
+    :s3_headers =>  { "Content-Type" => "application/gpx+xml" }
   # validate filename
-  validates_attachment_content_type :gpx, content_type: ["application/gpx+xml"]
+  validates_attachment_content_type :gpx, content_type: ["application/gpx+xml", "application/xml"]
 
   # attr_accessor :route
 
@@ -56,13 +57,23 @@ class Activity < ActiveRecord::Base
         moving_duration: self.duration
       )
       gpx.tracks << GPX::Track.new
+      gpx.tracks[0].segments << GPX::Segment.new
 
+      # add trackpoints to gpx instance
+      points = []
       @route.each do |point|
-        gpx.tracks[0].points << GPX::TrackPoint.new(lat: point["lat"].to_f, lon: point["lng"].to_f)
+        points << GPX::TrackPoint.new(lat: point["lat"].to_f, lon: point["lng"].to_f)
       end
+      gpx.tracks[0].segments[0].points = points
 
+      # create temp file to save to paperclip (StringIO creates incorrect content type)
+      tmp = Tempfile.new(["tmp", ".gpx"])
+      tmp.write(gpx.to_s)
+      tmp.rewind
+
+      # update gpx properties
       self.speed = gpx.average_speed(units: "miles")
-      self.gpx = StringIO.new(gpx.to_s)
+      self.gpx = tmp
     end
 
   end

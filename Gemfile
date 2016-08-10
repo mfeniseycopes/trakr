@@ -36,6 +36,9 @@ gem 'aws-sdk'
 # read, creation and manipulation of gpx files
 gem 'gpx'
 
+# set content type for manually created gpx
+gem 'mime-types'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
