@@ -98,90 +98,41 @@ a, button:hover {
   float: right;
 }
 
+.top {
+  margin-top: 0px;
+}
+
+.bottom {
+  margin-bottom: 0px;
+}
+
+.three-thirds {
+  width: 1200px;
+}
+
+.two-thirds-left {
+  width: 780px;
+  margin-right: 20px;
+}
+
+.one-third {
+  width: 400px;
+}
+
 /* main */
 .content {
   width: 1200px;
   margin: 0 auto;
 }
 
-.page-top {
-  padding: 10px 0;
-  height: 50px;
-}
-
 .page-header {
-  width: 200px;
+  width: 100%;
   font-size: 30px;
   float: left;
   margin: auto 0;
   height: 50px;
   line-height: 50px;
-}
-
-
-
-.user-pane {
-  width: 640px;
-  display: block;
-    float: left;
-}
-
-.user {
-  display: block;
-  float: left;
-  padding: 20px;
-
-  > *{
-    width: 100%;
-    display: block;
-    float: left;
-  }
-
-  > :last-child {
-    margin-right: 0;
-  }
-}
-
-.user-avatar-large {
-  width: 200px;
-  height: 200px;
-  overflow: hidden;
-  border-radius: 100%;
-
-  img {
-    height: 200px;
-    width: 200px;
-    object-fit: cover;
-  }
-}
-
-.user-detail {
-  width: 400px;
-  display: block;
-  float: left;
-
-  > * {
-    margin: 10px;
-  }
-
-  h3 {
-    display:inline;
-    margin-bottom: 20px;
-    font-size: 25px;
-  }
-}
-
-.user-avatar-large {
-  width: 200px;
-  height: 200px;
-  overflow: hidden;
-  border-radius: 100%;
-
-  img {
-    height: 200px;
-    width: 200px;
-    object-fit: cover;
-  }
+  padding: 10px 0;
 }
 
 .form {
@@ -218,26 +169,6 @@ a, button:hover {
   }
 }
 
-
-
-.progress-pane {
-  border: 1px black solid;
-  height: 400px;
-  width: 400px;
-  padding: 20px;
-  float: right;
-}
-
-.activities-table {
-  border: 1px black solid;
-  height: 500px;
-  width: 1160px;
-  padding: 20px;
-  display: block;
-}
-
-
-
 .button {
   border: 1px solid #a5a5a5;
   font-size: 16px;
@@ -269,14 +200,7 @@ a, button:hover {
   }
 }
 
-.bottom {
-  margin-bottom: 0px;
-}
 
-.map {
-  height: 600px;
-  width: 100%;
-}
 
 .mini-map {
   height: 200px;

@@ -14,31 +14,31 @@ const FormErrors          = require('../errors/form_errors');
 
 const ActivityDetail = React.createClass({
 
-  componentDidMount() {
-    const mapDOMNode = ReactDOM.findDOMNode(this.refs.map);
-    const mapOptions = {
-      center: { lat: 0, lng: 0},
-      zoom: 13
-    };
-    var decodedPath = google.maps.geometry.encoding.decodePath(this.props.activity.encoded_polyline);
-    this.map = new google.maps.Map(mapDOMNode, mapOptions);
-    let route = new google.maps.Polyline({
-      path: decodedPath,
-      strokeWeight: 5,
-      strokeColor: "#277455",
-      strokeOpacity: 0.8
-    });
-
-    var bounds = new google.maps.LatLngBounds();
-    var path = route.getPath();
-    for (var i = 0; i < path.getLength(); i++) {
-       bounds.extend(path.getAt(i));
-    }
-
-    this.map.fitBounds(bounds);
-    route.setMap(this.map);
-
-  },
+  // componentDidMount() {
+  //   // const mapDOMNode = ReactDOM.findDOMNode(this.refs.map);
+  //   // const mapOptions = {
+  //   //   center: { lat: 0, lng: 0},
+  //   //   zoom: 13
+  //   // };
+  //   // var decodedPath = google.maps.geometry.encoding.decodePath(this.props.activity.encoded_polyline);
+  //   // this.map = new google.maps.Map(mapDOMNode, mapOptions);
+  //   // let route = new google.maps.Polyline({
+  //   //   path: decodedPath,
+  //   //   strokeWeight: 5,
+  //   //   strokeColor: "#277455",
+  //   //   strokeOpacity: 0.8
+  //   // });
+  //   //
+  //   // var bounds = new google.maps.LatLngBounds();
+  //   // var path = route.getPath();
+  //   // for (var i = 0; i < path.getLength(); i++) {
+  //   //    bounds.extend(path.getAt(i));
+  //   // }
+  //   //
+  //   // this.map.fitBounds(bounds);
+  //   // route.setMap(this.map);
+  //   // debugger
+  // },
 
   render() {
     return (
@@ -50,7 +50,6 @@ const ActivityDetail = React.createClass({
         <p>{this.props.activity.distance}</p>
         <p>{this.props.activity.speed}</p>
         <p>{this.props.activity.description}</p>
-        <div className="map" ref="map"></div>
       </div>
     );
   }

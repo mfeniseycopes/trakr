@@ -27,7 +27,7 @@ const App = React.createClass({
       <div>
         <NavBar location={ this.props.location.pathname } />
 
-        <main className="content">
+        <main className="content group">
           { this.props.children }
         </main>
       </div>

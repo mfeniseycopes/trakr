@@ -143,12 +143,16 @@ const ActivityCreationMap = React.createClass({
   render() {
     return (
       <div>
-        <div className="map" ref="map"></div>
-        <div className="route-details">
-          <p>{this.state.distance.text}</p>
-          <button className="button" onClick={this.submitRoute} >Create!</button>
+        <h2 className="page-header">Activity Creator</h2>
+        <div>
+          <div className="activity-creator-map" ref="map"></div>
+          <div className="activity-creator-info-pane group">
+            {this.state.distance.text || "0 mi"}
+            <button className="button activity-creator-info-pane-item" onClick={this.submitRoute} >Create!</button>
+          </div>
         </div>
       </div>
+
     );
   },
 

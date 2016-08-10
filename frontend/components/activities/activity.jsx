@@ -1,6 +1,7 @@
 // react requires
 const hashHistory         = require('react-router').hashHistory;
 const React               = require('react');
+const ReactDOM            = require('react-dom');
 
 // project requires
 const ActivityActions     = require('../../actions/activity_actions');
@@ -25,8 +26,8 @@ const Activity = React.createClass({
   },
 
   componentWillReceiveProps(newProps) {
-    if (newProps.params.id !== this.props.params.id) {
-      ActivityActions.getActivity(id);
+    if (newProps !== this.props) {
+      ActivityActions.getActivity(this.props.params.id);
       ErrorActions.clearErrors();
     }
   },
@@ -63,20 +64,15 @@ const Activity = React.createClass({
     else {
       return (
         <div className="user group">
-          <div>
-            <section className="user-pane group">
-              <div className="page-top">
-                <h2 className="page-header">Activity</h2>
-                { this.toggleButton() }
-              </div>
-              { this.state.editable ? <p>Editable</p> : <p>Not Editable</p> }
-              {
-                this.state.edit ?
-                  <ActivityForm activity={this.state.activity} /> :
-                  <ActivityDetail activity={this.state.activity} />
-              }
-            </section>
-          </div>
+          <h2 className="page-header">Activity</h2>
+          { this.toggleButton() }
+          { this.state.editable ? <p>Editable</p> : <p>Not Editable</p> }
+          {
+            this.state.edit ?
+              <ActivityForm activity={this.state.activity} /> :
+              <ActivityDetail activity={this.state.activity} />
+          }
+          <div id="map" className="activity-creator-map" ref="map"></div>
         </div>
 
       );
@@ -90,6 +86,31 @@ const Activity = React.createClass({
       edit: false,
       editable: activity.user.id === SessionStore.currentUser().id
     });
+
+    this.map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+    var decodedPath = google.maps.geometry.encoding.decodePath(this.state.activity.encoded_polyline);
+    let route = new google.maps.Polyline({
+      path: decodedPath,
+      strokeWeight: 5,
+      strokeColor: "#277455",
+      strokeOpacity: 0.8
+    });
+
+    var bounds = new google.maps.LatLngBounds();
+    var path = route.getPath();
+    for (var i = 0; i < path.getLength(); i++) {
+       bounds.extend(path.getAt(i));
+    }
+
+    debugger
+    const mapDOMNode = ReactDOM.findDOMNode(this.refs.map);
+    const mapOptions = {
+      center: { lat: 0, lng: 0},
+      zoom: 13
+    };
+    this.map.fitBounds(bounds);
+    route.setMap(this.map);
   },
 
   toggleButton() {

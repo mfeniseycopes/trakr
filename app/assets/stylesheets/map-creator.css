@@ -1,0 +1,22 @@
+.activity-creator-map {
+  height: 800px;
+  width: 100%;
+  position: relative;
+
+}
+.activity-creator-info-pane {
+  position: absolute;
+  z-index: 20;
+  left: 50px;
+  bottom: 50px;
+  background-color: white;
+  padding: 20px;
+  width: 200px;
+
+  .activity-creator-info-pane-item {
+    display: block;
+    float: left;
+    width: 20px;
+    position: relative;
+  }
+}

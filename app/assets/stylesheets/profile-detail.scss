@@ -1,0 +1,46 @@
+.user {
+  display: block;
+  float: left;
+  padding: 20px;
+  width: 700px;
+
+  > *{
+    width: 100%;
+    display: block;
+    float: left;
+  }
+
+  > :last-child {
+    margin-right: 0;
+  }
+}
+
+.user-detail {
+  margin-left: 20px;
+  width: 430px;
+  display: block;
+  float: left;
+
+  > * {
+    margin: 10px;
+  }
+
+  h3 {
+    display:inline;
+    margin-bottom: 20px;
+    font-size: 25px;
+  }
+}
+
+.user-avatar-large {
+  width: 250px;
+  height: 250px;
+  overflow: hidden;
+  border-radius: 100%;
+
+  img {
+    height: 250px;
+    width: 250px;
+    object-fit: cover;
+  }
+}

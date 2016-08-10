@@ -83,22 +83,20 @@ const Profile = React.createClass({
     else {
 
       return (
-        <div className="user group">
-          <div>
-            <section className="user-pane group">
-              <div className="page-top">
-                <h2 className="page-header">Profile</h2>
-                { this.toggleButton() }
-              </div>
+        <div className="group">
+          <h2 className="page-header">Profile</h2>
+          <div className="group">
+            <div className="two-thirds-left left group">
+              { this.toggleButton() }
               {
                 this.state.edit ?
                   <ProfileEditForm user={ this.state.user } /> :
                   <ProfileDetail user={ this.state.user } />
               }
-            </section>
+            </div>
             <Progress />
           </div>
-          <ActivitiesTable activities={this.state.activities} />
+          <ActivitiesTable className="three-thirds" activities={this.state.activities} />
         </div>
       );
     }
