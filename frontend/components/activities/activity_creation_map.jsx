@@ -147,8 +147,10 @@ const ActivityCreationMap = React.createClass({
         <div>
           <div className="activity-creator-map" ref="map"></div>
           <div className="activity-creator-info-pane group">
-            {this.state.distance.text || "0 mi"}
-            <button className="button activity-creator-info-pane-item" onClick={this.submitRoute} >Create!</button>
+            <p className="activity-creator-info-pane-distance">
+              {this.state.distance.text || "0 mi"}
+            </p>
+            <button className="button activity-creator-info-pane-button" onClick={this.submitRoute} >Create!</button>
           </div>
         </div>
       </div>
