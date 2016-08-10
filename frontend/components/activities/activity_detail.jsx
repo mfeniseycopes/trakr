@@ -14,44 +14,72 @@ const FormErrors          = require('../errors/form_errors');
 
 const ActivityDetail = React.createClass({
 
-  // componentDidMount() {
-  //   // const mapDOMNode = ReactDOM.findDOMNode(this.refs.map);
-  //   // const mapOptions = {
-  //   //   center: { lat: 0, lng: 0},
-  //   //   zoom: 13
-  //   // };
-  //   // var decodedPath = google.maps.geometry.encoding.decodePath(this.props.activity.encoded_polyline);
-  //   // this.map = new google.maps.Map(mapDOMNode, mapOptions);
-  //   // let route = new google.maps.Polyline({
-  //   //   path: decodedPath,
-  //   //   strokeWeight: 5,
-  //   //   strokeColor: "#277455",
-  //   //   strokeOpacity: 0.8
-  //   // });
-  //   //
-  //   // var bounds = new google.maps.LatLngBounds();
-  //   // var path = route.getPath();
-  //   // for (var i = 0; i < path.getLength(); i++) {
-  //   //    bounds.extend(path.getAt(i));
-  //   // }
-  //   //
-  //   // this.map.fitBounds(bounds);
-  //   // route.setMap(this.map);
-  //   // debugger
-  // },
-
   render() {
+    let datetime = new Date(this.props.activity.date);
+
+    let date = datetime.toLocaleDateString();
+    let time = datetime.toLocaleTimeString();
+
+    let duration = this.durationString();
+
     return (
-      <div>
-        <p>{this.props.activity.user.name} - {this.props.activity.activity_type.name}</p>
-        <p>{this.props.activity.title}</p>
-        <p>{this.props.activity.date}</p>
-        <p>{this.props.activity.duration}</p>
-        <p>{this.props.activity.distance}</p>
-        <p>{this.props.activity.speed}</p>
-        <p>{this.props.activity.description}</p>
-      </div>
+
+      <section className="activity group">
+        <header>
+          <h1>{this.props.activity.user.name} - {this.props.activity.activity_type.name}</h1>
+        </header>
+        <div className="activity-main group">
+          <div className="activity-left">
+            <div className="activity-avatar-med">
+              <img src={this.props.activity.user.avatar_url} />
+            </div>
+            <div className="activity-detail">
+              <div className="activity-detail-row">
+                <h3 className="small-grey-text">{time} on {date}</h3>
+              </div>
+              <div className="activity-detail-row">
+                <h1>{this.props.activity.title}</h1>
+              </div>
+              <div className="activity-detail-row">
+                <p>{this.props.activity.description}</p>
+              </div>
+            </div>
+          </div>
+          <div className="activity-right">
+            <div className="activity-detail-row group">
+              <div className="activity-stat group">
+                <p>{duration}</p>
+                <p className="small-grey-text">Duration</p>
+              </div>
+              <div className="activity-stat group">
+                <p>{this.props.activity.distance} mi</p>
+                <p className="small-grey-text">Distance</p>
+              </div>
+              <div className="activity-stat group">
+                <p>{this.props.activity.speed.toPrecision(2)} mph</p>
+                <p className="small-grey-text">Speed</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     );
+  },
+
+  dateString() {
+    let date = new Date(this.props.activity.date);
+  },
+
+  durationString() {
+    let duration = this.props.activity.duration;
+    let ss = duration % 60;
+    let mm = Math.floor(duration /= 60) % 60;
+    let hh = Math.floor(duration / 60);
+    return `${hh}:${("00" + mm).slice(-2)}:${("00" + ss).slice(-2)}`;
+  },
+
+  timeString() {
+
   }
 
 });

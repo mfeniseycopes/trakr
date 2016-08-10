@@ -63,16 +63,19 @@ const Activity = React.createClass({
     }
     else {
       return (
-        <div className="user group">
+        <div className="group">
           <h2 className="page-header">Activity</h2>
-          { this.toggleButton() }
-          { this.state.editable ? <p>Editable</p> : <p>Not Editable</p> }
-          {
-            this.state.edit ?
-              <ActivityForm activity={this.state.activity} /> :
-              <ActivityDetail activity={this.state.activity} />
-          }
-          <div id="map" className="activity-creator-map" ref="map"></div>
+            <div className="group">
+              <div className="three-thirds-left group">
+                { this.toggleButton() }
+                {
+                  this.state.edit ?
+                    <ActivityForm activity={this.state.activity} /> :
+                    <ActivityDetail activity={this.state.activity} />
+                }
+              </div>
+            </div>
+          <div id="map" className="activity-map" ref="map"></div>
         </div>
 
       );
@@ -87,7 +90,6 @@ const Activity = React.createClass({
       editable: activity.user.id === SessionStore.currentUser().id
     });
 
-    this.map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
     var decodedPath = google.maps.geometry.encoding.decodePath(this.state.activity.encoded_polyline);
     let route = new google.maps.Polyline({
@@ -103,12 +105,13 @@ const Activity = React.createClass({
        bounds.extend(path.getAt(i));
     }
 
-    debugger
     const mapDOMNode = ReactDOM.findDOMNode(this.refs.map);
     const mapOptions = {
       center: { lat: 0, lng: 0},
       zoom: 13
     };
+
+    this.map = new google.maps.Map(mapDOMNode, mapOptions);
     this.map.fitBounds(bounds);
     route.setMap(this.map);
   },
@@ -116,7 +119,7 @@ const Activity = React.createClass({
   toggleButton() {
     if (this.state.editable) {
       return (
-        <a onClick={ this.toggleModes } className="button form-button bottom" >
+        <a onClick={ this.toggleModes } className="button" >
           { this.state.edit ? "Cancel" : "Edit" }
         </a>
       );
