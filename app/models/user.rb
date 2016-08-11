@@ -22,6 +22,22 @@ class User < ActiveRecord::Base
 
   has_many :activities
 
+  has_many(
+    :follower_ids,
+    class_name: "Follow",
+    primary_key: :id,
+    foreign_key: :followee_id
+  )
+  has_many(
+    :followee_ids,
+    class_name: "Follow",
+    primary_key: :id,
+    foreign_key: :follower_id
+  )
+
+  has_many :followers, through: :follower_ids, source: :follower
+  has_many :followees, through: :followee_ids, source: :followee
+
   validates :email, :password_digest, :session_token, :first_name, :last_name, presence: true
   validates :email, :session_token, uniqueness: true
   # user must supply password
