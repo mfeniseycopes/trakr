@@ -27,7 +27,6 @@ const Profile = React.createClass({
 
   // when first mounts we need to get user based on current info
   componentDidMount() {
-    debugger
     this.activityListener = ActivityStore.addListener(this.updateActivities);
     this.errorListener = ErrorStore.addListener(this.handleErrors);
     this.userListener = UserStore.addListener(this.resetUser);

@@ -20,7 +20,6 @@ const SessionStore        = require('../../stores/session_store');
 const Activity = React.createClass({
 
   componentDidMount() {
-    debugger
     this.errorListener = ErrorStore.addListener(this.handleErrors);
     this.activityListener = ActivityStore.addListener(this.resetActivity);
 
@@ -36,7 +35,6 @@ const Activity = React.createClass({
     if (newProps === this.props) {return;}
 
     if (newProps !== this.props) {
-      debugger
       ActivityActions.getActivity(this.props.params.id);
       if (newProps.location.pathname === this.props.params.id) {
         ErrorActions.clearErrors();
@@ -45,12 +43,10 @@ const Activity = React.createClass({
   },
 
   componentWillUnmount() {
-    debugger
     this.deregisterListeners();
   },
 
   deregisterListeners() {
-    debugger
     this.errorListener.remove();
     this.activityListener.remove();
   },
@@ -146,8 +142,6 @@ const Activity = React.createClass({
     }
     else {
       let activity = ActivityStore.find(parseInt(this.props.params.id));
-
-      debugger
 
       this.setState({
         activity: activity,
