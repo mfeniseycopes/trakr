@@ -9,22 +9,15 @@ const ErrorConstants = require('../constants/error_constants');
 const ActivityStore = new Store(AppDispatcher);
 
 // instance vars
-let _activities = {};
 let _orderedActivities = [];
 let _newActivity = {};
 
 ActivityStore.all = () => {
-  // let keys = Object.keys(_activities);
-  //
-  // return keys.map((key) => {
-  //   return _activities[key];
-  // });
   return _orderedActivities;
 };
 
 ActivityStore.find = (id) => {
   return _retrieveActivity(id);
-  // return _activities[id];
 };
 
 ActivityStore.__onDispatch = (payload) => {
@@ -52,7 +45,6 @@ ActivityStore.newActivity = () => {
 };
 
 ActivityStore.removeActivity = (activity) => {
-  // delete _activites[activity.id];
   _deleteActivity(id);
 
   ActivityStore.__emitChange();
@@ -60,19 +52,12 @@ ActivityStore.removeActivity = (activity) => {
 
 ActivityStore.resetActivities = (activities) => {
 
-  // _activities = {};
-  //
-  // activities.forEach((activity) => {
-  //   _activities[activity.id] = activity;
-  // });
-
   _orderedActivities = activities;
 
   ActivityStore.__emitChange();
 };
 
 ActivityStore.resetActivity = (activity) => {
-  // _activities[activity.id] = activity;
   _updateActivity(activity);
 
   ActivityStore.__emitChange();
@@ -81,10 +66,6 @@ ActivityStore.resetActivity = (activity) => {
 ActivityStore.resetNewActivity = (activity) => {
   _newActivity = activity;
 
-  // add to store if persisted
-  // if (activity.id) {
-  //   _activities[activity.id] = activity;
-  // }
   _orderedActivities.push(activity);
 
   ActivityStore.__emitChange();
