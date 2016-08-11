@@ -7,3 +7,5 @@ json.extract! @user,
   :location,
   :bio,
   :user_since
+
+json.following @user.followers.include?(current_user)

@@ -22,24 +22,14 @@ class User < ActiveRecord::Base
 
   has_many :activities
 
-  has_many(
-    :follower_ids,
-    class_name: "Follow",
-    primary_key: :id,
-    foreign_key: :followee_id
-  )
-  has_many(
-    :followee_ids,
-    class_name: "Follow",
-    primary_key: :id,
-    foreign_key: :follower_id
-  )
-
-  has_many :followers, through: :follower_ids, source: :follower
-  has_many :followees, through: :followee_ids, source: :followee
+  has_many :in_follows, class_name: "Follow", foreign_key: "followee_id"
+  has_many :out_follows, class_name: "Follow", foreign_key: "follower_id"
+  has_many :followers, through: :in_follows, source: :follower
+  has_many :followees, through: :out_follows, source: :followee
 
   validates :email, :password_digest, :session_token, :first_name, :last_name, presence: true
   validates :email, :session_token, uniqueness: true
+  
   # user must supply password
   validates :password, length: { minimum: 6 }, allow_nil: true
   # ensures email is valid format

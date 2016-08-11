@@ -7,7 +7,7 @@
 #  activity_type_id :integer          not null
 #  title            :string           not null
 #  description      :text
-#  date             :date             not null
+#  date             :datetime         not null
 #  distance         :float
 #  duration         :integer
 #  gpx_file_name    :string
@@ -17,6 +17,7 @@
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #  encoded_polyline :string
+#  speed            :float
 #
 
 class Activity < ActiveRecord::Base

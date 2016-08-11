@@ -21,8 +21,6 @@ const ErrorStore      = require('../../stores/error_store');
 const SessionStore    = require('../../stores/session_store');
 const UserStore       = require('../../stores/user_store');
 
-var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
-
 const Profile = React.createClass({
 
   // when first mounts we need to get user based on current info
@@ -33,20 +31,23 @@ const Profile = React.createClass({
 
     if (this.props.location.pathname === "/profile") {
       UserActions.getUser(SessionStore.currentUser().id);
+      ActivityActions.getActivitiesByUser(SessionStore.currentUser().id);
     } else {
       UserActions.getUser(this.props.params.id);
+      ActivityActions.getActivitiesByUser(this.props.params.id);
     }
-
-    ActivityActions.getActivitiesByUser(SessionStore.currentUser().id);
   },
 
   // when props change we need to get user based on future info
   componentWillReceiveProps(newProps) {
     if (newProps !== this.props) {
+
       if (newProps.location.pathname === "/profile") {
         UserActions.getUser(SessionStore.currentUser().id);
+        ActivityActions.getActivitiesByUser(SessionStore.currentUser().id);
       } else {
         UserActions.getUser(newProps.params.id);
+        ActivityActions.getActivitiesByUser(newProps.params.id);
       }
     }
     ErrorActions.clearErrors();
@@ -63,6 +64,7 @@ const Profile = React.createClass({
   },
 
   getInitialState() {
+    let userId = this.props.params.id || SessionStore.currentUser().id;
     return { user: null, activities: [] };
   },
 
@@ -80,7 +82,7 @@ const Profile = React.createClass({
       return <Error404 />;
     }
     else if (!this.state.user) {
-      return <div></div>;
+      return null;
     }
     else {
 
@@ -106,7 +108,13 @@ const Profile = React.createClass({
   },
 
   resetUser() {
-    let user = UserStore.user();
+    let id;
+    if (this.props.location.pathname === "/profile") {
+      id = SessionStore.currentUser().id;
+    } else {
+      id = this.props.params.id;
+    }
+    let user = UserStore.user(id);
     this.setState({
       user: user,
       edit: false,
@@ -123,7 +131,8 @@ const Profile = React.createClass({
       );
     }
     else {
-      return <FollowButton />;
+      debugger
+      return <FollowButton user={this.state.user}/>;
     }
   },
 
