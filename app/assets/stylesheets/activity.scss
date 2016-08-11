@@ -114,3 +114,68 @@
   width: 100%;
   height: 450px;
 }
+
+.minimap {
+  height: 150px;
+  width: 300px;
+}
+
+.activity-list {
+
+  .activity-item {
+    display: block;
+    margin: 20px;
+    height: 150px;
+
+
+    .activity-item-avatar, .activity-item-info, .minimap {
+      float: left;
+      margin-right: 30px;
+    }
+
+    .activity-item-avatar, .activity-item-info {
+      height: 60px;
+      padding-top: 45px
+    }
+
+    .activity-item-info {
+      width: 200px;
+      line-height: 30px;
+      height: 120px;
+      padding-top: 15px;
+
+      h1 {
+        font-weight: bold;
+      }
+
+      h5 {
+        font-size: 14px;
+        margin-right: 15px;
+        display: inline;
+      }
+    }
+
+    .activity-item-avatar {
+
+      padding-left: 50px;
+
+      .user-avatar-outside-padding {
+        height: 40px !important;
+        float: left;
+
+        .user-avatar {
+          height: 40px;
+          width: 40px;
+          border-radius: 100%;
+          overflow: hidden;
+
+          img {
+            height: 40px;
+            width: 40px;
+            object-fit: cover;
+          }
+        }
+      }
+    }
+  }
+}

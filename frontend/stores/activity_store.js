@@ -10,18 +10,21 @@ const ActivityStore = new Store(AppDispatcher);
 
 // instance vars
 let _activities = {};
+let _orderedActivities = [];
 let _newActivity = {};
 
 ActivityStore.all = () => {
-  let keys = Object.keys(_activities);
-
-  return keys.map((key) => {
-    return _activities[key];
-  });
+  // let keys = Object.keys(_activities);
+  //
+  // return keys.map((key) => {
+  //   return _activities[key];
+  // });
+  return _orderedActivities;
 };
 
 ActivityStore.find = (id) => {
-  return _activities[id];
+  return _retrieveActivity(id);
+  // return _activities[id];
 };
 
 ActivityStore.__onDispatch = (payload) => {
@@ -49,23 +52,28 @@ ActivityStore.newActivity = () => {
 };
 
 ActivityStore.removeActivity = (activity) => {
-  delete _activites[activity.id];
+  // delete _activites[activity.id];
+  _deleteActivity(id);
+
   ActivityStore.__emitChange();
 };
 
 ActivityStore.resetActivities = (activities) => {
 
-  _activities = {};
+  // _activities = {};
+  //
+  // activities.forEach((activity) => {
+  //   _activities[activity.id] = activity;
+  // });
 
-  activities.forEach((activity) => {
-    _activities[activity.id] = activity;
-  });
+  _orderedActivities = activities;
 
   ActivityStore.__emitChange();
 };
 
 ActivityStore.resetActivity = (activity) => {
-  _activities[activity.id] = activity;
+  // _activities[activity.id] = activity;
+  _updateActivity(activity);
 
   ActivityStore.__emitChange();
 };
@@ -74,11 +82,38 @@ ActivityStore.resetNewActivity = (activity) => {
   _newActivity = activity;
 
   // add to store if persisted
-  if (activity.id) {
-    _activities[activity.id] = activity;
-  }
+  // if (activity.id) {
+  //   _activities[activity.id] = activity;
+  // }
+  _orderedActivities.push(activity);
 
   ActivityStore.__emitChange();
+};
+
+let _deleteActivity = (id) => {
+  let idx = _findActivityIndex(id);
+
+  delete _orderedActivities[idx];
+};
+
+let _findActivityIndex = (id) => {
+  for (let i = 0; i < _orderedActivities.length; i++) {
+    if (_orderedActivities[i].id === id) {
+      return i;
+    }
+  }
+};
+
+let _updateActivity = (activity) => {
+  let idx = _findActivityIndex(activity.id);
+
+  _orderedActivities[idx] = activity;
+};
+
+let _retrieveActivity = (id) => {
+  let idx = _findActivityIndex(id);
+
+  return _orderedActivities[idx];
 };
 
 module.exports = ActivityStore;

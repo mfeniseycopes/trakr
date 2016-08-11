@@ -86,8 +86,7 @@ const Activity = React.createClass({
   },
 
   resetActivity() {
-    console.log("resetActivity");
-    let activity = ActivityStore.find(this.props.params.id);
+    let activity = ActivityStore.find(parseInt(this.props.params.id));
     this.setState({
       activity: activity,
       edit: false,

@@ -22,10 +22,11 @@ class Api::ActivitiesController < ApplicationController
   end
 
   def index
+
     if params[:user_id]
-      @activities = Activity.where(user_id: params[:user_id]).order(date: :asc)
+      @activities = Activity.where(user_id: params[:user_id]).order(date: :asc).limit(10)
     else
-      @activities = Activity.all
+      @activities = Activity.all.limit(10)
     end
 
     render :index

@@ -35,7 +35,7 @@ const App = React.createClass({
         <NavBar location={ this.props.location.pathname } />
 
         <main className="content group">
-          <ReactCSSTransitionGroup transitionName="example" transitionAppear={true} transitionAppearTimeout={500}>
+          <ReactCSSTransitionGroup transitionName="example" transitionAppear={true} transitionEnterTimeout={500} transitionLeaveTimeout={500} transitionAppearTimeout={500}>
 
         {React.cloneElement(this.props.children, { key: segment })}
 

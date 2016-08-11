@@ -8,7 +8,7 @@ const ActivityActions = require('../../actions/activity_actions');
 const ErrorActions    = require('../../actions/error_actions');
 const UserActions     = require('../../actions/user_actions');
 // components
-const ActivitiesTable = require('../activities/activities_table');
+const ActivityList = require('../activities/activity_list');
 const Error404        = require('../error_404');
 const FollowButton    = require('../follows/follow_button');
 const FormErrors      = require('../errors/form_errors');
@@ -99,7 +99,7 @@ const Profile = React.createClass({
             </div>
             <Progress />
           </div>
-          <ActivitiesTable className="three-thirds" activities={this.state.activities} />
+          <ActivityList className="three-thirds" activities={this.state.activities} />
         </div>
       );
     }
