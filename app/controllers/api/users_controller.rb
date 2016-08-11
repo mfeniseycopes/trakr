@@ -23,7 +23,6 @@ class Api::UsersController < ApplicationController
   end
 
   def update
-    debugger
     @user = User.includes(:followers).find_by(id: params[:id])
 
     if @user.update(user_params)

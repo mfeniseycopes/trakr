@@ -131,7 +131,6 @@ const Profile = React.createClass({
       );
     }
     else {
-      debugger
       return <FollowButton user={this.state.user}/>;
     }
   },

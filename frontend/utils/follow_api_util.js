@@ -2,8 +2,6 @@ const FollowApiUtil = {
 
   toggleFollow(user, successCallback, errorCallback) {
 
-    debugger
-
     $.ajax({
       method: user.following ? "DELETE" : "POST",
       url: `/api/users/${user.id}/follow`,
