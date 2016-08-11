@@ -49,7 +49,7 @@ const router = (
         onEnter={ _ensureLoggedIn } />
 
       <Route path="/new-activity"
-        component={ ActivityForm }
+        component={ Activity }
         onEnter={ _ensureLoggedIn }
         mode="create"/>
 

@@ -62,7 +62,7 @@ const ActivityForm = React.createClass({
     this.errorListener = ErrorStore.addListener(this.addErrors);
 
     // goto detail page when activity is persisted
-    this.activityListener = ActivityStore.addListener(this.gotoActivityDetail);
+    // this.activityListener = ActivityStore.addListener(this.gotoActivityDetail);
 
     // populate activityType dropdown
     this.activityTypeListener =
@@ -76,6 +76,7 @@ const ActivityForm = React.createClass({
 
   deregisterListeners() {
     this.errorListener.remove();
+    // this.activityListener.remove();
     this.activityTypeListener.remove();
   },
 
@@ -129,7 +130,7 @@ const ActivityForm = React.createClass({
     //   formData.append("activity[title]", this.state.title);
     // } else if (this.state.route) {
 
-    if (this.state.mode === "create") {
+    if (this.props.new) {
 
       activity.distance = this.state.distance;
       activity.encoded_polyline = this.state.encodedPolyline;
@@ -284,6 +285,12 @@ let _persistedActivity = (activity) => {
   let mm = ("00" + date.getMinutes()).slice(-2);
 
   let durations = _durations(activity.duration);
+  let route = null;
+  let mode = "edit";
+  if (!activity.id) {
+    route = activity.route;
+    mode = "create";
+  }
 
   return {
     activityType: activity.activity_type.id,
@@ -299,11 +306,11 @@ let _persistedActivity = (activity) => {
     id: activity.id,
     start: `${hh}:${mm}`,
     title: activity.title,
-    route: null,
+    route: route,
     speed: activity.speed,
     activityTypes: [],
     errors: [],
-    mode: "edit"
+    mode: mode
   };
 };
 

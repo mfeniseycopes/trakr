@@ -22,8 +22,6 @@ const ActivityDetail = React.createClass({
 
     let duration = this.durationString();
 
-    debugger
-
     return (
 
       <section className="activity group">
