@@ -61,9 +61,6 @@ const ActivityForm = React.createClass({
   componentDidMount() {
     this.errorListener = ErrorStore.addListener(this.addErrors);
 
-    // goto detail page when activity is persisted
-    // this.activityListener = ActivityStore.addListener(this.gotoActivityDetail);
-
     // populate activityType dropdown
     this.activityTypeListener =
       ActivityTypeStore.addListener(this.addActivityTypes);
@@ -145,10 +142,6 @@ const ActivityForm = React.createClass({
     }
 
   },
-  //
-  // miniMapUrl() {
-  //   return `https://maps.googleapis.com/maps/api/staticmap?size=300x200&path=color:0x003A23%7Cenc:${this.state.encodedPolyline}&key=AIzaSyDL_NuEJQOvYtPxbTALLDl_sku6ZioowKQ`;
-  // },
 
   gotoActivityDetail() {
 

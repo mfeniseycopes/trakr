@@ -44,7 +44,7 @@ const ActivityItem = React.createClass({
         </div>
 
         <img className="minimap"
-          src={`https://maps.googleapis.com/maps/api/staticmap?size=300x150&path=color:black%7Cenc:${this.props.activity.encoded_polyline}&key=AIzaSyDL_NuEJQOvYtPxbTALLDl_sku6ZioowKQ`}>
+          src={`https://maps.googleapis.com/maps/api/staticmap?size=300x150&path=color:0x003A23%7Cenc:${this.props.activity.encoded_polyline}&key=AIzaSyDL_NuEJQOvYtPxbTALLDl_sku6ZioowKQ`}>
         </img>
 
       </li>
