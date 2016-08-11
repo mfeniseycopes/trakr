@@ -12,12 +12,10 @@ const FollowButton = React.createClass({
   },
 
   render() {
-    debugger
-
     let classNm = this.props.user.following ? "following" : "not-following";
 
     return (
-      <button className={`button form-button ${classNm}`} onClick={this.toggleFollow}>
+      <button className={`button follow-button button-page-actions ${classNm}`} onClick={this.toggleFollow}>
 
       </button>
     );

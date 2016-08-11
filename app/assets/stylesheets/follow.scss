@@ -1,0 +1,18 @@
+.follow-button {
+  width: 100px !important;
+}
+.not-following::after {
+  content: "Not Following";
+}
+
+.not-following:hover::after {
+  content: "Follow";
+}
+
+.following::after {
+  content: "Following";
+}
+
+.following:hover::after {
+  content: "Unfollow";
+}
