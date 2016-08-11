@@ -4,7 +4,7 @@ json.extract! activity,
   :date,
   :distance,
   :duration,
-  :activity_type_name,
+  :activity_type_name
 
 json.user do
   json.name activity.user_name
