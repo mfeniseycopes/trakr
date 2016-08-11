@@ -57,7 +57,6 @@ const ProfileEditForm = React.createClass({
 
   render() {
     return (
-      <ReactCSSTransitionGroup transitionName="example" transitionAppear={true} transitionAppearTimeout={500}>
         <section className="user group transition">
           <header>
             <h1>Edit Profile</h1>
@@ -97,7 +96,6 @@ const ProfileEditForm = React.createClass({
             </form>
           </div>
         </section>
-      </ReactCSSTransitionGroup>
     );
   },
 

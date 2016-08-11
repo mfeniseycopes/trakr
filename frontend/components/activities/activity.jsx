@@ -28,7 +28,9 @@ const Activity = React.createClass({
   componentWillReceiveProps(newProps) {
     if (newProps !== this.props) {
       ActivityActions.getActivity(this.props.params.id);
-      ErrorActions.clearErrors();
+      if (newProps.location.pathname === this.props.params.id) {
+        ErrorActions.clearErrors();
+      }
     }
   },
 
@@ -63,6 +65,7 @@ const Activity = React.createClass({
     }
     else {
       return (
+
         <div className="group">
           <div className="page-header group">
             <h1>Activity</h1>{ this.toggleButton() }
@@ -78,12 +81,12 @@ const Activity = React.createClass({
           </div>
           <div id="map" className="activity-map" ref="map"></div>
         </div>
-
       );
     }
   },
 
   resetActivity() {
+    console.log("resetActivity");
     let activity = ActivityStore.find(this.props.params.id);
     this.setState({
       activity: activity,
@@ -120,7 +123,7 @@ const Activity = React.createClass({
   toggleButton() {
     if (this.state.editable) {
       return (
-        <a onClick={ this.toggleModes } className="button symbol-button" >
+        <a onClick={ this.toggleModes } className="button symbol-button button-page-actions" >
           { this.state.edit ? "✕" : "🖉" }
         </a>
       );

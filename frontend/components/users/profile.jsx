@@ -91,11 +91,10 @@ const Profile = React.createClass({
           </div>
           <div className="group">
             <div className="two-thirds-left">
-
               {
                 this.state.edit ?
-                  <ProfileEditForm user={ this.state.user } /> :
-                  <ProfileDetail user={ this.state.user } />
+                  <ProfileEditForm key="1" user={ this.state.user } /> :
+                  <ProfileDetail key="2" user={ this.state.user } />
               }
             </div>
             <Progress />
@@ -118,7 +117,7 @@ const Profile = React.createClass({
   toggleButton() {
     if (this.state.editable) {
       return (
-        <a onClick={ this.toggleModes } className="button symbol-button" >
+        <a onClick={ this.toggleModes } className="button symbol-button button-page-actions" >
           { this.state.edit ? "✕" : "🖉" }
         </a>
       );

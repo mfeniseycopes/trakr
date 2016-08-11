@@ -157,44 +157,35 @@ a, button:hover {
   }
 }
 
-  // .user-form {
-  //   width: 400px;
-  //   display: block;
-  //   // float: left;
-  //   font-size: 12px;
-  //
-  //   input, a, textarea {
-  //     padding: 4px;
-  //     margin: 10px;
-  //     display: block;
-  //     background-color: white;
-  //     border: 1px solid #a5a5a5;
-  //   }
-  //
-  //   .user-form-names > input {
-  //     float: left;
-  //     width: 170px;
-  //   }
-  //
-  //   > textarea {
-  //     width: 380px;
-  //     height: 100px;
-  //   }
-  //
-  //   > :first-child {
-  //     margin-bottom: 10px;
-  //     font-size: 20px;
-  //   }
-  // }
+.example-enter {
+  opacity: 0.01;
+}
 
-  .example-appear {
-    opacity: 0.01;
-  }
+.example-enter.example-enter-active {
+  opacity: 1;
+  transition: opacity 500ms  ease-in;
+}
 
-  .example-appear.example-appear-active {
-    opacity: 1;
-    transition: opacity .5s ease-in;
-  }
+
+.example-leave {
+  opacity: 1;
+}
+
+.example-leave.example-leave-active {
+  opacity: 0.01;
+  transition: opacity 500ms  ease-in;
+}
+
+.example-appear {
+  opacity: 0.01;
+}
+
+
+.example-appear.example-appear-active {
+  opacity: 1;
+  transition: opacity .5s ease-in;
+}
+
 
 .button {
   border: 1px solid #a5a5a5;
@@ -206,6 +197,9 @@ a, button:hover {
   background-color: #FFF;
   color: #000;
   line-height: 16px;
+}
+
+.button-page-actions {
   border-bottom: 0;
 }
 

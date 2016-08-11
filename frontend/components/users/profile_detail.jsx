@@ -15,19 +15,34 @@ const ProfileDetail = React.createClass({
 
   render() {
     return (
-      <ReactCSSTransitionGroup transitionName="example" transitionAppear={true} transitionAppearTimeout={500}>
-      <div className="user group transition">
-        <div className="user-avatar-large">
-          <img src={this.props.user.avatar_url} />
+        <div className="user group transition">
+          <div className="user-main group">
+            <div className="user-left">
+              <div className="user-avatar-large">
+                <img src={this.props.user.avatar_url} />
+              </div>
+              <div className="user-detail">
+
+                <div className="user-detail-row">
+                  <h1>{this.props.user.first_name} {this.props.user.last_name}</h1>
+                </div>
+
+                <div className="user-detail-row">
+                  <h5>Trakring since {this.props.user.user_since}</h5>
+                </div>
+
+                <div className="user-detail-row">
+                  <h5>{this.props.user.location}</h5>
+                </div>
+
+                <div className="user-detail-row">
+                  <p>{this.props.user.bio}</p>
+                </div>
+
+              </div>
+            </div>
+          </div>
         </div>
-        <div className="user-detail">
-          <h3>{this.props.user.first_name} {this.props.user.last_name}</h3>
-          <p>Member since {this.props.user.user_since}</p>
-          <p>{this.props.user.location}</p>
-          <p>{this.props.user.bio}</p>
-        </div>
-      </div>
-      </ReactCSSTransitionGroup>
     );
   },
 
