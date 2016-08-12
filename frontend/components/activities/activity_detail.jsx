@@ -2,6 +2,7 @@
 const hashHistory         = require('react-router').hashHistory;
 const React               = require('react');
 const ReactDOM            = require('react-dom');
+const Link = require('react-router').Link;
 
 // project requires
 const ActivityActions     = require('../../actions/activity_actions');
@@ -26,7 +27,11 @@ const ActivityDetail = React.createClass({
 
       <section className="activity group">
         <header>
-          <h1>{this.props.activity.user.name} - {this.props.activity.activity_type.name}</h1>
+          <h1>
+            <Link className="text-link" to={`/users/${this.props.activity.user.id}`}>
+              {this.props.activity.user.name}
+            </Link> - {this.props.activity.activity_type.name}
+          </h1>
         </header>
         <div className="activity-main group">
           <div className="activity-left">

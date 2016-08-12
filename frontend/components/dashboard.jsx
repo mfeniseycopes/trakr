@@ -36,7 +36,6 @@ const Dashboard = React.createClass({
   },
 
   deregisterListeners() {
-    this.activityListener.remove();
     this.errorListener.remove();
     this.userListener.remove();
   },

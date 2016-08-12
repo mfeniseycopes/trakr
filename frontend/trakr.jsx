@@ -28,8 +28,7 @@ const router = (
     <Route path="/" component={ App } >
 
       <IndexRoute
-        component={ Dashboard }
-        onEnter={ _ensureLoggedIn } />
+        onEnter={ _redirectToLoginOrDashboard } />
 
       <Route path="/signup"
         component={ LoginForm }
@@ -38,6 +37,10 @@ const router = (
       <Route path="/login"
         component={ LoginForm }
         onEnter={ _ensureLoggedOut }/>
+
+      <Route path="/dashboard"
+        component={ Dashboard }
+        onEnter={ _ensureLoggedIn } />
 
       <Route path="/profile"
         component={ Profile }
@@ -65,9 +68,9 @@ const router = (
   </Router>
 );
 
-function _redirectToLoginOrProfile(nextState, replace) {
+function _redirectToLoginOrDashboard(nextState, replace) {
   if (SessionStore.isLoggedIn()) {
-    replace('/profile');
+    replace('/dashboard');
   } else {
     replace('/signup');
   }
