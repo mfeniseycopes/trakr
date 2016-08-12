@@ -1,188 +1,53 @@
 # trakr
+---
 
-[Heroku link][heroku]
+[trakr live][heroku]
+
+**trakr** is a single-page, full-stack web application inspired by [Strava][strava] and built with Ruby on Rails and PostgreSQL on the backend, React.js using flux framework for the frontend, and enhanced by the Google Maps API.
 
 [heroku]: http://trakr.herokuapp.com
+[strava]: http://strava.com
 
-## Minimum Viable Product
+## Features
+---
 
-trakr is a web application inspired by strava.com built using Ruby on Rails and React.js. It is used to track activities via gps data and view and follow other users activities.
+trakr is a robust activity "trakking" application which allows a logged-in user to create and view their activities as well as those of other users. A user can follow another user to see their recent activity in their homepage feed.
 
-- [x] Hosting on Heroku
-- [x] A production README, replacing this README
-- [x] Users
-  - [x] Creation (Sign Up)
-  - [x] Login
-  - [x] Guest login
-  - [x] Accurate navigation
-  - [x] CSS Styling that matches strava.com
-- [x] Profiles
-  - [x] Users can view theirs and others profiles
-  - [x] Users can edit their profile
-  - [x] Accurate navigation
-  - [x] Lots of seed data
-  - [x] CSS Styling that matches strava.com
-- [ ] Activities
-  - [ ] Upload activity
-  - [x] Manually create activity
-  - [x] View activity
-  - [x] Edit activity
-  - [x] Present data about activity (time, speed, distance)
-  - [ ] View list of activities on profiles
-  - [x] Accurate navigation
-  - [ ] Lots of seed data
-  - [ ] CSS Styling that matches strava.com
-- [ ] Social
-  - [ ] Follow users
-  - [ ] Unfollow users
-  - [ ] Social feed on homepage
-  - [ ] Comments on Activities
-  - [ ] Props on activities
-  - [ ] Accurate navigation
-  - [ ] Lots of seed data
-  - [ ] CSS Styling that matches strava.com
-- [ ] Segments (BONUS)
-  - [ ] Create segment from activity
-  - [ ] View Segments
-  - [ ] Automatically check for and link segments on new activities
-  - [ ] View all segments
-  - [ ] View segments for activity
-- [ ] More data (BONUS)
-  - [ ] Display mile splits for runs
-  - [ ] Show elevation
-  - [ ] Graph speed, elevation for activities
+### User Login and Authentication
+Upon initially visiting the site, a potential user is prompted to sign up with their name, email and password. Their password is encrypted using the `bcrypt` gem and stored in the database (no unencrypted passwords here!). When a user signs up or logs in, a new session is created to preserve their state. This is done by creating a unique session token which is given to the user in the form of a cookie and also attached to their record in the database. When a user logs out, their cookie is cleared and their session cookie on the db is reset. When the user logs in again, their inputted password in encrypted and checked against the stored encrypted password.
 
-## Design Docs
-* [View Wireframes][views]
-* [React Components][components]
-* [Flux Cycles][flux-cycles]
-* [API endpoints][api-endpoints]
-* [DB schema][schema]
+#### Users
+After creating an account, users can visit their profile to update their profile information. This consists of their first name, last name, location and a short bio.
 
+### Maps Everywhere!
+The Google Maps API was instrumental in allowing the manual creation and display of activity routes.
+To create a new activity, users can click on the "+" in the navbar. This takes them to the map creator, where they can create a route.
 
-[views]: docs/wireframes/wireframes.pdf
-[components]: docs/components.md
-[flux-cycles]: docs/flux-cycles.md
-[api-endpoints]: docs/api-endpoints.md
-[schema]: docs/schema.md
-[phases]: docs/phases
+#### User Generated Routes
+Activity creation uses the Google Maps JS API to render the map, markers and polyline. Users are met with a blank map (defaulting to the location set in their profile if they have one). Clicking on the map adds points which are linked via a single route provided by the Google Directions Service when given the set of markers.
 
-## Implementation Timeline
+The map creator is a single react component component with a local instance variable keeping track of the route's origin, destination and waypoints.
 
-### Phase 1: Backend setup and Front End User Authentication (2 days, W1 W 6pm)
+Clicking on the map triggers a map click event handler, which tells the Directions Service how to proceed.
 
-**Objective:** Functioning rails project with front-end Authentication and navigation skeleton
+The initial click on the map renders a single marker. This is just a placeholder as Google Directions Service requires an origin, destination and (optionally) a set of waypoints. The latlng of the marker are stored locally.
 
-* [x] create new project
-* [x] create `User` model
-* [x] authentication backend setup
-* [x] create `StaticPages` controller and root view
-* [x] set up webpack & flux scaffold with skeleton files
-* [x] setup `APIUtil` to interact with the API
-* [x] set up flux cycle for frontend auth
-* [x] components:
-  * [x] `App`
-  * [x] `Navbar`
-    * [x] `UserNav` w/ empty links
-      * [x] `LoginForm`
-* [x] directs to `/` and empty `App` component
-* [x] style components
-* [x] seed users
+The second click creates a destination and requests a route from the Directions Service. This is rendered on the map and the initial marker is removed.
 
-#### * Not implemented *
+Subsequent map clicks are handled by pushing the current destination point into an array of waypoints and setting the destination to the clicked latlng.
 
-* `SignupForm`: merged with LoginForm
-* `LoggedInNav`: trivially implemented within NavBar (will break out after activities)
-* `MainNav`: trivially implemented within NavBar (will break out after activities)
+The route is also draggable, which means the user can insert a waypoint in the middle of the route. This triggers a recalculation of distance and updates the local instance variables.
 
-### Phase 2: User Profiles and UI framework (1 day, W1 Th 6pm)
+When a user is done creating their route, they click the "Create" button and are brought to a form, where they can review the map and enter additional information.
 
-**Objective:** User profiles can be viewed and edited
+#### Activities
+Activities can be viewed in a number of locations. They are listed in the dashboard, profile and training pages, which provides links to the detail view. Detail views displays the map, user inputted info (title, description) and stats (distance, duration, pace).
 
-* [x] `UsersController#update`
-* [x] components:
-  * [x] `Profile`
-    * [x] `ProfileDetail`
-    * [x] `ProfileForm`
-  * [x] stub components for:
-    * [x] `FollowButton`
-    * [x] `ProgressPane`
-    * [x] `ActivityTable`
-* [x] get reasonable css sizing for components
+### Staying Social
+A user can view other users profiles from the 'Explore' page. Here they can see the user's info and recent activities. They can also follow or unfollow them.
 
-#### * Not implemented *
+#### Follows and the Dashboard
+Following a user adds their recent activities to a user's dashboard. When the first visit the site they are brought to their dashboard, where they can view recent activities that may interest them and also get a snapshot of their weekly activity.
 
-* `EditProfileButton`: not needed (same page editing instead of routed)
-
-### Phase 3: Activity Creation and Details (2 days, W2 M 6pm)
-
-**Objective:** Activities can be created via file upload or google maps route creation
-
-* [x] create `Activity` model
-* [ ] `ActivityUpload` component
-  * [ ] `FileUpload` component
-  * [ ] `ActivityForm` component
-* [x] necessary flux loop for activity creation
-* [x] setup use of Google Maps API
-* [x] `ManualEntry` component
-  * [x] `RouteCreatorMap` component
-    * [x] listens for clicks on google.map
-    * [x] draws route polylines between them
-    * [ ] user can clear polylines
-    * [x] marker positions are saved on `ActivityForm` submit
-* [x] activty data saved as gpx file (uses gpx gem)
-* [x] `ActivityDetail` component
-* [x] can edit activity
-* [ ] can delete activity
-* [ ] reasonable css styling for activity creation, activity detail
-* [ ] seed activities
-
-### Phase 4: Incorporate activities (1 day, W2 T 6pm)
-
-**Objective:** Activities can be seen on user's profile page and training tab
-
-* [ ] create `ActivityTable` component
-* [ ] include on `ProfileDetail` and `Training` components
-* [ ] create `ProgressPane` to display activity totals
-
-
-### Phase 5: Follows (1 day, W2 W 6pm)
-
-**Objective:** Users can follow other users and see them in their dashboard
-
-* [ ] create `Follows` model
-* [ ] `FollowButton` on `Profile` component
-  * [ ] can follow and unfollow user
-* [ ] create `Dashboard` component
-  * [ ] create `ActivityItem` component
-* [ ] `Dashboard` will display activities of followed users
-* [ ] style `Dashbaord` and `FollowButton`
-* [ ] seed follows
-
-### Phase 6: Explore (1 day, W2 Th 6pm)
-
-**Objective:** Users can view list of other users and activities
-
-* [ ] create `Explore` component
-* [ ] create `SearchBar`
-* [ ] create `UserTable`
-* [ ] create `ActivityTable`
-* [ ] changing text in `SearchBar` updates list of results in table
-  * [ ] searching while looking at users filters on user name
-  * [ ] searching while looking at activities filters on title
-
-### Phase 7: Props and Comments (BONUS)
-
-**Objective:** Users can leave `props` or `comments` on activities
-
-* [ ] create `PropsCommentsButtons`
-  * [ ] create `PropButton`
-  * [ ] create `CommentButton`
-* [ ] create PropsCommentsPane
-* [ ] include components in `ActivityDetail` and `Dashboard` components
-* [ ] seed `props` and `comments`
-* [ ] style components
-
-### Phase 8: More data
-
-### Phase 9: Segment Matching
+### It's a Single-Page App!
+Using React.js and the flux framework, the page utilizes API calls to a remote server on nearly every user interaction.
