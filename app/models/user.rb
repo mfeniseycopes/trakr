@@ -122,6 +122,7 @@ class User < ActiveRecord::Base
 
     activities.each do |activity|
       type = activity.activity_type_name.downcase.to_sym
+      type = :other if type != :ride && type != :run
       stats[type][:count] += 1
       stats[type][:duration] += activity.duration
       stats[type][:distance] += activity.distance
