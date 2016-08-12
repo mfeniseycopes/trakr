@@ -88,7 +88,9 @@ a, button:hover {
 
 /* login specific */
 .logged-out {
-  background-image: image-url("rocky.jpg");
+  background: image-url("rocky.jpg") no-repeat center center fixed;
+  background-size: cover;
+
 }
 
 .logged-in {
