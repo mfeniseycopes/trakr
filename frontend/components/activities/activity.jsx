@@ -65,6 +65,7 @@ const Activity = React.createClass({
       if (this.props.location.query.from === "creator") {
         let newActivity = ActivityStore.newActivity();
 
+        activity.activity_type = { id: 7 };
         activity.distance = newActivity.distance;
         activity.route = newActivity.route;
         activity.encoded_polyline = newActivity.encodedPolyline;
