@@ -9,7 +9,7 @@ const LogoutButton = React.createClass({
 
   logout() {
     SessionActions.logout();
-    hashHistory.push("/signup");
+    // hashHistory.push("/signup");
   },
 
   render() {

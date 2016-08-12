@@ -161,12 +161,22 @@ const LoginForm = React.createClass({
 
           <div className="session-form-row">
             <button className="session-form-row-full" type="submit" >{ this.buttonText() }</button>
+            {
+              this.props.location.pathname === "/signup" ?
+              <button className="session-form-row-full guest-login-button" onClick={ this.guestLogin } >
+                Guest Login
+              </button> : ""
+            }
           </div>
 
         </form>
       </div>
     );
   },
+
+  guestLogin() {
+    SessionActions.login("guest@email.com", "starwars");
+  }
 
 });
 

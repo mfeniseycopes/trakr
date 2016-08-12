@@ -2,6 +2,15 @@
 # USERS
 #
 User.create(
+  email: "guest@email.com",
+  password: "starwars",
+  first_name: "Guest",
+  last_name: "User",
+  location: "Brooklyn, NY",
+  bio: "I like to ride bikes and sometimes do battle."
+)
+
+User.create(
   email: "jackbauer@email.com",
   password: "starwars",
   first_name: "Jack",
