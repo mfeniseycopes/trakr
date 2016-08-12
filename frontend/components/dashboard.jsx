@@ -49,7 +49,6 @@ const Dashboard = React.createClass({
       return null;
     }
     else {
-
       return (
         <div>
           <div className="page-header group">
@@ -58,7 +57,7 @@ const Dashboard = React.createClass({
           <div className="group">
             <ActivityList width="two-thirds-left"
               activities={this.state.dashboard.followee_activities} />
-            <Progress />
+            <Progress weekStats={this.state.dashboard.week_stats}/>
           </div>
         </div>
       );
