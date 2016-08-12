@@ -57,7 +57,7 @@ const NavBar = React.createClass({
             <Link to="/training">Training</Link>
           </li>
           <li>
-            <Link to="#">Explore</Link>
+            <Link to="/explore">Explore</Link>
           </li>
         </ul>
       );

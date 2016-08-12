@@ -14,6 +14,7 @@ const ActivityForm        = require('./components/activities/activity_form');
 const App                 = require('./components/app');
 const Dashboard           = require('./components/dashboard');
 const ErrorActions        = require('./actions/error_actions');
+const Explore             = require('./components/explore');
 const LoginForm           = require('./components/sessions/login_form');
 const Profile             = require('./components/users/profile');
 const SessionActions      = require('./actions/session_actions');
@@ -46,6 +47,10 @@ const router = (
 
       <Route path="/profile"
         component={ Profile }
+        onEnter={ _ensureLoggedIn } />
+
+      <Route path="/explore"
+        component={ Explore }
         onEnter={ _ensureLoggedIn } />
 
       <Route path="/users/:id"

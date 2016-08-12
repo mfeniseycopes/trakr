@@ -7,6 +7,10 @@ const UserStore = new Store(AppDispatcher);
 
 let _users = [];
 
+UserStore.all = () => {
+  return _users;
+};
+
 UserStore.__onDispatch = (payload) => {
   switch(payload.actionType) {
     case UserConstants.RECEIVE_FOLLOW_TOGGLE:
@@ -16,11 +20,20 @@ UserStore.__onDispatch = (payload) => {
     case UserConstants.RECEIVE_USER:
     UserStore.resetUser(payload.user);
     break;
+
+    case UserConstants.RECEIVE_USERS:
+    UserStore.resetUsers(payload.users);
+    break;
   }
 };
 
 UserStore.resetUser = (user) => {
   _updateUser(user);
+  UserStore.__emitChange();
+};
+
+UserStore.resetUsers = (users) => {
+  _users = users;
   UserStore.__emitChange();
 };
 

@@ -9,7 +9,6 @@ const ActivityTable = React.createClass({
   render() {
     return (
       <section className="activities-table">
-        Activities Table
         <table>
           <thead>
             <tr>
@@ -32,22 +31,39 @@ const ActivityTable = React.createClass({
   },
 
   row(activity) {
+
+    let datetime = new Date(activity.date);
+
+    let date = datetime.toLocaleDateString();
+    let time = datetime.toLocaleTimeString();
+
+    let duration = this.durationString(activity);
+
     return (
       <tr key={activity.id}>
         <td>{activity.activity_type_name}</td>
-        <td>{activity.date}</td>
+        <td>{date}</td>
         <td>
-          <Link to={`/activities/activity.id`} title="See more info">{activity.title}</Link>
+          <Link to={`/activities/${activity.id}`} className="text-link" title="See more info">{activity.title}</Link>
         </td>
-        <td>{activity.duration}</td>
-        <td>{activity.distance} mi</td>
-        <td>{activity.speed} mph</td>
+        <td>{duration}</td>
+        <td>{activity.distance.toPrecision(2)} mi</td>
+        <td>{activity.speed.toPrecision(2)} mph</td>
       </tr>
     );
   },
 
   rows() {
     return this.props.activities.map((activity) => { return this.row(activity); });
+  },
+
+
+  durationString(activity) {
+    let duration = activity.duration;
+    let ss = duration % 60;
+    let mm = Math.floor(duration /= 60) % 60;
+    let hh = Math.floor(duration / 60);
+    return `${hh}:${("00" + mm).slice(-2)}:${("00" + ss).slice(-2)}`;
   }
 
 });

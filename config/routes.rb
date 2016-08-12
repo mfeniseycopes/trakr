@@ -10,7 +10,7 @@ Rails.application.routes.draw do
     resource  :session, only: [:create, :destroy]
 
     # users cannot be deleted
-    resources :users, only: [:create, :update, :show] do
+    resources :users, only: [:create, :index, :update, :show] do
       # activities created and viewed in context of user
       resources :activities, only: [:index]
       # follows can only be handled in current_user

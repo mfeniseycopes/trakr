@@ -11,8 +11,10 @@ class Api::UsersController < ApplicationController
     end
   end
 
-  def dashboard
+  def index
+    @users = User.all
 
+    render :index
   end
 
   def show

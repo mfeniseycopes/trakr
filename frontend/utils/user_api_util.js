@@ -33,6 +33,20 @@ const UserApiUtil = {
     });
   },
 
+  getUsers(successCallback, errorCallback) {
+    $.ajax({
+      method: "GET",
+      url: `/api/users`,
+      dataType: "json",
+      error(res) {
+        errorCallback("users", res.responseJSON);
+      },
+      success(res) {
+        successCallback(res);
+      }
+    });
+  },
+
   updateUser(user, successCallback, errorCallback) {
 
     $.ajax({

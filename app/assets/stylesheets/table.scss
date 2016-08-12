@@ -1,0 +1,53 @@
+table {
+  border-collapse: collapse;
+  display: block;
+  width: 100%;
+  border:none;
+
+  th {
+    vertical-align: middle;
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 30px;
+    border-bottom: 3px solid black;
+  }
+
+  tbody {
+    width: 100%;
+
+    tr {
+      width: 100%;
+    }
+
+    td {
+      padding: 10px 30px;
+      text-align: left;
+      border: 1px solid #a5a5a5;
+      vertical-align: middle;
+      box-sizing: border-box;
+      height: 40px;
+      width: 19%;
+
+      a {
+        color: blue;
+      }
+
+    }
+
+    tr:hover {
+      background-color: #e5e5e5;
+    }
+
+  }
+}
+
+.activities-table {
+  height: 500px;
+  width: 1160px;
+  padding: 20px;
+  display: block;
+}
+
+.users-table {
+  
+}

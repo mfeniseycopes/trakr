@@ -76,6 +76,7 @@ const Profile = React.createClass({
   },
 
   render() {
+    debugger
 
     if (this.state.error) {
       return <Error404 />;
@@ -107,13 +108,18 @@ const Profile = React.createClass({
   },
 
   resetUser() {
+
+    debugger
+
     let id;
     if (this.props.location.pathname === "/profile") {
       id = SessionStore.currentUser().id;
     } else {
       id = this.props.params.id;
     }
-    let user = UserStore.user(id);
+
+    let user = UserStore.user(parseInt(id));
+
     this.setState({
       user: user,
       edit: false,

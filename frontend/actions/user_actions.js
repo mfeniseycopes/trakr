@@ -14,6 +14,10 @@ const UserActions = {
     UserApiUtil.getUser(id, this.receiveUser, ErrorActions.setErrors);
   },
 
+  getUsers() {
+    UserApiUtil.getUsers(this.receiveUsers, ErrorActions.setErrors);
+  },
+
   receiveFollow(follow) {
     AppDispatcher.dispatch({
       actionType: UserConstants.RECEIVE_FOLLOW_TOGGLE,
@@ -25,6 +29,13 @@ const UserActions = {
     AppDispatcher.dispatch({
       actionType: UserConstants.RECEIVE_USER,
       user: user
+    });
+  },
+
+  receiveUsers(users) {
+    AppDispatcher.dispatch({
+      actionType: UserConstants.RECEIVE_USERS,
+      users: users
     });
   },
 
