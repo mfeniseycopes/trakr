@@ -240,7 +240,7 @@ let _blankActivity = () => {
   let mm = ("00" + date.getMinutes()).slice(-2);
 
   return {
-    activityType: 1,
+    activityType: 7,
     date: `${year}-${month}-${day}`,
     description: "",
     distance: 0,
