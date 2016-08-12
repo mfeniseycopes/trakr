@@ -74,10 +74,12 @@ class User < ActiveRecord::Base
   end
 
   def feed_activities
-    (self.followee_activities + self.activities).sort do |a, b|
+    activities = (self.followee_activities + self.activities).sort do |a, b|
       # debugger
       b.date <=> a.date
     end
+
+    activities[0, 20]
   end
 
   def is_password?(password)
