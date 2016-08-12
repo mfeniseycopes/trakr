@@ -73,6 +73,13 @@ class User < ActiveRecord::Base
     self.avatar.url
   end
 
+  def feed_activities
+    (self.followee_activities + self.activities).sort do |a, b|
+      # debugger
+      b.date <=> a.date
+    end
+  end
+
   def is_password?(password)
     BCrypt::Password.new(password_digest).is_password?(password)
   end
