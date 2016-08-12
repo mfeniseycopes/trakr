@@ -135,7 +135,7 @@ const ActivityForm = React.createClass({
 
       ActivityActions.createActivity(activity);
     }
-    else if (this.state.mode === "edit") {
+    else {
       activity.id = this.state.id;
 
       ActivityActions.updateActivity(activity);

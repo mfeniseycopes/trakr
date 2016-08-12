@@ -23,6 +23,8 @@ const ActivityDetail = React.createClass({
 
     let duration = this.durationString();
 
+    let milePaceStr = this.paceString();
+
     return (
 
       <section className="activity group">
@@ -61,7 +63,7 @@ const ActivityDetail = React.createClass({
                 <p className="small-grey-text">Distance</p>
               </div>
               <div className="activity-stat group">
-                <p>{this.props.activity.speed.toPrecision(2)} mph</p>
+                <p>{milePaceStr} / mi</p>
                 <p className="small-grey-text">Speed</p>
               </div>
             </div>
@@ -77,6 +79,21 @@ const ActivityDetail = React.createClass({
     let mm = Math.floor(duration /= 60) % 60;
     let hh = Math.floor(duration / 60);
     return `${hh}:${("00" + mm).slice(-2)}:${("00" + ss).slice(-2)}`;
+  },
+
+  paceString() {
+
+    let milePace = Math.floor(this.props.activity.duration / this.props.activity.distance);
+
+    let mileStr = "";
+
+    let ss = milePace % 60;
+    let mm = Math.floor(milePace /= 60) % 60;
+    let hh = Math.floor(milePace / 60);
+    if (hh > 0) {
+      mileStr += `${hh}:`;
+    }
+    return mileStr + `${("00" + mm).slice(-2)}:${("00" + ss).slice(-2)}`;
   }
 
 

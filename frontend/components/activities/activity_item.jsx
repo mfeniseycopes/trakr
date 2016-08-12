@@ -39,7 +39,7 @@ const ActivityItem = React.createClass({
             </Link>
           </div>
           <div className="activity-detail-row">
-            <h5>{duration}</h5><h5>{this.props.activity.distance} mi</h5><h5>{this.props.activity.speed.toPrecision(2)} mph</h5>
+            <h5>{duration}</h5><h5>{this.props.activity.distance} mi</h5><h5>{this.paceString()} / mi</h5>
           </div>
         </div>
 
@@ -49,6 +49,21 @@ const ActivityItem = React.createClass({
 
       </li>
     );
+  },
+
+  paceString() {
+
+    let milePace = Math.floor(this.props.activity.duration / this.props.activity.distance);
+
+    let mileStr = "";
+
+    let ss = milePace % 60;
+    let mm = Math.floor(milePace /= 60) % 60;
+    let hh = Math.floor(milePace / 60);
+    if (hh > 0) {
+      mileStr += `${hh}:`;
+    }
+    return mileStr + `${("00" + mm).slice(-2)}:${("00" + ss).slice(-2)}`;
   },
 
   durationString() {

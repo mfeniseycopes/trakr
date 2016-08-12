@@ -48,13 +48,28 @@ const ActivityTable = React.createClass({
         </td>
         <td>{duration}</td>
         <td>{activity.distance.toPrecision(2)} mi</td>
-        <td>{activity.speed.toPrecision(2)} mph</td>
+        <td>{this.paceString(activity)} / mi</td>
       </tr>
     );
   },
 
   rows() {
     return this.props.activities.map((activity) => { return this.row(activity); });
+  },
+
+  paceString(activity) {
+
+    let milePace = Math.floor(activity.duration / activity.distance);
+
+    let mileStr = "";
+
+    let ss = milePace % 60;
+    let mm = Math.floor(milePace /= 60) % 60;
+    let hh = Math.floor(milePace / 60);
+    if (hh > 0) {
+      mileStr += `${hh}:`;
+    }
+    return mileStr + `${("00" + mm).slice(-2)}:${("00" + ss).slice(-2)}`;
   },
 
 

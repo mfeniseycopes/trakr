@@ -75,7 +75,6 @@ class User < ActiveRecord::Base
 
   def feed_activities
     activities = (self.followee_activities + self.activities).sort do |a, b|
-      # debugger
       b.date <=> a.date
     end
 
