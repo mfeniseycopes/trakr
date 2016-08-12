@@ -42,13 +42,17 @@ table {
 }
 
 .activities-table {
-  height: 500px;
   width: 1200px;
   display: block;
 
   th {
     width: 200px;
   }
+}
+
+.activities-table-empty {
+  line-height: 200px;
+  text-align: center;
 }
 
 .users-table {

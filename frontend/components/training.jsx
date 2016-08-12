@@ -56,6 +56,10 @@ const Training = React.createClass({
           <div className="group">
             <div className="three-thirds">
               <ActivityTable activities={this.state.activities} />
+              {
+                this.state.activities.length === 0 ?
+                <p className="activities-table-empty">No activities... yet! Do an activity to see your progress.</p> : ""
+              }
             </div>
           </div>
         </div>
