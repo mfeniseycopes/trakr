@@ -11,12 +11,20 @@ class Api::UsersController < ApplicationController
     end
   end
 
-  def show
-    @user = User.includes(:followers).find_by(id: params[:id])
+  def dashboard
 
-    if @user
-      render :show
+  end
+
+  def show
+    if params[:dashboard]
+      @user = User.includes(:followee_activities).find_by(id: params[:id])
+      render :dashboard if @user
     else
+      @user = User.includes(:followers).find_by(id: params[:id])
+      render :show if @user
+    end
+
+    if !@user
       render json: ["User does not exist."], status: 404
     end
 

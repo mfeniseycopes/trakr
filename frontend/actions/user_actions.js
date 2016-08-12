@@ -6,6 +6,10 @@ const UserConstants = require('../constants/user_constants');
 
 const UserActions = {
 
+  getDashboard() {
+    UserApiUtil.getDashboard(this.receiveUser, ErrorActions.setErrors);
+  },
+
   getUser(id) {
     UserApiUtil.getUser(id, this.receiveUser, ErrorActions.setErrors);
   },

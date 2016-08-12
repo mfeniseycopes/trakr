@@ -64,7 +64,6 @@ const Profile = React.createClass({
   },
 
   getInitialState() {
-    let userId = this.props.params.id || SessionStore.currentUser().id;
     return { user: null, activities: [] };
   },
 

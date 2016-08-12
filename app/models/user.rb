@@ -27,9 +27,11 @@ class User < ActiveRecord::Base
   has_many :followers, through: :in_follows, source: :follower
   has_many :followees, through: :out_follows, source: :followee
 
+  has_many :followee_activities, through: :followees, source: :activities
+
   validates :email, :password_digest, :session_token, :first_name, :last_name, presence: true
   validates :email, :session_token, uniqueness: true
-  
+
   # user must supply password
   validates :password, length: { minimum: 6 }, allow_nil: true
   # ensures email is valid format

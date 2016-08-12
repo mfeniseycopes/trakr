@@ -12,7 +12,7 @@ const ActivityList = React.createClass({
     });
 
     return (
-      <ul className="activity-list">
+      <ul className={`activity-list ${this.props.width}`}>
       { activityItems }
     </ul>
     );

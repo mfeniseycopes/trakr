@@ -12,11 +12,15 @@ const ActivityCreationMap = require('./components/activities/activity_creation_m
 const Activity            = require('./components/activities/activity');
 const ActivityForm        = require('./components/activities/activity_form');
 const App                 = require('./components/app');
+const Dashboard           = require('./components/dashboard');
 const ErrorActions        = require('./actions/error_actions');
 const LoginForm           = require('./components/sessions/login_form');
 const Profile             = require('./components/users/profile');
 const SessionActions      = require('./actions/session_actions');
 const SessionStore        = require('./stores/session_store');
+
+// const UserApi = require('./utils/user_api_util');
+// window.UserApi = UserApi;
 
 // routes
 const router = (
@@ -24,7 +28,8 @@ const router = (
     <Route path="/" component={ App } >
 
       <IndexRoute
-        onEnter={ _redirectToLoginOrProfile } />
+        component={ Dashboard }
+        onEnter={ _ensureLoggedIn } />
 
       <Route path="/signup"
         component={ LoginForm }
@@ -33,7 +38,6 @@ const router = (
       <Route path="/login"
         component={ LoginForm }
         onEnter={ _ensureLoggedOut }/>
-
 
       <Route path="/profile"
         component={ Profile }
