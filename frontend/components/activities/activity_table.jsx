@@ -1,12 +1,10 @@
 // react requires
 const React           = require('react');
+const Link = require('react-router').Link;
 
-// project requires
-const ActivityStore   = require('../../stores/user_store');
-const ErrorStore      = require('../../stores/error_store');
-const SessionStore    = require('../../stores/session_store');
 
-const ActvitiesTable = React.createClass({
+
+const ActivityTable = React.createClass({
 
   render() {
     return (
@@ -38,7 +36,9 @@ const ActvitiesTable = React.createClass({
       <tr key={activity.id}>
         <td>{activity.activity_type_name}</td>
         <td>{activity.date}</td>
-        <td>{activity.title}</td>
+        <td>
+          <Link to={`/activities/activity.id`} title="See more info">{activity.title}</Link>
+        </td>
         <td>{activity.duration}</td>
         <td>{activity.distance} mi</td>
         <td>{activity.speed} mph</td>
@@ -52,4 +52,4 @@ const ActvitiesTable = React.createClass({
 
 });
 
-module.exports = ActvitiesTable;
+module.exports = ActivityTable;

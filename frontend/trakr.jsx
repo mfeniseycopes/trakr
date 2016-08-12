@@ -18,6 +18,7 @@ const LoginForm           = require('./components/sessions/login_form');
 const Profile             = require('./components/users/profile');
 const SessionActions      = require('./actions/session_actions');
 const SessionStore        = require('./stores/session_store');
+const Training            = require('./components/training');
 
 // const UserApi = require('./utils/user_api_util');
 // window.UserApi = UserApi;
@@ -29,6 +30,7 @@ const router = (
 
       <IndexRoute
         onEnter={ _redirectToLoginOrDashboard } />
+
 
       <Route path="/signup"
         component={ LoginForm }
@@ -50,6 +52,10 @@ const router = (
         component={ Profile }
         onEnter={ _ensureLoggedIn } />
 
+
+      <Route path="/training"
+        component={ Training }
+        onEnter={ _ensureLoggedIn } />
 
       <Route path="/create-activity"
         component={ ActivityCreationMap }

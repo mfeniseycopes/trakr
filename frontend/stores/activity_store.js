@@ -52,7 +52,9 @@ ActivityStore.removeActivity = (activity) => {
 
 ActivityStore.resetActivities = (activities) => {
 
-  _orderedActivities = activities;
+  _orderedActivities = activities.map((activity) => {
+    return activity;
+  });
 
   ActivityStore.__emitChange();
 };

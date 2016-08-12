@@ -7,7 +7,7 @@ const React           = require('react');
 const ErrorActions    = require('../actions/error_actions');
 const UserActions     = require('../actions/user_actions');
 // components
-const ActivityList = require('./activities/activity_list');
+const ActivityList    = require('./activities/activity_list');
 const Error404        = require('./error_404');
 const FollowButton    = require('./follows/follow_button');
 const FormErrors      = require('./errors/form_errors');
@@ -46,7 +46,7 @@ const Dashboard = React.createClass({
 
   render() {
     if (!this.state.dashboard) {
-      return null;
+      return <p>No activities to display</p>;
     }
     else {
 
