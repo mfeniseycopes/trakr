@@ -105,8 +105,6 @@ const Profile = React.createClass({
               (<ActivityList className="three-thirds" activities={this.state.activities} />) :
               (<p>No activities... yet! Do an activity to see your progress.</p>)
           }
-
-          <ActivityList className="three-thirds" activities={this.state.activities} />
         </div>
       );
     }
