@@ -99,6 +99,13 @@ const Profile = React.createClass({
             </div>
             <Progress weekStats={this.state.user.week_stats}/>
           </div>
+          <h2 className="profile-activities">Activities</h2>
+          {
+            (this.state.activities.length > 0) ?
+              (<ActivityList className="three-thirds" activities={this.state.activities} />) :
+              (<p>No activities... yet! Do an activity to see your progress.</p>)
+          }
+
           <ActivityList className="three-thirds" activities={this.state.activities} />
         </div>
       );

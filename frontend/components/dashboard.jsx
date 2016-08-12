@@ -46,7 +46,13 @@ const Dashboard = React.createClass({
 
   render() {
     if (!this.state.dashboard) {
-      return null;
+      return (
+        <div>
+          <div className="page-header group">
+            <h1>Dashboard</h1>
+          </div>
+        </div>
+      );
     }
     else {
       return (
@@ -55,8 +61,12 @@ const Dashboard = React.createClass({
             <h1>Dashboard</h1>
           </div>
           <div className="group">
-            <ActivityList width="two-thirds-left"
-              activities={this.state.dashboard.followee_activities} />
+            {
+              (this.state.dashboard.followee_activities.length > 0) ?
+                (<ActivityList width="two-thirds-left"
+                  activities={this.state.dashboard.followee_activities} />) :
+                (<p>No activities... yet! Follow more users and do an activity to see more.</p>)
+            }
             <Progress weekStats={this.state.dashboard.week_stats}/>
           </div>
         </div>

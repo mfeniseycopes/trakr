@@ -45,12 +45,16 @@ table {
   height: 500px;
   width: 1200px;
   display: block;
+
+  th {
+    width: 200px;
+  }
 }
 
 .users-table {
   width: 1200px;
 
-  td {
+  th {
     width: 600px;
   }
 
