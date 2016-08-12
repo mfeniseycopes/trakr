@@ -39,20 +39,22 @@ SessionStore.__onDispatch = (payload) => {
 // private methods
 function _login(user) {
   _setCurrentUser(user);
-  hashHistory.push('/profile');
+  document.body.className = "logged-in";
+  hashHistory.push('/dashboard');
 }
 
 function _logout() {
   _setCurrentUser({});
+  document.body.className = "logged-out";
   hashHistory.push('/signup');
 }
 
 function _bootstrapUser(user) {
   _setCurrentUser(user);
+  document.body.className = "logged-in";
 }
 
 function _setCurrentUser(user) {
-  document.body.className = (user === {} ? "logged-out" : "");
   _currentUser = user;
   SessionStore.__emitChange();
 }

@@ -35,7 +35,13 @@ const Activity = React.createClass({
     if (newProps === this.props) {return;}
 
     if (newProps !== this.props) {
-      ActivityActions.getActivity(this.props.params.id);
+      if (newProps.params.id) {
+        ActivityActions.getActivity(newProps.params.id);
+
+      }
+      else {
+        ActivityActions.getActivity(this.props.params.id);
+      }
       if (newProps.location.pathname === this.props.params.id) {
         ErrorActions.clearErrors();
       }

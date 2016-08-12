@@ -19,10 +19,6 @@ const Training = React.createClass({
     ActivityActions.getActivitiesByUser(SessionStore.currentUser().id);
   },
 
-  componentWillReceiveProps(newProps) {
-    console.log(newProps);
-  },
-
   componentWillUnmount() {
     this.deregisterListeners();
   },

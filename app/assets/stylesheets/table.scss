@@ -26,7 +26,7 @@ table {
       vertical-align: middle;
       box-sizing: border-box;
       height: 40px;
-      width: 19%;
+      width: 200px;
 
       a {
         color: blue;
@@ -43,11 +43,15 @@ table {
 
 .activities-table {
   height: 500px;
-  width: 1160px;
-  padding: 20px;
+  width: 1200px;
   display: block;
 }
 
 .users-table {
-  
+  width: 1200px;
+
+  td {
+    width: 600px;
+  }
+
 }

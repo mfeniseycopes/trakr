@@ -76,7 +76,6 @@ const Profile = React.createClass({
   },
 
   render() {
-    debugger
 
     if (this.state.error) {
       return <Error404 />;
@@ -109,7 +108,6 @@ const Profile = React.createClass({
 
   resetUser() {
 
-    debugger
 
     let id;
     if (this.props.location.pathname === "/profile") {

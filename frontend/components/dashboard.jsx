@@ -46,7 +46,7 @@ const Dashboard = React.createClass({
 
   render() {
     if (!this.state.dashboard) {
-      return <p>No activities to display</p>;
+      return null;
     }
     else {
 

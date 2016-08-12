@@ -164,7 +164,7 @@ const ActivityForm = React.createClass({
             <form className="activity-form group" onSubmit={this.handleSubmit}>
 
               <div className="form-row group">
-                <label for="type">Type</label>
+                <label htmlFor="type">Type</label>
                 <select name="Type"
                   value={this.state.activityType}
                   onChange={this.change("activityType")}>
@@ -174,18 +174,18 @@ const ActivityForm = React.createClass({
                   }
                 </select>
 
-                <label for="title">Title</label>
+                <label htmlFor="title">Title</label>
                 <input type="text"
                   onChange={this.change("title")}
                   value={this.state.title}
                   placeholder="Title" />
 
-                <label for="date">Date</label>
+                <label htmlFor="date">Date</label>
                 <input type="date"
                   onChange={this.change("date")}
                   value={this.state.date}/>
 
-                <label for="time">Time</label>
+                <label htmlFor="time">Time</label>
                 <input type="time"
                   onChange={this.change("start")}
                   value={this.state.start} />
@@ -193,23 +193,23 @@ const ActivityForm = React.createClass({
 
               <div className="form-row group">
 
-                <label for="description">Description</label>
+                <label htmlFor="description">Description</label>
                 <textarea id="description"
                   onChange={this.change("description")}
                   value={this.state.description}
                   placeholder="Description" />
 
-                <label for="durationHH" >hh</label>
+                <label htmlFor="durationHH" >hh</label>
                 <input id="durationHH" type="number"
                   onChange={this.change("durationHH", this.changeDurationAndSpeed)}
                   value={this.state.durationHH}
                   placeholder="HH" />
-                  <label for="durationMM" >mm</label>
+                <label htmlFor="durationMM" >mm</label>
                 <input id="durationMM" type="number"
                   onChange={this.change("durationMM", this.changeDurationAndSpeed)}
                   value={this.state.durationMM}
                   placeholder="MM" />
-                <label for="durationSS" >ss</label>
+                <label htmlFor="durationSS" >ss</label>
                 <input id="durationSS" type="number"
                   onChange={this.change("durationSS", this.changeDurationAndSpeed)}
                   value={this.state.durationSS}

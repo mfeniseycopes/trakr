@@ -7,10 +7,6 @@ const UserActions     = require('../../actions/user_actions');
 
 const FollowButton = React.createClass({
 
-  componentWillReceiveProps(newProps) {
-    console.log(`follow button receives new props: ${newProps}`);
-  },
-
   render() {
     let classNm = this.props.user.following ? "following" : "not-following";
 

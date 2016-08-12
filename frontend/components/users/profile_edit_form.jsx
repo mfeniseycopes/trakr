@@ -65,17 +65,17 @@ const ProfileEditForm = React.createClass({
             <form className="user-form" onSubmit={ this.updateUser }>
 
               <div className="form-row group">
-                <label for="first-name">First</label>
+                <label htmlFor="first-name">First</label>
                   <input id="first-name" type="text"
                     value={this.state.first_name}
                     onChange={ this.changeFirstName }/>
 
-                <label for="last-name">Last</label>
+                  <label htmlFor="last-name">Last</label>
                   <input id="last-name" type="text"
                     value={this.state.last_name}
                     onChange={ this.changeLastName }/>
 
-                <label for="location">Location</label>
+                  <label htmlFor="location">Location</label>
                   <input id="location" type="text"
                     value={this.state.location}
                     onChange={ this.changeLocation }/>
@@ -83,7 +83,7 @@ const ProfileEditForm = React.createClass({
               </div>
 
               <div className="form-row group">
-                <label for="bio">Bio</label>
+                <label htmlFor="bio">Bio</label>
                   <textarea id="bio"
                     value={this.state.bio}
                     onChange={ this.changeBio }/>
