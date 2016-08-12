@@ -84,7 +84,6 @@ const Profile = React.createClass({
       return null;
     }
     else {
-
       return (
         <div>
           <div className="page-header group">
@@ -98,7 +97,7 @@ const Profile = React.createClass({
                   <ProfileDetail key="2" user={ this.state.user } />
               }
             </div>
-            <Progress />
+            <Progress weekStats={this.state.user.week_stats}/>
           </div>
           <ActivityList className="three-thirds" activities={this.state.activities} />
         </div>
@@ -107,7 +106,6 @@ const Profile = React.createClass({
   },
 
   resetUser() {
-
 
     let id;
     if (this.props.location.pathname === "/profile") {

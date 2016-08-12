@@ -96,6 +96,32 @@ class User < ActiveRecord::Base
     self.created_at.year
   end
 
+  def week_stats
+    # week totals
+    days_occurred_this_week = DateTime.now.wday
+    week_start = DateTime.now - days_occurred_this_week.days
+    week_end = week_start + 7
+
+    activities = self.activities.where("date >= ? AND date <= ?", week_start, week_end)
+
+    puts activities
+
+    stats = {
+      ride: { count: 0, duration: 0, distance:0 },
+      run: { count: 0, duration: 0, distance:0 },
+      other: { count: 0, duration: 0, distance:0 }
+    }
+
+    activities.each do |activity|
+      type = activity.activity_type_name.downcase.to_sym
+      stats[type][:count] += 1
+      stats[type][:duration] += activity.duration
+      stats[type][:distance] += activity.distance
+    end
+
+    stats
+  end
+
   # private methods
   private
 
