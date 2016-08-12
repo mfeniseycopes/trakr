@@ -180,9 +180,10 @@ const Activity = React.createClass({
 
 
 let _blankActivity = () => {
+
   let date = new Date();
   let year = date.getFullYear();
-  let month = ("00" + date.getMonth()).slice(-2);
+  let month = ("00" + (date.getMonth() + 1)).slice(-2);
   let day = ("00" + date.getDate()).slice(-2);
   let hh = ("00" + date.getHours()).slice(-2);
   let mm = ("00" + date.getMinutes()).slice(-2);

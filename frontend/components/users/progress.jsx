@@ -10,7 +10,7 @@ const Progress = React.createClass({
 
     return (
       <section className="progress-pane">
-        Progress Pane
+        
       </section>
     );
   }
