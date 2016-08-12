@@ -1,7 +1,35 @@
 .progress-pane {
-  height: 398px;
-  width: 398px;
-  border: 1px solid #a5a5a5;
+  height: 380px;
+  width: 380px;
+  border: 10px solid #277455;
   display: block;
   float: right;
+  color: #666;
+
+  h1 {
+    font-size: 20px;
+    line-height: 40px;
+    text-align: center;
+  }
+
+  .week-stat {
+    padding-top: 20px;
+    height: 90px;
+
+    h2 {
+      padding-left: 60px;
+      font-size: 40px;
+      font-weight: bold;
+      display: block;
+      float: left;
+      width: 150px;
+      color: #277455;
+    }
+    div {
+      display: block;
+      float: left;
+      width: 150px;
+    }
+  }
+
 }

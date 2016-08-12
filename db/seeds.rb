@@ -1,7 +1,7 @@
 #
 # USERS
 #
-User.create(
+guest = User.create(
   email: "guest@email.com",
   password: "starwars",
   first_name: "Guest",
@@ -10,7 +10,7 @@ User.create(
   bio: "I like to ride bikes and sometimes do battle."
 )
 
-User.create(
+jack = User.create(
   email: "jackbauer@email.com",
   password: "starwars",
   first_name: "Jack",
@@ -20,7 +20,7 @@ User.create(
   bio: "I can’t tell you what to do. I’ve been wrestling with this one my whole life. I see fifteen people held hostage on a bus, and everything else goes out the window. I will do whatever it takes to save them – and I mean whatever it takes."
 )
 
-User.create(
+tony = User.create(
   email: "tonyalmeida@email.com",
   password: "starwars",
   first_name: "Tony",
@@ -30,7 +30,7 @@ User.create(
   bio: "But if I could just do this, if I could save...one life on the outside, then maybe I'd feel worthy of my wife's love again."
 )
 
-User.create(
+david = User.create(
   email: "davidpalmer@email.com",
   password: "starwars",
   first_name: "David",
@@ -40,7 +40,7 @@ User.create(
   bio: "Your brother was one of the greatest men to ever occupy the office. His loss—to all of us—can't be expressed in words."
 )
 
-User.create(
+nina = User.create(
   email: "ninamyers@email.com",
   password: "starwars",
   first_name: "Nina",
@@ -50,7 +50,7 @@ User.create(
   bio: "You're worse than a traitor, Nina. You don't even have a cause; you don't believe in anything."
 )
 
-User.create(
+kim = User.create(
   email: "kimbauer@email.com",
   password: "starwars",
   first_name: "Kim",
@@ -60,7 +60,7 @@ User.create(
   bio: "You are the love of my life and I am so proud of you."
 )
 
-User.create(
+sherry = User.create(
   email: "sherrypalmer@email.com",
   password: "starwars",
   first_name: "Sherry",
@@ -70,7 +70,7 @@ User.create(
   bio: "You're not a member of my staff. You're not a government employee. And you're not my wife."
 )
 
-User.create(
+victor = User.create(
   email: "victordrazen@email.com",
   password: "starwars",
   first_name: "Victor",
@@ -83,9 +83,13 @@ User.create(
 #
 # ACTIVITY_TYPES
 #
-ActivityType.create(name: "Ride")
-ActivityType.create(name: "Run")
-ActivityType.create(name: "Swim")
-ActivityType.create(name: "Gun Battle")
-ActivityType.create(name: "BJJ")
-ActivityType.create(name: "Muay Thai")
+ride = ActivityType.create(name: "Ride")
+run = ActivityType.create(name: "Run")
+swim = ActivityType.create(name: "Swim")
+gun_battle = ActivityType.create(name: "Gun Battle")
+bjj = ActivityType.create(name: "BJJ")
+mt = ActivityType.create(name: "Muay Thai")
+
+#
+# FOLLOWS
+#
