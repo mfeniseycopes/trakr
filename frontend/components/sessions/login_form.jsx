@@ -174,8 +174,11 @@ const LoginForm = React.createClass({
     );
   },
 
-  guestLogin() {
-    SessionActions.login("guest@email.com", "starwars");
+  guestLogin(e) {
+    e.preventDefault();
+
+    // SessionActions.login("guest@email.com", "starwars");
+    SessionActions.login("jackbauer@ctu.com", "starwars");
   }
 
 });
