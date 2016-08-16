@@ -23,8 +23,8 @@
     "npm": "3.10.3"
   },
   "scripts": {
-    "postinstall": "./node_modules/.bin/webpack",
-    "webpack": "webpack --watch"
+    "webpack": "webpack --watch",
+    "heroku-postbuild": "webpack --config webpack.config.prod.js"
   },
   "repository": {
     "type": "git",
