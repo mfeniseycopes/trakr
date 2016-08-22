@@ -1,11 +1,11 @@
 # trakr
 ---
 
-[trakr live][heroku]
+[trakr live][live]
 
 **trakr** is a single-page, full-stack web application inspired by [Strava][strava] and built with Ruby on Rails and PostgreSQL on the backend, React.js using flux framework for the frontend, and enhanced by the Google Maps API.
 
-[heroku]: http://trakr.herokuapp.com
+[live]: http://trakr.cc
 [strava]: http://strava.com
 
 ## Features
