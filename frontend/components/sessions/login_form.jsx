@@ -137,14 +137,13 @@ const LoginForm = React.createClass({
       <div className="session-form">
         <form onSubmit={ this.handleSubmit } >
 
-          <FormErrors errors={ this.state.errors } />
 
           { this.additionalSignupFields() }
 
           <div className="session-form-row">
             <input
               className="session-form-row-full"
-              type="email"
+              type="text"
               value={ this.state.email }
               onChange={ this.changeEmail }
               placeholder="Email"/>
@@ -159,6 +158,7 @@ const LoginForm = React.createClass({
               placeholder="Password" />
           </div>
 
+
           <div className="session-form-row">
             <button className="session-form-row-full" type="submit" >{ this.buttonText() }</button>
             {
@@ -168,6 +168,8 @@ const LoginForm = React.createClass({
               </button> : ""
             }
           </div>
+
+          <FormErrors errors={ this.state.errors } />
 
         </form>
       </div>
