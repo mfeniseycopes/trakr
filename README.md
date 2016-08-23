@@ -13,7 +13,9 @@ trakr is a robust activity "trakking" application which allows a logged-in user 
 
 
 ### User Login and Authentication
-<img src="docs/images/login.png" height="300px" style="display: block; margin: auto;"/>
+
+<img align="center" src="docs/images/login.png" height="300px" style="display: block; "/>
+
 Upon initially visiting the site, a potential user is prompted to sign up with their name, email and password. Their password is encrypted using the `bcrypt` gem and stored in the database (no unencrypted passwords here!). When a user signs up or logs in, a new session is created to preserve their state. This is done by creating a unique session token which is given to the user in the form of a cookie and also attached to their record in the database. When a user logs out, their cookie is cleared and their session cookie on the db is reset. When the user logs in again, their inputted password in encrypted and checked against the stored encrypted password.
 
 #### Users
