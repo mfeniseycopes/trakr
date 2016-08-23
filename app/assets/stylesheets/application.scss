@@ -14,7 +14,7 @@
  *= require_self
  */
 
-@import url(https://fonts.googleapis.com/css?family=Gloria+Hallelujah);
+@import url(https://fonts.googleapis.com/css?family=Source+Sans);
 @import url(https://fonts.googleapis.com/css?family=Rancho);
 
 /* reset */
@@ -77,9 +77,8 @@ input[type="submit"] {
 
 /* all */
 
-/*TODO: move to scss to include background image */
 body {
-  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-family: "Helvetica Neue", "Source Sans", Arial, sans-serif;
 }
 
 a, button:hover {
