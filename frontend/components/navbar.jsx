@@ -48,9 +48,6 @@ const NavBar = React.createClass({
       return (
         <ul className="left nav-list">
           <li>
-            <Link to="#" title="Search">🔍</Link>
-          </li>
-          <li>
             <Link to="/dashboard">Dashboard</Link>
           </li>
           <li>
