@@ -57,7 +57,7 @@ const ProfileEditForm = React.createClass({
 
   render() {
     return (
-        <section className="user group transition">
+        <section className="user edit group transition">
           <header>
             <h1>Edit Profile</h1>
           </header>
@@ -74,12 +74,13 @@ const ProfileEditForm = React.createClass({
                   <input id="last-name" type="text"
                     value={this.state.last_name}
                     onChange={ this.changeLastName }/>
-
-                  <label htmlFor="location">Location</label>
-                  <input id="location" type="text"
-                    value={this.state.location}
-                    onChange={ this.changeLocation }/>
-
+              </div>
+              
+              <div className="form-row group">
+                <label htmlFor="location">Location</label>
+                <input id="location" type="text"
+                  value={this.state.location}
+                  onChange={ this.changeLocation }/>
               </div>
 
               <div className="form-row group">

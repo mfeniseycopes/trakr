@@ -14,8 +14,7 @@
  *= require_self
  */
 
-@import url(https://fonts.googleapis.com/css?family=Source+Sans);
-@import url(https://fonts.googleapis.com/css?family=Rancho);
+@import url(https://fonts.googleapis.com/css?family=Rancho|Roboto);
 
 /* reset */
  html, body, header, nav, h1, a,
@@ -78,7 +77,7 @@ input[type="submit"] {
 /* all */
 
 body {
-  font-family: "Helvetica Neue", "Source Sans", Arial, sans-serif;
+  font-family: "Helvetica Neue", "Roboto", Arial, sans-serif;
 }
 
 a, button:hover {
