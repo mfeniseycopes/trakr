@@ -45,6 +45,21 @@ const ActivityCreationMap = React.createClass({
     this.routeDisplayListener.remove();
   },
 
+  directionsRequest() {
+    // create request
+    return {
+      origin: this.origin,
+      destination: this.destination,
+      waypoints: this.waypoints.map((waypoint) => {
+        return {
+          location: waypoint,
+          stopover: false
+        };
+      }),
+      travelMode: google.maps.TravelMode.WALKING
+    };
+  },
+
   distance() {
     let distance = this.state.distance.text;
     distance = distance.slice(0, distance.length - 3);
@@ -58,7 +73,6 @@ const ActivityCreationMap = React.createClass({
   },
 
   _handleClick(e) {
-    // add to routePoints
 
     // only one point, no route yet
     if (!this.origin) {
@@ -82,27 +96,14 @@ const ActivityCreationMap = React.createClass({
       // clear the marker
       this.marker.setMap(null);
 
-      // get directions
-      // generate route request
+      // get directions & generate route request
       if (this.destination) {
         this.waypoints.push(this.destination);
       }
       this.destination = e.latLng;
 
-      // create request
-      var request = {
-        origin: this.origin,
-        destination: this.destination,
-        waypoints: this.waypoints.map((waypoint) => {
-          return {
-            location: waypoint,
-            stopover: false
-          };
-        }),
-        travelMode: google.maps.TravelMode.WALKING
-      };
-
-      this.routeService.route(request, (response, status) => {
+      // make the request and pass callback
+      this.routeService.route(this.directionsRequest(), (response, status) => {
         if (status === 'OK') {
           this.routeDisplay.setDirections(response);
         }
