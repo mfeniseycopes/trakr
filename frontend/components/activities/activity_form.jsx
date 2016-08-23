@@ -27,7 +27,17 @@ const ActivityForm = React.createClass({
   },
 
   addActivityTypes() {
-    this.setState({ activityTypes: ActivityTypeStore.all() });
+    let activityTypes = ActivityTypeStore.all();
+    
+    // sets default activity if new activity
+    let activityType = this.state.activityType;
+    if (!this.state.activityType) {
+      activityType = activityTypes[0].id;
+    }
+    this.setState({
+      activityTypes: ActivityTypeStore.all(),
+      activityType: activityType
+    });
   },
 
   addErrors() {
@@ -73,7 +83,6 @@ const ActivityForm = React.createClass({
 
   deregisterListeners() {
     this.errorListener.remove();
-    // this.activityListener.remove();
     this.activityTypeListener.remove();
   },
 
