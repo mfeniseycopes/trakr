@@ -28,15 +28,14 @@ const ActivityForm = React.createClass({
 
   addActivityTypes() {
     let activityTypes = ActivityTypeStore.all();
-    
+
     // sets default activity if new activity
     let activityType = this.state.activityType;
     if (!this.state.activityType) {
       activityType = activityTypes[0].id;
     }
     this.setState({
-      activityTypes: ActivityTypeStore.all(),
-      activityType: activityType
+      activityTypes: ActivityTypeStore.all()
     });
   },
 
@@ -249,7 +248,7 @@ let _blankActivity = () => {
   let mm = ("00" + date.getMinutes()).slice(-2);
 
   return {
-    activityType: 7,
+    activityType: null, // will get default after activityTypes received from db
     date: `${year}-${month}-${day}`,
     description: "",
     distance: 0,
