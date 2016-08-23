@@ -18,7 +18,7 @@
 
 /* reset */
  html, body, header, nav, h1, a,
-ul, li, strong, main, button, i,
+ul, li, strong, main, button, i, select,
 section, img, div, h2, h3, h4, h5, p, form,
 fieldset, label, input, textarea,
 span, article, footer, time, small {
@@ -252,7 +252,6 @@ a, button:hover {
   background-color: #f5f5f5;
 
   .form-row {
-    // height: 60px;
     display: block;
     padding-left: 0px;
 
@@ -269,11 +268,8 @@ a, button:hover {
     background-color: white;
     border: 1px solid #a5a5a5;
     line-height: 30px;
+    height: 30px;
     font-size: 16px;
-  }
-
-  select {
-    padding: 8px;
   }
 
   label {
@@ -288,14 +284,6 @@ a, button:hover {
     width: 300px;
     height: 100px;
   }
-
-  // .activity-form-duration {
-  //   * {
-  //     display: block;
-  //     float: left;
-  //     margin: 0px;
-  //   }
-  // }
 }
 
 .small-grey-text {
