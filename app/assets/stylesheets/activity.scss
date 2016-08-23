@@ -13,8 +13,7 @@
   .activity-main {
     border: 1px solid #a5a5a5;
     border-top: 0px;
-    padding: 10px 0;
-    height: 200px;
+    padding: 20px;
 
     .activity-left, .activity-right {
       float: left;
@@ -22,7 +21,7 @@
 
     .activity-left {
       padding: 10px;
-      width: 579px;
+      width: 559px;
 
       > .activity-avatar-med, .activity-detail {
         float: left;
@@ -44,7 +43,7 @@
       .activity-detail {
         padding-top: 10px;
         margin-left: 30px;
-        width: 399px;
+        width: 379px;
 
         .activity-detail-row {
           // width: 100%;
@@ -74,7 +73,7 @@
 
     .activity-right {
       padding: 10px;
-      width: 578px;
+      width: 558px;
       border-left: 1px solid #e5e5e5;
       height: 180px;
 
@@ -84,7 +83,7 @@
         float: left;
         height: 100px;
         margin-top: 40px;
-        width: 192px;
+        width: 185px;
 
         p, input {
           // float: left;
@@ -100,13 +99,14 @@
   }
 
   .activity-form {
-    width: 1198px;
+    width: 1158px;
   }
 
   .button {
     position: absolute;
-    right: 20px;
-    bottom: 20px;
+    right: 0px;
+    bottom: 0px;
+    margin: 0;
   }
 }
 

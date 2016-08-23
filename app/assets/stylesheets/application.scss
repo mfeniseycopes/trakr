@@ -139,6 +139,7 @@ a, button:hover {
 /* main */
 .content {
   width: 100%;
+  max-width: 1200px;
   margin: 0 auto;
 }
 
@@ -255,7 +256,7 @@ a, button:hover {
   .form-row {
     // height: 60px;
     display: block;
-    padding-left: 20px;
+    padding-left: 0px;
 
     > * {
       display: block;

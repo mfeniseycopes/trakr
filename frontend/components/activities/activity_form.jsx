@@ -216,9 +216,9 @@ const ActivityForm = React.createClass({
                   placeholder="SS" />
               </div>
 
-              <FormErrors errors={ this.state.errors } />
+              <button className="button bottom-right-button button-invert-color" type="submit">Save</button>
 
-              <button className="button bottom-right-button button-invert-color" type="submit">Save Changes</button>
+              <FormErrors errors={ this.state.errors } />
 
             </form>
           </div>
