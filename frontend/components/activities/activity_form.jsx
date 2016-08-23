@@ -35,7 +35,8 @@ const ActivityForm = React.createClass({
       activityType = activityTypes[0].id;
     }
     this.setState({
-      activityTypes: ActivityTypeStore.all()
+      activityTypes: activityTypes,
+      activityType: activityType
     });
   },
 
@@ -86,28 +87,7 @@ const ActivityForm = React.createClass({
   },
 
   getInitialState() {
-
-    // load activity from props
-    if (this.props.activity) {
-      return _persistedActivity(this.props.activity);
-    }
-    // load activity details from creation method
-    else if (this.props.location.pathname === "/new-activity") {
-
-      let state = _blankActivity();
-
-      if (this.props.location.query.from === "creator") {
-        let activity = ActivityStore.newActivity();
-        state.distance = activity.distance;
-        state.route = activity.route;
-        state.encodedPolyline = activity.encodedPolyline;
-      }
-      else if (this.props.location.query.from === "upload") {
-        // TODO: get info from gpx file
-      }
-
-      return state;
-    }
+    return _persistedActivity(this.props.activity);
   },
 
   handleSubmit(e) {
@@ -151,122 +131,80 @@ const ActivityForm = React.createClass({
 
   },
 
-  gotoActivityDetail() {
-
-    if (this.state.mode === "edit") {
-
-    }
-    else if (this.state.mode === "create" && ActivityStore.newActivity().id) {
-      hashHistory.push(`/activities/${ActivityStore.newActivity().id}`);
-    }
-  },
-
   render() {
 
     return(
-        <section className="activity group">
-          <header>
-            <h1>Edit Activity</h1>
-          </header>
-          <div className="activity-main form group">
-            <form className="activity-form group" onSubmit={this.handleSubmit}>
+      <section className="activity group">
+        <header>
+          <h1>Edit Activity</h1>
+        </header>
+        <div className="activity-main form group">
+          <form className="activity-form group" onSubmit={this.handleSubmit}>
 
-              <div className="form-row group">
-                <label htmlFor="type">Type</label>
-                <select name="Type"
-                  value={this.state.activityType}
-                  onChange={this.change("activityType")}>
-                  {
-                    this.state.activityTypes.length > 0 ?
-                    this.activityTypeOptions() : ""
-                  }
-                </select>
+            <div className="form-row group">
+              <label htmlFor="type">Type</label>
+              <select name="Type"
+                value={this.state.activityType || 1}
+                onChange={this.change("activityType")}>
+                {
+                  this.state.activityTypes.length > 0 ?
+                  this.activityTypeOptions() : ""
+                }
+              </select>
 
-                <label htmlFor="title">Title</label>
-                <input type="text"
-                  onChange={this.change("title")}
-                  value={this.state.title}
-                  placeholder="Title" />
+              <label htmlFor="title">Title</label>
+              <input type="text"
+                onChange={this.change("title")}
+                value={this.state.title}
+                placeholder="Title" />
 
-                <label htmlFor="date">Date</label>
-                <input type="date"
-                  onChange={this.change("date")}
-                  value={this.state.date}/>
+              <label htmlFor="date">Date</label>
+              <input type="date"
+                onChange={this.change("date")}
+                value={this.state.date}/>
 
-                <label htmlFor="time">Time</label>
-                <input type="time"
-                  onChange={this.change("start")}
-                  value={this.state.start} />
-              </div>
+              <label htmlFor="time">Time</label>
+              <input type="time"
+                onChange={this.change("start")}
+                value={this.state.start} />
+            </div>
 
-              <div className="form-row group">
+            <div className="form-row group">
 
-                <label htmlFor="description">Description</label>
-                <textarea id="description"
-                  onChange={this.change("description")}
-                  value={this.state.description}
-                  placeholder="Description" />
+              <label htmlFor="description">Description</label>
+              <textarea id="description"
+                onChange={this.change("description")}
+                value={this.state.description}
+                placeholder="Description" />
 
-                <label htmlFor="durationHH" >hh</label>
-                <input id="durationHH" type="number"
-                  onChange={this.change("durationHH", this.changeDurationAndSpeed)}
-                  value={this.state.durationHH}
-                  placeholder="HH" />
-                <label htmlFor="durationMM" >mm</label>
-                <input id="durationMM" type="number"
-                  onChange={this.change("durationMM", this.changeDurationAndSpeed)}
-                  value={this.state.durationMM}
-                  placeholder="MM" />
-                <label htmlFor="durationSS" >ss</label>
-                <input id="durationSS" type="number"
-                  onChange={this.change("durationSS", this.changeDurationAndSpeed)}
-                  value={this.state.durationSS}
-                  placeholder="SS" />
-              </div>
+              <label htmlFor="durationHH" >hh</label>
+              <input id="durationHH" type="number"
+                onChange={this.change("durationHH", this.changeDurationAndSpeed)}
+                value={this.state.durationHH}
+                placeholder="HH" />
+              <label htmlFor="durationMM" >mm</label>
+              <input id="durationMM" type="number"
+                onChange={this.change("durationMM", this.changeDurationAndSpeed)}
+                value={this.state.durationMM}
+                placeholder="MM" />
+              <label htmlFor="durationSS" >ss</label>
+              <input id="durationSS" type="number"
+                onChange={this.change("durationSS", this.changeDurationAndSpeed)}
+                value={this.state.durationSS}
+                placeholder="SS" />
+            </div>
 
-              <button className="button bottom-right-button button-invert-color" type="submit">Save</button>
+            <button className="button bottom-right-button button-invert-color" type="submit">Save</button>
 
-              <FormErrors errors={ this.state.errors } />
+            <FormErrors errors={ this.state.errors } />
 
-            </form>
-          </div>
-        </section>
-
-
-
+          </form>
+        </div>
+      </section>
     );
   }
 
 });
-
-let _blankActivity = () => {
-  let date = new Date();
-  let year = date.getFullYear();
-  let month = ("00" + date.getMonth()).slice(-2);
-  let day = ("00" + date.getDate()).slice(-2);
-  let hh = ("00" + date.getHours()).slice(-2);
-  let mm = ("00" + date.getMinutes()).slice(-2);
-
-  return {
-    activityType: null, // will get default after activityTypes received from db
-    date: `${year}-${month}-${day}`,
-    description: "",
-    distance: 0,
-    duration: 0,
-    durationHH: "",
-    durationMM: "",
-    durationSS: "",
-    encodedPolyline: "",
-    gpxFile: null,
-    start: `${hh}:${mm}`,
-    title: "My Activity",
-    route: null,
-    speed: 0,
-    activityTypes: [],
-    errors: [],
-    mode: "create"
-  };
-};
 
 let _durations = (duration) => {
   return {
@@ -294,7 +232,7 @@ let _persistedActivity = (activity) => {
   }
 
   return {
-    activityType: activity.activity_type.id,
+    activityType: (activity.activity_type ? activity.activity_type.id : null),
     date: `${year}-${month}-${day}`,
     description: activity.description,
     distance: activity.distance,

@@ -175,7 +175,6 @@ const Activity = React.createClass({
   toggleModes() {
     this.setState({ edit: !this.state.edit });
   }
-
 });
 
 
@@ -189,7 +188,6 @@ let _blankActivity = () => {
   let mm = ("00" + date.getMinutes()).slice(-2);
 
   return {
-    activity_type: {id: 1, name: ""},
     date: new Date().toDateString(),
     description: "",
     distance: 0,
