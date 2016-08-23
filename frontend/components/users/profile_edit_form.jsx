@@ -75,7 +75,7 @@ const ProfileEditForm = React.createClass({
                     value={this.state.last_name}
                     onChange={ this.changeLastName }/>
               </div>
-              
+
               <div className="form-row group">
                 <label htmlFor="location">Location</label>
                 <input id="location" type="text"
@@ -89,6 +89,10 @@ const ProfileEditForm = React.createClass({
                     value={this.state.bio}
                     onChange={ this.changeBio }/>
               </div>
+              <div className="form-row group">
+                <label htmlFor="bio">Avatar</label>
+                <input id="location" type="file" onChange={this.updateAvatar} />
+              </div>
 
               <FormErrors errors={ this.state.errors } />
 
@@ -98,6 +102,13 @@ const ProfileEditForm = React.createClass({
           </div>
         </section>
     );
+  },
+
+  updateAvatar(e) {
+    let user = new FormData();
+    user.append("user[id]", this.props.user.id);
+    user.append("user[avatar]", e.target.files[0]);
+    UserActions.updateUserAvatar(this.props.user.id, user);
   },
 
   updateUser(e) {

@@ -48,12 +48,28 @@ const UserApiUtil = {
   },
 
   updateUser(user, successCallback, errorCallback) {
-
     $.ajax({
       method: "PATCH",
       url: `/api/users/${user.id}`,
       dataType: "json",
       data: { user: user },
+      error(res) {
+        errorCallback("userForm", res.responseJSON);
+      },
+      success(res) {
+        successCallback(res);
+      }
+    });
+  },
+
+  updateUserAvatar(id, user, successCallback, errorCallback) {
+    $.ajax({
+      method: "PATCH",
+      url: `/api/users/${id}`,
+      contentType: false,
+      processData: false,
+      dataType: "json",
+      data: user,
       error(res) {
         errorCallback("userForm", res.responseJSON);
       },

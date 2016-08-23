@@ -21,6 +21,7 @@ const ProfileDetail = React.createClass({
               <div className="user-avatar-large">
                 <img src={this.props.user.avatar_url} />
               </div>
+
               <div className="user-detail">
 
                 <div className="user-detail-row">

@@ -45,7 +45,12 @@ const UserActions = {
 
   updateUser(user) {
     UserApiUtil.updateUser(user, this.receiveUser, ErrorActions.setErrors);
+  },
+
+  updateUserAvatar(id, user) {
+    UserApiUtil.updateUserAvatar(id, user, this.receiveUser, ErrorActions.setErrors);
   }
+
 };
 
 module.exports = UserActions;
