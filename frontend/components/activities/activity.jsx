@@ -163,7 +163,7 @@ const Activity = React.createClass({
     if (this.state.editable) {
       return (
         <a onClick={ this.toggleModes } className="button symbol-button button-page-actions" >
-          { this.state.edit ? "✕" : "🖉" }
+          { this.state.edit ? "✖" : "✎" }
         </a>
       );
     }
