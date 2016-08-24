@@ -132,7 +132,10 @@ const Profile = React.createClass({
     if (this.state.editable) {
       return (
         <a onClick={ this.toggleModes } className="button symbol-button button-page-actions" >
-          { this.state.edit ? "✕" : "🖉" }
+          { this.state.edit ?
+             <i className="fa fa-times" aria-hidden="true"></i> :
+             <i className="fa fa-pencil" aria-hidden="true"></i>
+           }
         </a>
       );
     }
