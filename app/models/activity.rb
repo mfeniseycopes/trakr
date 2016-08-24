@@ -68,7 +68,7 @@ class Activity < ActiveRecord::Base
       gpx.tracks[0].segments[0].points = points
 
       # create temp file to save to paperclip (StringIO creates incorrect content type)
-      tmp = Tempfile.new([`#{self.activity_type_name}_`, ".gpx"])
+      tmp = Tempfile.new(['tmp', ".gpx"])
       tmp.write(gpx.to_s)
       tmp.rewind
 
