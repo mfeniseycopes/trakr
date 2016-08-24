@@ -8,6 +8,8 @@ json.extract! activity,
   :encoded_polyline,
   :speed
 
+json.gpx_url activity.gpx.url
+
 json.activity_type do
   json.id activity.activity_type.id
   json.name activity.activity_type.name

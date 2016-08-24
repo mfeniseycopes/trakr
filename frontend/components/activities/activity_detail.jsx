@@ -67,6 +67,7 @@ const ActivityDetail = React.createClass({
                 <p className="small-grey-text">Speed</p>
               </div>
             </div>
+            <a className="button" href={this.props.activity.gpx_url} >Export as GPX</a>
           </div>
         </div>
       </section>

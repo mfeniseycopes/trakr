@@ -8,6 +8,9 @@ json.extract! @activity,
   :speed,
   :title
 
+
+json.gpx_url @activity.gpx.url
+
 json.activity_type do
   json.id @activity.activity_type_id
   json.name @activity.activity_type_name
