@@ -21,7 +21,7 @@ Upon initially visiting the site, a potential user is prompted to sign up with t
 Encrypting user's password:
 ```ruby
 # user.rb
-# save as instance variable to allow for length validation on `create`
+# save password as instance variable to allow for length validation on `create`, without persisting to db
 attr_reader :password  
 
 def password=(password)
@@ -181,7 +181,7 @@ Following a user adds their recent activities to a user's dashboard. When the fi
 
 ### It's a Single-Page App!
 
-Using React.js and the flux framework, the page utilizes API calls to a remote server on nearly every user interaction.
+Using React.js and the flux pattern, the page utilizes API calls to a remote server on nearly every user interaction.
 
 
 [live]: http://trakr.cc
