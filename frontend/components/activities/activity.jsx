@@ -149,12 +149,21 @@ const Activity = React.createClass({
     else {
       let activity = ActivityStore.find(parseInt(this.props.params.id));
 
-      this.setState({
-        activity: activity,
-        edit: false,
-        editable: activity.user.id === SessionStore.currentUser().id
-      });
-      this.createMap(activity.encoded_polyline);
+      // activity deleted, redirect to Training page
+      if (this.state.activity !== null && activity === null) {
+        hashHistory.push("/training");
+      }
+
+      // initial activity load, setState w/ new activity
+      else {
+        this.setState({
+          activity: activity,
+          edit: false,
+          editable: activity.user.id === SessionStore.currentUser().id,
+          new: activity.id ? false : true
+        });
+        this.createMap(activity.encoded_polyline);
+      }
     }
 
   },

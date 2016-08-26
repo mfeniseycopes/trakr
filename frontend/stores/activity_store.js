@@ -45,7 +45,7 @@ ActivityStore.newActivity = () => {
 };
 
 ActivityStore.removeActivity = (activity) => {
-  _deleteActivity(id);
+  _deleteActivity(activity.id);
 
   ActivityStore.__emitChange();
 };
@@ -76,7 +76,7 @@ ActivityStore.resetNewActivity = (activity) => {
 let _deleteActivity = (id) => {
   let idx = _findActivityIndex(id);
 
-  delete _orderedActivities[idx];
+  _orderedActivities.splice(idx, 1);
 };
 
 let _findActivityIndex = (id) => {
@@ -85,18 +85,31 @@ let _findActivityIndex = (id) => {
       return i;
     }
   }
+
+  return -1;
 };
 
 let _updateActivity = (activity) => {
   let idx = _findActivityIndex(activity.id);
 
-  _orderedActivities[idx] = activity;
+  if (idx !== -1) {
+    _orderedActivities[idx] = activity;
+  }
+  else {
+    _orderedActivities.push(activity);
+  }
+
 };
 
 let _retrieveActivity = (id) => {
   let idx = _findActivityIndex(id);
 
-  return _orderedActivities[idx];
+  if (idx !== -1) {
+    return _orderedActivities[idx];
+  }
+  else {
+    return null;
+  }
 };
 
 module.exports = ActivityStore;

@@ -43,13 +43,14 @@ class Api::ActivitiesController < ApplicationController
   end
 
   def show
-    @activity = Activity.find(params[:id])
+    @activity = Activity.find_by(id: params[:id])
 
     if @activity
       render :show
     else
       render json: ["The requested activity does not exist."], status: 404
     end
+
   end
 
   def activity_create_params

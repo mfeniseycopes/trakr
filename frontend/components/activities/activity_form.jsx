@@ -90,6 +90,10 @@ const ActivityForm = React.createClass({
     return _persistedActivity(this.props.activity);
   },
 
+  handleDelete(e) {
+    ActivityActions.destroyActivity(this.state.id);
+  },
+
   handleSubmit(e) {
 
     e.preventDefault();
@@ -194,7 +198,9 @@ const ActivityForm = React.createClass({
                 placeholder="SS" />
             </div>
 
-            <button className="button bottom-right-button button-invert-color" type="submit">Save</button>
+            <button className="button button-invert-color" type="submit">Save</button>
+
+            { this.state.id ? <button className="button button-delete" onClick={this.handleDelete} >Delete</button> : "" }
 
             <FormErrors errors={ this.state.errors } />
 

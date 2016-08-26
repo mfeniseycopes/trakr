@@ -96,7 +96,7 @@ const ProfileEditForm = React.createClass({
 
               <FormErrors errors={ this.state.errors } />
 
-              <button className="button bottom-right-button button-invert-color" type="submit" value="Update" >Save Changes</button>
+              <button className="button button-invert-color" type="submit" value="Update" >Save Changes</button>
 
             </form>
           </div>

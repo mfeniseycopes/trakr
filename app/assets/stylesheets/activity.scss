@@ -57,7 +57,7 @@
 
           > p {
             height: 100px;
-            overflow: hidden;
+            overflow-x: auto;
             white-space: pre-wrap;
             line-height: 25px;
           }
@@ -106,7 +106,19 @@
     position: absolute;
     right: 0px;
     bottom: 0px;
-    margin: 0;
+    // margin: 0;
+  }
+
+  .button-delete {
+    width:auto;
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: auto;
+    // background-color: #d46a6a;
+  }
+  .button-delete:hover {
+    background-color: #d46a6a;
   }
 }
 

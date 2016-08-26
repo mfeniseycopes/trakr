@@ -19,7 +19,7 @@ const ActivityActions = {
   },
 
   destroyActivity(id) {
-    ActivityApiUtil.destroyActivity(id, this.receiveActivity, ErrorActions.setErrors);
+    ActivityApiUtil.destroyActivity(id, this.removeActivity, ErrorActions.setErrors);
   },
 
   getActivity(id) {
